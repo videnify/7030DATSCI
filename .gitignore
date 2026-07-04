@@ -1,0 +1,101 @@
+# ============================================================
+# DATSCI7030 — .gitignore
+# ============================================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# --- Virtual environments ---
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# --- Data (raw/interim/processed/external data itself is never committed) ---
+# Pattern ignores directory CONTENTS (folder/*) rather than the folder itself,
+# so README.md / .gitkeep can be negated back in to preserve structure on a fresh clone.
+data/raw/*
+data/processed/*
+data/interim/*
+data/external/*
+!data/raw/README.md
+!data/raw/.gitkeep
+!data/processed/README.md
+!data/processed/.gitkeep
+!data/interim/README.md
+!data/interim/.gitkeep
+!data/external/README.md
+!data/external/.gitkeep
+
+# Belt-and-braces: never allow these extensions anywhere in the repo
+*.csv
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.xlsx
+*.xls
+
+# --- Models (trained binaries — never committed, only the code that produces them) ---
+models/*
+!models/README.md
+!models/.gitkeep
+*.pt
+*.pth
+*.onnx
+*.joblib
+
+# --- Notebook archive (superseded/duplicate notebooks — kept locally for reference only) ---
+notebooks/archive/
+
+# --- Environment variables & secrets ---
+.env
+*.env
+.env.*
+!.env.example
+config.yaml
+*.key
+*.pem
+*_secret*
+*_private*
+*credentials*
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Office lock/temp files (e.g. ~$thesis.docx while a .docx is open) ---
+~$*
+*.tmp
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- Reports (generated/duplicate exports — the dissertation itself is tracked separately) ---
+reports/figures/*.png
+reports/figures/*.pdf
+reports/figures/*.html
+reports/figures/*.svg
+reports/*.docx
+reports/*.pdf
+
+# --- Logs ---
+logs/*
+!logs/README.md
+!logs/.gitkeep
+*.log

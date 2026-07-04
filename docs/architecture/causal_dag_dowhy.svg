@@ -1,0 +1,309 @@
+<svg viewBox="0 0 1300 900" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <title>Causal DAG — DoWhy Structural Causal Model</title>
+  <desc>Causal DAG for DATSCI7030. Confounders: VIX (Z1), Market Return (Z2), Macro Regime (Z3). Treatment: Event Occurrence (T). Outcome: Asset Return (Y). Mediators: Sentiment Score (M1), Event Severity (M2). Ibrahim Haroun, LJMU 2025-2026.</desc>
+
+  <defs>
+    <!-- Arrowhead markers — each colour has its own id -->
+    <marker id="mBlue" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="mRed" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#dc2626"/>
+    </marker>
+    <marker id="mOrange" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#ea580c"/>
+    </marker>
+    <marker id="mGrey" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6b7280"/>
+    </marker>
+
+    <!-- Node clip circles so edges terminate at node edge cleanly -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000020"/>
+    </filter>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BACKGROUND
+       ═══════════════════════════════════════════════════════════ -->
+  <rect width="1300" height="900" fill="#f8fafc"/>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TITLE BAND
+       ═══════════════════════════════════════════════════════════ -->
+  <rect width="1300" height="56" fill="#0f172a"/>
+  <text x="650" y="24" text-anchor="middle" font-size="18" font-weight="700" fill="#f1f5f9" letter-spacing="0.3">Causal DAG — Structural Causal Model (DoWhy)</text>
+  <text x="650" y="44" text-anchor="middle" font-size="10.5" fill="#94a3b8">DATSCI7030 · Causal Event-Driven Market Impact Modelling · Microsoft Research DoWhy Framework · Ibrahim Haroun, LJMU 2025–2026</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NODE COORDINATE PLAN
+       ───────────────────────────────────────────────────────────
+       Confounders row  cy=170  r=62
+         Z1 VIX          cx=230
+         Z2 Market Ret   cx=650
+         Z3 Macro        cx=1070
+
+       Middle row
+         T  Treatment     cx=230  cy=430  r=70
+         M1 Sentiment     cx=560  cy=340  r=54   (upper-mid)
+         M2 Severity      cx=740  cy=500  r=54   (lower-mid)
+         Y  Outcome       cx=1070 cy=430  r=70
+
+       ─ Edges are drawn FIRST in z-order ─
+       ─ Nodes drawn SECOND (cover edge endpoints) ─
+       ═══════════════════════════════════════════════════════════ -->
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 1 — EDGES
+       All edge endpoints calculated to stop at node circumference
+       so arrowheads sit neatly at node edges, not inside.
+
+       Circle edge points used (cx, cy ± r or angle-projected):
+         Z1 VIX (230,170,62):  bottom=(230,232)  right=(292,170)
+         Z2 Mkt (650,170,62):  bottom=(650,232)  left=(588,170)  right=(712,170)
+         Z3 Mac (1070,170,62): bottom=(1070,232) left=(1008,170)
+         T  (230,430,70):      top=(230,360)  right=(300,430)  top-r=(278,368)
+         M1 (560,340,54):      left=(506,340)  right=(614,340) top-l=(522,288)
+         M2 (740,500,54):      left=(686,500)  right=(794,500)
+         Y  (1070,430,70):     top=(1070,360) left=(1000,430) top-l=(1022,368)
+       ═══════════════════════════════════════════════════════════ -->
+
+  <!-- ── CONFOUNDER PATHS (dashed blue) ── -->
+
+  <!-- Z1 → T  straight down -->
+  <line x1="230" y1="232" x2="230" y2="360"
+        stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="7,4"
+        marker-end="url(#mBlue)"/>
+
+  <!-- Z1 → Y  arc over top of diagram, well above all nodes -->
+  <path d="M 282,120 Q 650,15 1018,120"
+        fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="7,4"
+        marker-end="url(#mBlue)"/>
+
+  <!-- Z2 → T  diagonal left-down, ends before T right edge -->
+  <line x1="596" y1="214" x2="298" y2="403"
+        stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="7,4"
+        marker-end="url(#mBlue)"/>
+
+  <!-- Z2 → Y  diagonal right-down -->
+  <line x1="704" y1="214" x2="1002" y2="403"
+        stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="7,4"
+        marker-end="url(#mBlue)"/>
+
+  <!-- Z3 → Y  straight down -->
+  <line x1="1070" y1="232" x2="1070" y2="360"
+        stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="7,4"
+        marker-end="url(#mBlue)"/>
+
+  <!-- Z3 → T  arc over top, mirror of Z1→Y -->
+  <path d="M 1018,120 Q 650,15 282,120"
+        fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-dasharray="7,4"
+        marker-end="url(#mBlue)"/>
+
+  <!-- ── MEDIATION PATHS (orange) ── -->
+
+  <!-- T → M1  angled upper-right from T right-top to M1 left -->
+  <line x1="276" y1="375" x2="508" y2="316"
+        stroke="#ea580c" stroke-width="2"
+        marker-end="url(#mOrange)"/>
+
+  <!-- T → M2  angled lower-right from T bottom-right to M2 left -->
+  <line x1="284" y1="484" x2="688" y2="494"
+        stroke="#ea580c" stroke-width="2"
+        marker-end="url(#mOrange)"/>
+
+  <!-- M1 → Y  from M1 right to Y top-left -->
+  <line x1="614" y1="332" x2="1022" y2="372"
+        stroke="#ea580c" stroke-width="2"
+        marker-end="url(#mOrange)"/>
+
+  <!-- M2 → Y  from M2 right to Y bottom-left area -->
+  <line x1="794" y1="490" x2="1002" y2="460"
+        stroke="#ea580c" stroke-width="2"
+        marker-end="url(#mOrange)"/>
+
+  <!-- ── ATE ARROW (bold red) — routed BELOW all nodes ── -->
+  <!-- Starts at T bottom, curves down and under, arrives at Y bottom -->
+  <path d="M 255,496 Q 650,620 1045,496"
+        fill="none" stroke="#dc2626" stroke-width="5"
+        marker-end="url(#mRed)"/>
+
+  <!-- ATE pill label — centred on the curve at bottom, clear of everything -->
+  <rect x="506" y="586" width="288" height="30" rx="8"
+        fill="#fff" stroke="#dc2626" stroke-width="2"/>
+  <text x="650" y="606" text-anchor="middle" font-size="12.5" font-weight="700" fill="#dc2626">ATE — Average Treatment Effect</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 2 — NODES (drawn on top of all edges)
+       ═══════════════════════════════════════════════════════════ -->
+
+  <!-- ── Z1: VIX ── -->
+  <circle cx="230" cy="170" r="62" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.2" filter="url(#shadow)"/>
+  <text x="230" y="148" text-anchor="middle" font-size="9" font-weight="700" fill="#1d4ed8" letter-spacing="1">CONFOUNDER Z₁</text>
+  <text x="230" y="169" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">VIX</text>
+  <text x="230" y="187" text-anchor="middle" font-size="9.5" fill="#3b82f6">Market Fear /</text>
+  <text x="230" y="200" text-anchor="middle" font-size="9.5" fill="#3b82f6">Volatility Regime</text>
+
+  <!-- ── Z2: Market Return ── -->
+  <circle cx="650" cy="170" r="62" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.2" filter="url(#shadow)"/>
+  <text x="650" y="148" text-anchor="middle" font-size="9" font-weight="700" fill="#1d4ed8" letter-spacing="1">CONFOUNDER Z₂</text>
+  <text x="650" y="167" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Market Return</text>
+  <text x="650" y="185" text-anchor="middle" font-size="9.5" fill="#3b82f6">SPY benchmark</text>
+  <text x="650" y="199" text-anchor="middle" font-size="9.5" fill="#3b82f6">daily log return</text>
+
+  <!-- ── Z3: Macro Regime ── -->
+  <circle cx="1070" cy="170" r="62" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.2" filter="url(#shadow)"/>
+  <text x="1070" y="148" text-anchor="middle" font-size="9" font-weight="700" fill="#1d4ed8" letter-spacing="1">CONFOUNDER Z₃</text>
+  <text x="1070" y="167" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">Macro Regime</text>
+  <text x="1070" y="185" text-anchor="middle" font-size="9.5" fill="#3b82f6">Fed rate · CPI</text>
+  <text x="1070" y="199" text-anchor="middle" font-size="9.5" fill="#3b82f6">yield spread</text>
+
+  <!-- ── T: Event Occurrence (Treatment) ── -->
+  <circle cx="230" cy="430" r="70" fill="#fef2f2" stroke="#dc2626" stroke-width="2.5" filter="url(#shadow)"/>
+  <!-- Badge pill: drawn as part of node, sits inside top arc -->
+  <rect x="175" y="350" width="110" height="19" rx="5" fill="#dc2626"/>
+  <text x="230" y="363" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" letter-spacing="0.5">T — TREATMENT</text>
+  <text x="230" y="413" text-anchor="middle" font-size="15" font-weight="700" fill="#7f1d1d">Event</text>
+  <text x="230" y="431" text-anchor="middle" font-size="15" font-weight="700" fill="#7f1d1d">Occurrence</text>
+  <text x="230" y="452" text-anchor="middle" font-size="10" fill="#dc2626">T ∈ {0, 1}</text>
+  <text x="230" y="466" text-anchor="middle" font-size="9" fill="#dc2626">Binary treatment</text>
+
+  <!-- ── M1: Sentiment Score ── -->
+  <circle cx="560" cy="340" r="54" fill="#fff7ed" stroke="#ea580c" stroke-width="2" filter="url(#shadow)"/>
+  <text x="560" y="316" text-anchor="middle" font-size="8.5" font-weight="700" fill="#7c2d12" letter-spacing="0.5">M₁ — MEDIATOR</text>
+  <text x="560" y="335" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">Sentiment</text>
+  <text x="560" y="351" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">Score</text>
+  <text x="560" y="368" text-anchor="middle" font-size="9" fill="#ea580c">FinBERT [−1, +1]</text>
+
+  <!-- ── M2: Event Severity ── -->
+  <circle cx="740" cy="500" r="54" fill="#fff7ed" stroke="#ea580c" stroke-width="2" filter="url(#shadow)"/>
+  <text x="740" y="476" text-anchor="middle" font-size="8.5" font-weight="700" fill="#7c2d12" letter-spacing="0.5">M₂ — MEDIATOR</text>
+  <text x="740" y="495" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">Event</text>
+  <text x="740" y="511" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">Severity</text>
+  <text x="740" y="528" text-anchor="middle" font-size="9" fill="#ea580c">Goldstein Scale</text>
+
+  <!-- ── Y: Asset Return (Outcome) ── -->
+  <circle cx="1070" cy="430" r="70" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="1015" y="350" width="110" height="19" rx="5" fill="#16a34a"/>
+  <text x="1070" y="363" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" letter-spacing="0.5">Y — OUTCOME</text>
+  <text x="1070" y="413" text-anchor="middle" font-size="15" font-weight="700" fill="#14532d">Asset</text>
+  <text x="1070" y="431" text-anchor="middle" font-size="15" font-weight="700" fill="#14532d">Return</text>
+  <text x="1070" y="452" text-anchor="middle" font-size="10" fill="#16a34a">Y = log(Pₜ/Pₜ₋₁)</text>
+  <text x="1070" y="466" text-anchor="middle" font-size="9" fill="#16a34a">Continuous outcome</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYER 3 — LEGEND (always on top, top-left)
+       ═══════════════════════════════════════════════════════════ -->
+  <rect x="16" y="68" width="188" height="220" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0f172a">Legend</text>
+  <line x1="26" y1="95" x2="194" y2="95" stroke="#f1f5f9" stroke-width="1.5"/>
+
+  <circle cx="42" cy="112" r="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8"/>
+  <text x="56" y="116" font-size="10" font-weight="700" fill="#3b82f6">Confounder (Z)</text>
+  <text x="56" y="128" font-size="8.5" fill="#64748b">Affects both T and Y</text>
+
+  <circle cx="42" cy="147" r="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.8"/>
+  <text x="56" y="151" font-size="10" font-weight="700" fill="#dc2626">Treatment (T)</text>
+  <text x="56" y="163" font-size="8.5" fill="#64748b">Event occurrence {0,1}</text>
+
+  <circle cx="42" cy="182" r="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8"/>
+  <text x="56" y="186" font-size="10" font-weight="700" fill="#16a34a">Outcome (Y)</text>
+  <text x="56" y="198" font-size="8.5" fill="#64748b">Asset log return</text>
+
+  <circle cx="42" cy="217" r="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8"/>
+  <text x="56" y="221" font-size="10" font-weight="700" fill="#ea580c">Mediator (M)</text>
+  <text x="56" y="233" font-size="8.5" fill="#64748b">On causal path T→Y</text>
+
+  <line x1="26" y1="244" x2="194" y2="244" stroke="#f1f5f9" stroke-width="1.5"/>
+
+  <!-- Arrow key -->
+  <line x1="28" y1="257" x2="62" y2="257" stroke="#3b82f6" stroke-width="1.6" stroke-dasharray="6,3" marker-end="url(#mBlue)"/>
+  <text x="70" y="261" font-size="8.5" fill="#475569">Confounder path</text>
+
+  <line x1="28" y1="274" x2="62" y2="274" stroke="#dc2626" stroke-width="4" marker-end="url(#mRed)"/>
+  <text x="70" y="278" font-size="8.5" fill="#475569">ATE causal effect</text>
+
+  <line x1="28" y1="291" x2="62" y2="291" stroke="#ea580c" stroke-width="2" marker-end="url(#mOrange)"/>
+  <text x="70" y="295" font-size="8.5" fill="#475569">Mediation path</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       DOWHY PIPELINE — bottom section
+       ═══════════════════════════════════════════════════════════ -->
+  <rect x="16" y="644" width="1268" height="228" rx="10" fill="#fff" stroke="#3b82f6" stroke-width="1.8" filter="url(#shadow)"/>
+  <rect x="16" y="644" width="1268" height="36" rx="10" fill="#0f172a"/>
+  <rect x="16"  y="662" width="1268" height="18" fill="#0f172a"/>
+  <text x="650" y="668" text-anchor="middle" font-size="13.5" font-weight="700" fill="#f1f5f9">DoWhy Estimation Pipeline — 4-Step Process</text>
+
+  <!-- Step width = (1268 - 5*16) / 4 = 297  gap=16  start=32 -->
+  <!-- Steps at x: 32, 345, 658, 971   width 297 height 182 -->
+
+  <!-- ① Model -->
+  <rect x="32"  y="684" width="297" height="174" rx="7" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.3"/>
+  <rect x="32"  y="684" width="297" height="28"  rx="7" fill="#3b82f6"/>
+  <rect x="32"  y="700" width="297" height="12"  fill="#3b82f6"/>
+  <text x="180" y="703" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">① Model</text>
+  <text x="180" y="728" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">Define causal graph as DAG</text>
+  <text x="180" y="745" text-anchor="middle" font-size="9.5" fill="#475569">Specify T, Y and all Z nodes</text>
+  <text x="180" y="760" text-anchor="middle" font-size="9.5" fill="#475569">in DOT / GML format</text>
+  <text x="180" y="778" text-anchor="middle" font-size="9" fill="#3b82f6" font-style="italic">CausalModel(data,</text>
+  <text x="180" y="792" text-anchor="middle" font-size="9" fill="#3b82f6" font-style="italic">  treatment, outcome, graph)</text>
+  <text x="180" y="810" text-anchor="middle" font-size="8.5" fill="#94a3b8">Encodes Z₁ · Z₂ · Z₃</text>
+  <text x="180" y="824" text-anchor="middle" font-size="8.5" fill="#94a3b8">as common causes of T and Y</text>
+
+  <!-- arrow -->
+  <line x1="329" y1="771" x2="345" y2="771" stroke="#6b7280" stroke-width="2" marker-end="url(#mGrey)"/>
+
+  <!-- ② Identify -->
+  <rect x="345" y="684" width="297" height="174" rx="7" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.3"/>
+  <rect x="345" y="684" width="297" height="28"  rx="7" fill="#3b82f6"/>
+  <rect x="345" y="700" width="297" height="12"  fill="#3b82f6"/>
+  <text x="493" y="703" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">② Identify</text>
+  <text x="493" y="728" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">Identify causal estimand</text>
+  <text x="493" y="745" text-anchor="middle" font-size="9.5" fill="#475569">Backdoor criterion applied</text>
+  <text x="493" y="760" text-anchor="middle" font-size="9.5" fill="#475569">Adjust for all Z confounders</text>
+  <text x="493" y="778" text-anchor="middle" font-size="9" fill="#3b82f6" font-style="italic">model.identify_effect()</text>
+  <text x="493" y="795" text-anchor="middle" font-size="8.5" fill="#94a3b8">Closes all backdoor paths</text>
+  <text x="493" y="809" text-anchor="middle" font-size="8.5" fill="#94a3b8">through Z₁ · Z₂ · Z₃</text>
+  <text x="493" y="824" text-anchor="middle" font-size="8.5" fill="#94a3b8">Returns: IdentifiedEstimand</text>
+
+  <!-- arrow -->
+  <line x1="642" y1="771" x2="658" y2="771" stroke="#6b7280" stroke-width="2" marker-end="url(#mGrey)"/>
+
+  <!-- ③ Estimate -->
+  <rect x="658" y="684" width="297" height="174" rx="7" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.3"/>
+  <rect x="658" y="684" width="297" height="28"  rx="7" fill="#3b82f6"/>
+  <rect x="658" y="700" width="297" height="12"  fill="#3b82f6"/>
+  <text x="806" y="703" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">③ Estimate</text>
+  <text x="806" y="728" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">Estimate ATE value</text>
+  <text x="806" y="745" text-anchor="middle" font-size="9.5" fill="#475569">backdoor.linear_regression</text>
+  <text x="806" y="760" text-anchor="middle" font-size="9.5" fill="#475569">OLS with confounder control</text>
+  <text x="806" y="778" text-anchor="middle" font-size="9" fill="#3b82f6" font-style="italic">model.estimate_effect()</text>
+  <text x="806" y="795" text-anchor="middle" font-size="8.5" fill="#94a3b8">→ ATE point estimate</text>
+  <text x="806" y="809" text-anchor="middle" font-size="8.5" fill="#94a3b8">→ 95% confidence interval</text>
+  <text x="806" y="824" text-anchor="middle" font-size="8.5" fill="#94a3b8">→ p-value significance test</text>
+
+  <!-- arrow -->
+  <line x1="955" y1="771" x2="971" y2="771" stroke="#6b7280" stroke-width="2" marker-end="url(#mGrey)"/>
+
+  <!-- ④ Refute -->
+  <rect x="971" y="684" width="297" height="174" rx="7" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.3"/>
+  <rect x="971" y="684" width="297" height="28"  rx="7" fill="#3b82f6"/>
+  <rect x="971" y="700" width="297" height="12"  fill="#3b82f6"/>
+  <text x="1119" y="703" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">④ Refute</text>
+  <text x="1119" y="728" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">Validate via refutation tests</text>
+  <text x="1119" y="745" text-anchor="middle" font-size="9.5" fill="#475569">• random_common_cause</text>
+  <text x="1119" y="760" text-anchor="middle" font-size="9.5" fill="#475569">• placebo_treatment_refuter</text>
+  <text x="1119" y="775" text-anchor="middle" font-size="9.5" fill="#475569">• data_subset_refuter</text>
+  <text x="1119" y="793" text-anchor="middle" font-size="9" fill="#3b82f6" font-style="italic">model.refute_estimate()</text>
+  <text x="1119" y="810" text-anchor="middle" font-size="8.5" fill="#94a3b8">ATE remains stable across</text>
+  <text x="1119" y="824" text-anchor="middle" font-size="8.5" fill="#94a3b8">all three tests ✓</text>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <text x="650" y="892" text-anchor="middle" font-size="9" fill="#94a3b8">DATSCI7030 — Causal DAG (DoWhy Framework) — Version 1.1 — Ibrahim Haroun, LJMU 2025–2026</text>
+</svg>
