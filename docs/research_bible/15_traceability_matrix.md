@@ -16,10 +16,10 @@
 | `02_eda.ipynb` | ✅ | ✅ | — |
 | `03_event_detection.ipynb` | ✅ | ✅ | — |
 | `04_causal_analysis.ipynb` | ✅ (primary) | ✅ (mean_car feature) | — |
-| `05_feature_engineering.ipynb` | — | ✅ (legacy pipeline — superseded by `feature_matrix.parquet`/FES v1.0, produced out-of-band; see `10_decision_log.md` 2026-07-06) | ✅ (legacy) |
-| `06_model_training.ipynb` | — | ✅ (legacy — importance/SHAP on legacy feature set) | ✅ (legacy — no baseline split; frozen RQ3 verdict comes from `model_contract.md`/Mission 07, not this notebook) |
-| `07_model_evaluation.ipynb` | — | ✅ (legacy — SHAP deep-dive on legacy model) | ✅ (legacy — extended metrics only, no RQ3 verdict stated) |
-| `08_results_visualisation.ipynb` | ✅ (08a/08b current) | ✅ (08c legacy) | ✅ (08c/08d legacy — pending regeneration, see `08_figures_plan.md`) |
+| `05_feature_engineering.ipynb` | — | ✅ (current — rebuilt 2026-07-06, Mission 05-07 Reproducibility Rebuild; reproduces `feature_matrix.parquet`/FES v1.0 exactly from `master_dataset.parquet`+`car_results.parquet`, `REPRODUCTION_EXACT=True`) | ✅ (current) |
+| `06_model_training.ipynb` | — | ✅ (current — rebuilt 2026-07-06; reproduces `Baseline_LASSO` exactly from `feature_matrix.parquet`, MCP v1.0) | ✅ (current — reproduces the frozen RQ3 baseline exactly; see `10_decision_log.md` 2026-07-06) |
+| `07_model_evaluation.ipynb` | — | ✅ (current — rebuilt 2026-07-06; reproduces `Event_LASSO`/`XGBoost`/`LightGBM` metrics and DM/z-test statistics exactly) | ✅ (current — reproduces the frozen RQ3 verdict, H0₃ not rejected, exactly; see `10_decision_log.md` 2026-07-06) |
+| `08_results_visualisation.ipynb` | ✅ (08a/08b current) | ✅ (08c current — rebuilt 2026-07-06, Results Visualisation Freeze v1.0) | ✅ (08c/08d current — rebuilt 2026-07-06; both state the RQ3 null result explicitly, see `08_figures_plan.md`, `10_decision_log.md`) |
 
 ## Figures (see `08_figures_plan.md` for the full per-figure table)
 

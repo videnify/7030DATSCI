@@ -90,8 +90,8 @@
 |--------|----------|-------|
 | `08a_event_landscape.png` | RQ1 | Event volume, type distribution, sentiment over time, president breakdown |
 | `08b_causal_evidence.png` | **RQ1 (summary evidence)** | CAR distributions, DoWhy estimates with CI, sentiment–CAR scatter, regime interaction |
-| `08c_predictive_pipeline.png` | **RQ2 + RQ3 (summary evidence)** | Feature importance by group, model comparison, SHAP top drivers — update once baseline exists |
-| `08d_full_dashboard.png` | All three RQs | Integrated timeline: SPY + VIX + events + model signal + cumulative strategy return (same caveat as `07d`) |
+| `08c_predictive_pipeline.png` | **RQ2 + RQ3 (summary evidence)** | **Rebuilt 2026-07-06 (Results Visualisation Freeze v1.0)** — feature importance by category (FES v1.0, `feature_importance.parquet`), 4-model comparison including `Baseline_LASSO` (`model_comparison.parquet`), SHAP top drivers (`shap_values_event_lasso.parquet`), explicit RQ3 verdict annotation (H0₃ not rejected). No legacy input remains. |
+| `08d_full_dashboard.png` | All three RQs | **Rebuilt 2026-07-06 (Results Visualisation Freeze v1.0)** — integrated timeline sourced from `feature_matrix.parquet` + `reports/model_comparison/event_model_predictions.parquet`; signal/strategy panels use `Event_LASSO` as the representative (not "best") event-enhanced model, explicitly captioned as illustrative only (same caveat as `07d`) with the RQ3 null result stated on the figure itself. |
 
 ## Architecture diagrams (`docs/architecture/`) — not data-driven, but part of the figure inventory
 
@@ -112,8 +112,8 @@
 
 ## Figures requiring an update once the baseline model lands (`07_model_plan.md`)
 
-`06a_model_comparison.png`, `08c_predictive_pipeline.png`, `08d_full_dashboard.png` — all three currently show a 3-model (no-baseline) comparison and must be regenerated once the RQ3 baseline gap is closed, or the dissertation risks presenting an incomplete RQ3 answer as if it were final.
+**Resolved 2026-07-06 (Results Visualisation Freeze v1.0)** for `08c_predictive_pipeline.png` and `08d_full_dashboard.png` — both now show the full 4-model comparison including `Baseline_LASSO`, sourced from `reports/model_comparison/`. `06a_model_comparison.png` (produced by `06_model_training.ipynb`) was outside this mission's scope (Notebook 08 only, per its brief) — its status was not re-verified here and remains to be checked in a future pass if it is still cited anywhere.
 
 ## Figures requiring a caveat in the dissertation text
 
-`07d_strategy_performance.png`, `08d_full_dashboard.png` — any cumulative-return/strategy-style panel must be captioned as illustrative directional-signal visualisation, not a claim of tradeable profit net of transaction costs and slippage (see `00_project_overview.md` "What this project explicitly does NOT attempt" and `11_limitations.md`).
+`07d_strategy_performance.png`, `08d_full_dashboard.png` — any cumulative-return/strategy-style panel must be captioned as illustrative directional-signal visualisation, not a claim of tradeable profit net of transaction costs and slippage (see `00_project_overview.md` "What this project explicitly does NOT attempt" and `11_limitations.md`). `08d`'s panel 5 now states this caveat directly on the figure itself, alongside the RQ3 null-result statement.

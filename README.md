@@ -147,10 +147,10 @@ Reproducibility notes:
 | 2 | `02_eda.ipynb` | ✅ Complete | EDA figures in `reports/figures/` |
 | 3 | `03_event_detection.ipynb` | ✅ Complete | 4 processed parquets, 4 figures |
 | 4 | `04_causal_analysis.ipynb` | ✅ Complete | `car_results.parquet`, `causal_estimates.parquet`, 4 figures |
-| 5 | `05_feature_engineering.ipynb` | ✅ Complete (legacy output); **FES v1.0 frozen 2026-07-05** | `feature_matrix.parquet` (current), `model_features.parquet` / `feature_metadata.parquet` (legacy), 3 figures |
-| 6 | `06_model_training.ipynb` | ✅ Complete (legacy, full-feature models); **market-only baseline (`Baseline_LASSO`) frozen 2026-07-05, MCP v1.0** | `lasso.pkl`, `xgboost.json`, `lightgbm.txt` (legacy, superseded feature set), `test_predictions.parquet`, `shap_values.parquet`, 4 figures; `models/baseline/`, `reports/baseline/` (current) |
-| 7 | `07_model_evaluation.ipynb` | ✅ Complete | `evaluation_summary.parquet`, `residual_diagnostics.json`, 4 figures |
-| 8 | `08_results_visualisation.ipynb` | ✅ Complete | 4 publication figures (300 dpi) |
+| 5 | `05_feature_engineering.ipynb` | ✅ Complete — **rebuilt 2026-07-06 to reproduce FES v1.0 exactly** (Mission 05-07 Reproducibility Rebuild); legacy `model_features.parquet` output no longer produced by this notebook | `feature_matrix.parquet`, `feature_profile.json`, `feature_matrix_validation.json` |
+| 6 | `06_model_training.ipynb` | ✅ Complete — **rebuilt 2026-07-06 to reproduce `Baseline_LASSO` exactly** (MCP v1.0) from `feature_matrix.parquet` only | `models/baseline/baseline_lasso.joblib`, `baseline_model_metadata.json`, `reports/baseline/baseline_metrics.json`, `baseline_predictions.parquet` |
+| 7 | `07_model_evaluation.ipynb` | ✅ Complete — **rebuilt 2026-07-06 to reproduce `Event_LASSO`/`XGBoost`/`LightGBM` and the RQ3 verdict exactly** | `reports/model_comparison/model_comparison.parquet`, `statistical_tests.json`, `feature_importance.parquet` |
+| 8 | `08_results_visualisation.ipynb` | ✅ Complete — **rebuilt 2026-07-06 (Results Visualisation Freeze v1.0)**: all four figures (08a-08d) now read exclusively from the canonical pipeline; no legacy dependency remains | 4 publication figures (300 dpi) |
 
 ---
 
