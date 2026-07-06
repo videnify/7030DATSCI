@@ -14,6 +14,8 @@ Every document in this folder must justify its own existence against the three r
 
 ## Document index
 
+**Start here:** [`00_project_freeze.md`](00_project_freeze.md) — the Project Governance Freeze (2026-07-06). States what is frozen, why, and what changes are still allowed before reading anything else in this folder. Sits alongside the numbered sequence below (like the SAP suite further down) rather than displacing `00_project_overview.md`'s number, to avoid disturbing the existing `12_dissertation_outline.md` chapter mapping.
+
 | # | Document | One-line purpose |
 |---|----------|-------------------|
 | 00 | [`00_project_overview.md`](00_project_overview.md) | What the project is, why it exists, and current phase status at a glance |

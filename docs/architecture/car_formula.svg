@@ -50,8 +50,8 @@
 
   <rect x="628" y="134" width="112" height="80" rx="5" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
   <text x="684" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#111111">E[Rₜₐ]</text>
-  <text x="684" y="178" text-anchor="middle" font-size="10" fill="#444444">Market model / ARIMA</text>
-  <text x="684" y="196" text-anchor="middle" font-size="10" fill="#444444">forecast</text>
+  <text x="684" y="178" text-anchor="middle" font-size="10" fill="#444444">Market-model</text>
+  <text x="684" y="196" text-anchor="middle" font-size="10" fill="#444444">expected return</text>
 
   <!-- Divider -->
   <line x1="60" y1="232" x2="740" y2="232" stroke="#DDDDDD" stroke-width="0.8"/>
@@ -63,7 +63,7 @@
 
   <rect x="430" y="260" width="310" height="64" rx="5" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
   <text x="585" y="284" text-anchor="middle" font-size="12" font-weight="700" fill="#111111">a — asset index</text>
-  <text x="585" y="306" text-anchor="middle" font-size="10" fill="#444444">SPY · QQQ · GLD · TLT (config.yaml)</text>
+  <text x="585" y="306" text-anchor="middle" font-size="10" fill="#444444">SPY (RQ1 evidence base — see 11_limitations.md)</text>
 
   <!-- Divider -->
   <line x1="60" y1="342" x2="740" y2="342" stroke="#DDDDDD" stroke-width="0.8"/>
@@ -71,7 +71,7 @@
 
   <rect x="60" y="370" width="680" height="64" rx="5" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
   <text x="400" y="394" text-anchor="middle" font-size="12" font-weight="700" fill="#111111">t₁ to t₂ — event accumulation window</text>
-  <text x="400" y="416" text-anchor="middle" font-size="10" fill="#444444">e.g. t₁ = 0 (event day), t₂ = +5 or +20 trading days — chosen based on expected event persistence</text>
+  <text x="400" y="416" text-anchor="middle" font-size="10" fill="#444444">t₁ = −5, t₂ = +10 trading days (config.yaml: event_window_pre/post) — 120-day pre-window estimation</text>
 
   <!-- Divider -->
   <line x1="60" y1="452" x2="740" y2="452" stroke="#DDDDDD" stroke-width="0.8"/>
@@ -87,5 +87,5 @@
 
   <!-- Footer -->
   <line x1="60" y1="546" x2="740" y2="546" stroke="#CCCCCC" stroke-width="0.6"/>
-  <text x="400" y="556" text-anchor="middle" font-size="9" fill="#AAAAAA">DATSCI7030 — CAR Formula Reference — Version 1.1</text>
+  <text x="400" y="556" text-anchor="middle" font-size="9" fill="#AAAAAA">DATSCI7030 — CAR Formula Reference — Version 1.2 (corrected 2026-07-06 — ARIMA reference removed, window matched to config.yaml)</text>
 </svg>

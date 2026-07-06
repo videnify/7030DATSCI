@@ -82,7 +82,7 @@ RF-importance selection (which of these 95 candidates clears the 0.001 threshold
 
 ## Sentiment Features (25) — Category header
 
-**Supports:** RQ1 (methodology — feeds the causal model's sentiment signal), RQ2. **Hypothesis:** H1 (context), H2. **Baseline-eligible:** ❌ No. **Dependencies:** `master_dataset.parquet` columns `overall_mean_sentiment`, `overall_net_sentiment`, `total_events`, and the eight per-category daily sentiment columns (`energy, geopolitical, health, labour, monetary, other, regulatory, trade`) — all already lexicon-method aggregates per the FinBERT-vs-lexicon decision (`10_decision_log.md`). **Expected behaviour:** raw per-category sentiment is genuinely zero (not missing) on non-event days, per `dataset_version.md`'s fill policy — every rolling/lag feature below inherits that same zero-is-a-true-value semantics.
+**Supports:** RQ1 (methodology — feeds the causal model's sentiment signal), RQ2. **Hypothesis:** H1 (context), H2. **Baseline-eligible:** ❌ No. **Dependencies:** `master_dataset.parquet` columns `overall_mean_sentiment`, `overall_net_sentiment`, `total_events`, and the eight per-category daily sentiment columns (`energy, geopolitical, health, labour, monetary, other, regulatory, trade`) — all already predominantly FinBERT-method aggregates (official primary sentiment engine, Sentiment Engine Freeze v1.0 — `10_decision_log.md`), with the lexicon scorer retained only as a fallback/historical method. **Expected behaviour:** raw per-category sentiment is genuinely zero (not missing) on non-event days, per `dataset_version.md`'s fill policy — every rolling/lag feature below inherits that same zero-is-a-true-value semantics.
 
 | Feature | Source variable(s) | Formula | Purpose | Potential risk |
 |---|---|---|---|---|

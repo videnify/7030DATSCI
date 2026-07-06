@@ -95,7 +95,18 @@
 
 ## Architecture diagrams (`docs/architecture/`) — not data-driven, but part of the figure inventory
 
-`arima_pipeline.svg`, `car_formula.svg`, `causal_dag_dowhy*.svg/png`, `data_pipeline_architecture*.svg/png`, `datsci7030_project_structure.svg`, `full_system_architecture.svg`, `hybrid_model.svg`, `intervention_equation.svg`, `ml_project_map.svg`, `phase5_validation_pipeline.svg`, `project_structure.svg` — these support the dissertation Methodology chapter (pipeline/DAG diagrams), not a specific RQ's evidence; see `docs/architecture/README.md`.
+**Rebuilt 2026-07-06 (Architecture SVG Cleanup & Rebuild mission).** Canonical set (6 files, all support the dissertation Methodology chapter, not a specific RQ's evidence — see `docs/architecture/README.md` for the full use-in-dissertation mapping):
+
+| File | Chapter use |
+|------|-------------|
+| `project_pipeline.svg` | Ch.3 pipeline overview |
+| `data_lineage.svg` | Ch.3 §3.1 data sources / reproducibility appendix |
+| `research_governance.svg` | Ch.3 governance/versioning figure |
+| `rq_traceability.svg` | Ch.1 or Ch.4 opening figure — see `docs/architecture/README.md`'s note on the RQ1/RQ2 lane correction |
+| `modelling_flow.svg` | Ch.3 §3.5 model specification / Ch.4 §4.4 model comparison |
+| `car_formula.svg` | Ch.3 event-study equation reference (updated 2026-07-06 — ARIMA reference removed) |
+
+11 diagrams describing a superseded ARIMA/intervention-analysis methodology (never implemented in the frozen pipeline) were archived to `docs/architecture/archive/`, and 2 files misattributed to a different project ("GOVFIN") were deleted. None of the archived/deleted diagrams should be cited in the dissertation.
 
 ---
 

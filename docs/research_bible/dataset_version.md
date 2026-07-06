@@ -26,7 +26,7 @@
 | `QQQ`, `GLD`, `TLT` | float64 | Optional cross-asset closes — carried for the not-yet-scoped cross-asset check (`11_limitations.md` L8); not used in any RQ1–RQ3 result yet |
 | `vix` | float64 | VIX daily close |
 | `fed_funds_rate`, `cpi`, `unemployment`, `treasury_10y`, `treasury_2y`, `mfg_employment`, `yield_spread` | float64 | Macro indicators, forward-filled onto the SPY trading calendar from their native (often lower-frequency) release schedule |
-| `energy`, `geopolitical`, `health`, `labour`, `monetary`, `other`, `regulatory`, `trade` | float64 | Daily mean sentiment by event category (lexicon method); 0.0 on days with no events of that category — see Missing Value Policy below |
+| `energy`, `geopolitical`, `health`, `labour`, `monetary`, `other`, `regulatory`, `trade` | float64 | Daily mean sentiment by event category — predominantly FinBERT-sourced (official primary sentiment engine, Sentiment Engine Freeze v1.0; lexicon scorer used only as fallback/historical method — see `10_decision_log.md`); 0.0 on days with no events of that category — see Missing Value Policy below |
 | `overall_mean_sentiment`, `overall_net_sentiment` | float64 | Daily aggregate sentiment across all categories |
 | `total_events` | float64 | Count of tagged events that day, all categories |
 | `gdelt_risk_score`, `gdelt_mean_tone`, `gdelt_n_events` | float64 | GDELT geopolitical risk signal — **5-day sample only, not representative of the full period** (`11_limitations.md` L7); present in the schema but should not be treated as a reliable daily signal until backfilled |

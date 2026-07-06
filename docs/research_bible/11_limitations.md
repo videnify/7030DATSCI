@@ -31,8 +31,8 @@ Both FinBERT and the lexicon scorer operate on document *titles* (`app_president
 **Handling in write-up:** State explicitly as a scope limitation; note that full-text scoring is a natural extension (see also L6, FinBERT domain mismatch, which full-text scoring might also partially address).
 
 ### L6 — FinBERT domain mismatch
-FinBERT is trained on financial-news headlines, not political/policy language, producing 95.3% neutral labels when applied to presidential communications (see `10_decision_log.md`). The lexicon method was substituted as primary, but is itself a hand-curated (not independently validated) keyword list.
-**Handling in write-up:** Report both methods' distributions (already done in `09_results_log.md`), justify the lexicon choice, and note that neither method has been validated against human-labelled ground truth for this domain — a genuine open validity question.
+FinBERT — the project's official primary sentiment engine (Sentiment Engine Freeze v1.0, 2026-07-06 — see `10_decision_log.md`) — is trained on financial-news headlines, not political/policy language, producing 95.3% neutral labels when applied to presidential communications. The lexicon scorer, retained only as a fallback/historical prototype, is itself a hand-curated (not independently validated) keyword list, and shows a more discriminative but unvalidated distribution (73.1% neutral).
+**Handling in write-up:** Report both methods' distributions (already done in `09_results_log.md`), justify FinBERT as the adopted primary engine despite its neutral-heavy output (SEF v1.0 rationale: it matches what the pipeline actually runs and produces), and note that neither method has been validated against human-labelled ground truth for this domain — a genuine open validity question.
 
 ### L7 — GDELT limited to a 5-day sample against a 2015–2025 study period
 `data/raw/gdelt_sample.parquet` and the derived `gdelt_daily_risk.parquet` cover only 5 days. Any geopolitical-risk feature derived from GDELT is not representative of the full study period.

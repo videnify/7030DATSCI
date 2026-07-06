@@ -50,7 +50,9 @@ DoWhy causal effect (lexicon sentiment, pooled across event types): **+0.0051**,
 
 **Result:** FinBERT (document titles): 95.3% neutral, 2.7% positive, 2.0% negative, mean score +0.0067. Lexicon method: 73.1% neutral, 14.5% positive, 12.3% negative.
 
-**Interpretation:** FinBERT's domain mismatch (trained on financial-news headlines, applied to formal presidential/policy language) produces an overwhelmingly neutral, low-discrimination signal. The lexicon method is materially more discriminative and was selected as the primary sentiment signal — logged as a decision in `10_decision_log.md`.
+**Interpretation:** FinBERT's domain mismatch (trained on financial-news headlines, applied to formal presidential/policy language) produces an overwhelmingly neutral, low-discrimination signal. At the time of this entry, the lexicon method was judged materially more discriminative and was selected as the primary sentiment signal — logged as a decision in `10_decision_log.md`.
+
+**Update (2026-07-06, Sentiment Engine Freeze v1.0):** This method-selection reasoning was superseded by a Project Director decision — FinBERT is now the project's official primary sentiment engine, matching the fact that the actual frozen event catalogue is 99.2% FinBERT-sourced, not lexicon-sourced as concluded here. The percentages above are historical and unchanged; see `10_decision_log.md` for the full SEF v1.0 entry.
 
 **Caveats:** Both methods score document *titles* only, not full text — see `11_limitations.md`.
 
@@ -159,6 +161,94 @@ LASSO train R² 0.092 → test R² 0.033 (stable); XGBoost train R² 0.554 → t
 
 ---
 
+## 2026-07-06 — Event_LASSO isolated re-run: RQ3 Experiment 1 of 3 (Mission 07A)
+
+**RQ:** RQ3 (also informs RQ2 via retained-feature list)
+**Source:** `reports/event/event_lasso_07a_metrics.json`, `reports/event/event_lasso_07a_predictions.parquet`, `models/event/event_lasso_07a_metadata.json`, `reports/statistics/07A_event_lasso_summary.md`.
+
+**Result:** `Event_LASSO` retrained in isolation (all 95 FES v1.0 features, identical split/`TimeSeriesSplit(5)`/seed 42/persisted scaling to `Baseline_LASSO`) as the first of a planned three-part RQ3 experiment sequence (07A Event_LASSO / 07B / 07C). Selected alpha = 0.0007347957825603087; 11/95 coefficients retained non-zero (`log_return`, `return_lag3d`, `return_lag5d`, `return_lag21d`, `vix_change_1d`, `unemployment`, `mean_car`, `n_sig_events`, `sent_x_vix_regime`, `monetary_x_vix`, `sent_x_high_vol`). Test-split: RMSE 0.009465 (−1.74% vs. `Baseline_LASSO`'s 0.009632), MAE 0.006502, R² 0.033 (vs. −0.002), Dir. Acc. 0.564 (vs. 0.575), IC 0.166 (first defined IC in the RQ3 line — `Baseline_LASSO`'s is undefined), ROC-AUC 0.575 (vs. 0.500).
+
+**Interpretation:** Descriptive-only evidence (no Diebold-Mariano or two-proportion z-test run in this experiment, by design — see `10_decision_log.md`). Event_LASSO shows better RMSE/MAE/R²/IC/ROC-AUC than `Baseline_LASSO` but *lower* raw directional accuracy — the latter is not read as a deficiency, since `Baseline_LASSO`'s 0.575 is a mechanical base-rate artefact (constant prediction, ROC-AUC 0.500) rather than genuine skill, per `baseline_evaluation.md`'s standing caveat. The retained feature list — including the event-study `mean_car` and two sentiment/macro interaction terms — is qualitative evidence that event-derived information carries linear signal beyond what `Baseline_LASSO` can access (which was zero).
+
+**Cross-check:** This isolated re-run's test-split metrics match the existing 2026-07-05 Mission 07 Event_LASSO entry above almost exactly (RMSE/R²/Dir.Acc/IC identical to displayed precision; train Dir. Acc. differs by ~0.1 percentage point, consistent with a sign-tie edge case, not a methodology difference) — treated as a reproducibility confirmation, not a new number superseding the prior one. Saved under distinct `_07a`-suffixed filenames so neither run's artefacts overwrite the other.
+
+**Caveats:** RQ3 is **not** answered by this entry — this is Experiment 1 of 3; XGBoost/LightGBM (07B/07C) and any formal significance testing remain outstanding for this narrower experiment sequence (the 2026-07-05 Mission 07 entry already ran the full three-model DM/z-test comparison, but this 07A/07B/07C sequence re-derives the same ground more granularly per the current mission structure — both are retained, not in conflict, since neither is a Feature Matrix or Baseline version change).
+
+---
+
+## 2026-07-06 — XGBoost isolated re-run: RQ3 Experiment 2 of 3 (Mission 07B)
+
+**RQ:** RQ3 (also informs RQ2 via gain-importance list)
+**Source:** `reports/event/xgboost_07b_metrics.json`, `reports/event/xgboost_07b_predictions.parquet`, `models/event/xgboost_07b_metadata.json`, `reports/statistics/07B_xgboost_summary.md`.
+
+**Result:** `XGBoost` retrained in isolation (all 95 FES v1.0 features, identical split/`TimeSeriesSplit(5)`/seed 42/persisted scaling to `Baseline_LASSO`/`Event_LASSO`), tuned via `RandomizedSearchCV` (n_iter=25, `TimeSeriesSplit(5)`, seed 42). Selected params: `n_estimators=200, max_depth=5, learning_rate=0.05, subsample=0.9, colsample_bytree=0.5, min_child_weight=5, reg_alpha=0.1, reg_lambda=0.5`. Test-split: RMSE 0.009881 (+2.58% *worse* than `Baseline_LASSO`'s 0.009632), MAE 0.006779, R² −0.054 (vs. −0.002), Dir. Acc. 0.512 (vs. 0.575), IC 0.073 (first defined value for this model), ROC-AUC 0.517 (vs. 0.500). Train R² 0.597 collapses to test R² −0.054 — severe overfitting.
+
+**Interpretation:** Unlike `Event_LASSO` (07A), XGBoost is descriptively *worse* than `Baseline_LASSO` on every regression metric and on raw directional accuracy in this experiment — no evidence here that event-derived features improve prediction via this model. The train/test collapse reproduces (and in this specific hyperparameter draw, exceeds in magnitude) the XGBoost overfitting already documented at two prior feature-matrix versions (`11_limitations.md` L9: legacy train R² 0.554→test R² 0.030; 2026-07-05 FES v1.0 retrain train R² 0.267→test R² 0.019). Top gain-importance features include genuine event/macro signal (`mean_car`, `car_positive`, `vix_vs_ma`) alongside price/calendar features, indicating the model is overfitting to (not ignoring) event information.
+
+**Cross-check:** This run's numbers do **not** match the 2026-07-05 Mission 07 XGBoost entry exactly (that run: test RMSE 0.009533, R² 0.019, Dir. Acc. 0.556) — expected, since `RandomizedSearchCV`'s exact result depends on the full `param_distributions` searched, and only the prior run's winning point estimate was persisted in `event_model_metadata.json`, not its full search space. This experiment's search space (documented in `models/event/xgboost_07b_metadata.json`) was reconstructed as a reasonable standard grid consistent with that winning point, but an exact match was not guaranteed and did not occur — both runs agree qualitatively (XGBoost overfits, does not beat baseline).
+
+**Caveats:** RQ3 is **not** answered by this entry — this is Experiment 2 of 3; LightGBM (07C) and any formal significance testing remain outstanding. No significance test run in this experiment, by design. A recommendation to persist full `param_distributions` for every future randomized-search model (as done here) is logged in `future_improvements.md` so future tree-model re-runs can be reproduced as tightly as `Event_LASSO`'s deterministic `LassoCV` path search.
+
+---
+
+## 2026-07-06 — LightGBM isolated re-run: RQ3 Experiment 3 of 3 (Mission 07C) — sequence complete
+
+**RQ:** RQ3 (also strongly informs RQ2 via gain-importance list)
+**Source:** `reports/event/lightgbm_07c_metrics.json`, `reports/event/lightgbm_07c_predictions.parquet`, `models/event/lightgbm_07c_metadata.json`, `reports/statistics/07C_lightgbm_summary.md`.
+
+**Result:** `LightGBM` retrained in isolation (all 95 FES v1.0 features, identical split/`TimeSeriesSplit(5)`/seed 42/persisted scaling to `Baseline_LASSO`/07A/07B), tuned via `RandomizedSearchCV` (n_iter=25, `TimeSeriesSplit(5)`, seed 42; full `param_distributions` persisted per the 07B recommendation). Selected params: `n_estimators=200, max_depth=3, num_leaves=31, learning_rate=0.01, subsample=0.8, colsample_bytree=0.6, min_child_samples=50, reg_alpha=0, reg_lambda=1.5`. Test-split: RMSE 0.009470 (−1.68% vs. `Baseline_LASSO`'s 0.009632), MAE 0.006562 (+0.18%, essentially flat), R² 0.032 (vs. −0.002), Dir. Acc. 0.553 (vs. 0.575), IC 0.145, ROC-AUC 0.544 (vs. 0.500). Train R² 0.119 → test R² 0.032 — mild, not severe, overfitting (contrast with 07B's XGBoost collapse of 0.597 → −0.054).
+
+**Interpretation:** LightGBM's pattern matches `Event_LASSO` (07A) more closely than `XGBoost` (07B): descriptively better than baseline on RMSE/R²/IC/ROC-AUC, worse on raw directional accuracy for the same base-rate reason already established. The standout finding is gain-importance concentration: `mean_car` alone accounts for 36.9% of total gain, more than double the next feature (`return_lag5d`, 18.8%) — the strongest single-feature evidence across all three 07A/07B/07C experiments that event-study information (not just macro/sentiment generally) drives this project's clearest event-enhanced signal. This corroborates, with more concentration than before, the standing RQ2 finding that `mean_car` ranks among the top predictive features project-wide.
+
+**07A/07B/07C sequence complete — summary:**
+
+| Model | Test RMSE | vs. Baseline | Test R² | Test Dir. Acc | Overfitting |
+|---|---|---|---|---|---|
+| `Baseline_LASSO` | 0.009632 | — | −0.002 | 0.575 | None (constant) |
+| Event_LASSO (07A) | 0.009465 | −1.74% | 0.033 | 0.564 | Mild |
+| XGBoost (07B) | 0.009881 | +2.58% (worse) | −0.054 | 0.512 | Severe |
+| LightGBM (07C) | 0.009470 | −1.68% | 0.032 | 0.553 | Mild |
+
+**Cross-check:** As with 07B, this run's numbers are close to, but do not exactly match, the 2026-07-05 Mission 07 LightGBM entry (test RMSE 0.009529, R² 0.020, Dir. Acc. 0.549) — same search-space-not-persisted caveat as 07B, both runs agree qualitatively.
+
+**Caveats:** RQ3 is still **not formally answered** by the 07A/07B/07C sequence itself — no Diebold-Mariano or two-proportion z-test has been run within this sequence for any of the three models. The existing 2026-07-05 Mission 07 entry already ran that formal protocol on its own (numerically close) versions of all three models and found H0₃ not rejected for each. Given how closely both sets of numbers agree in direction and rough magnitude, a formal test on this sequence's own numbers would very likely reach the same qualitative verdict, but that is a determination for a dedicated significance-testing mission to make, not asserted here. `mean_car`'s dominant share of LightGBM's gain importance (36.9%) raises a robustness question (does the RMSE improvement survive without it?) flagged for Mission 08 or a future ablation, not answered here.
+
+---
+
 ## Template fulfilled
 
 The "market-only baseline vs. event-informed models" entry this template was reserved for is now logged above (2026-07-05, Mission 07). Retained here as a reference for the *next* RQ3 re-test (e.g. following a future Feature Matrix or Baseline version bump), not as an open item.
+
+---
+
+## 2026-07-06 — Mission 03-PRECHECK: event-detection notebook alignment (process log, not a research result)
+
+**RQ:** N/A — governance/documentation entry, logged here because it confirms no research number in this log changes as a result.
+**Source:** `notebooks/03_event_detection.ipynb` (documentation cells added: expanded title/purpose header, EDA cross-reference, event-definitions table, pre-save validation cell, post-save verification cell, handoff section); `docs/research_bible/{05_data_dictionary.md, 10_decision_log.md, dataset_contract.md, 15_traceability_matrix.md, statistical_decision_matrix.md}` (reviewed, cross-checked, no conflicts found).
+
+**Result:** `03_event_detection.ipynb` confirmed consistent with `02_eda.ipynb`'s EDA findings (stationarity, GDELT limitation, weak raw correlations — see the notebook's new "Link to EDA" section for the exact citations), the frozen Research Bible, and SAP v1.0. Two scope clarifications were made explicit and logged as decisions (`10_decision_log.md`, 2026-07-06): (1) this notebook must not consume `master_dataset.parquet` (circular dependency — `master_dataset.parquet` is built from this notebook's own `daily_sentiment.parquet` output), and (2) event-window construction remains solely in `04_causal_analysis.ipynb`, not duplicated here. No existing executable cell was modified; two new read-only validation/verification code cells were added.
+
+**Interpretation:** This notebook was already substantively well-aligned with the rest of the pipeline — the alignment pass found documentation gaps (no explicit RQ/hypothesis/EDA-link header, no consolidated event-definitions table, no pre-save validation checks) rather than logic errors. The one thing worth flagging forward: the mission brief that triggered this pass suggested inputs/outputs (`master_dataset.parquet` as an input; `detected_events.parquet`/`event_windows.parquet`/`event_calendar.parquet` as outputs) that do not match the actual, correct pipeline dependency graph — this mismatch was identified and not applied, rather than followed mechanically.
+
+**Caveats:** The two new validation cells (`validation-checks`, `post-save-verification`) have not yet been executed — their diagnostic output will only exist once the notebook is next run top-to-bottom. This entry records that the checks were *added*, not that they have *passed*.
+
+---
+
+## 2026-07-06 — Mission 03: full execution, validation, and freeze of `03_event_detection.ipynb`
+
+**RQ:** RQ1/RQ2 (this notebook's outputs feed both, per `15_traceability_matrix.md`).
+**Source:** Live top-to-bottom execution via `nbclient`; `data/processed/{events_tagged,daily_sentiment,high_impact_events,gdelt_daily_risk}.parquet`; `reports/figures/03{a,b,c,d}_*.png`.
+
+**Result:**
+- **Catalogue:** 11,664 total events — 11,570 core-president APP documents + 89 FOMC decisions + 5 GDELT rows. Event-type distribution: other 6,392 (54.8%), regulatory 2,246 (19.3%), geopolitical 1,617 (13.9%), health 438, monetary 293, trade 276, labour 243, energy 159.
+- **Sentiment:** 11,081 neutral (95.0%), 324 positive (2.8%), 259 negative (2.2%); mean numeric sentiment +0.0054. `sentiment_source`: `finbert` 11,570 (99.2%, reused from a prior cache), `rule` 89, `gdelt_goldstein` 5.
+- **High-impact events:** 4,100 of 11,664 (35.2%) — regulatory 2,019, geopolitical 1,453, trade 253, monetary 227, energy 148.
+- **Validation checks (new, `validation-checks` cell):** 124 duplicate `(date, title, doc_type)` rows found (genuine same-day, identically-titled documents — e.g. recurring proclamation/press-briefing titles — not a pipeline defect); 0 null dates; **5 rows outside the nominal 2015–2025 study window**, all GDELT (`date` 2026-05-02 → 2026-05-06 — the "5-day sample" is a recent live pull, not a historical sample drawn from within the study period); 0 missing sentiment labels.
+- **Post-save verification:** all 4 output files confirmed on disk with shapes matching the in-memory objects exactly.
+- Two runtime bugs found and fixed during execution (see `10_decision_log.md` for full reasoning): a `KeyError: 'decision'` from an upstream `fomc_dates.parquet` column rename (`decision` → `rate_decision`), and a cache-merge row-explosion in the sentiment-scoring cell (fixed by deduplicating the cache on `title` before merging).
+
+**Interpretation:** The notebook now executes cleanly end-to-end and its outputs are verified consistent with what the code actually produces (not assumed from stale documentation). Two corrections to prior Research Bible entries follow directly: `events_tagged.parquet`/`high_impact_events.parquet` row counts in `05_data_dictionary.md` were substantially wrong (180,594/7,864 vs. the actual 11,664/4,100) and are now fixed. Separately, and more substantively, the actual sentiment signal in this catalogue is dominantly FinBERT-sourced (99.2% of rows), which contradicts the "lexicon is primary" methodology decision recorded elsewhere in this Research Bible — flagged in `10_decision_log.md` as requiring a founder decision, not resolved here. The GDELT date-range finding (5 rows entirely in 2026-05, outside 2015–2025) sharpens `11_limitations.md` L7: the sample isn't just short, it doesn't overlap the study period at all, reinforcing that it should not be treated as an active predictor (consistent with `02_eda.ipynb` §9.2's finding that `gdelt_*` columns show no variation in `master_dataset.parquet`).
+
+**Caveats:** This notebook's own outputs (`events_tagged.parquet` etc.) were regenerated by this execution — `master_dataset.parquet` and `feature_matrix.parquet` (both frozen, both read-only per their contracts) were **not** touched, re-derived, or re-validated against these new numbers. If a future session wants to confirm `master_dataset.parquet` still accurately reflects the current `daily_sentiment.parquet`, that comparison has not been done here and should not be assumed to pass.
+
+**Resolved (2026-07-06, Sentiment Engine Freeze v1.0):** The Project Director ratified FinBERT as the project's official primary sentiment engine, matching this notebook's actual output rather than the previously documented "lexicon is primary" position. Documentation updated accordingly across the Research Bible, README, and Notebook 03 — no datasets, models, or statistical outputs were changed. See `10_decision_log.md`.

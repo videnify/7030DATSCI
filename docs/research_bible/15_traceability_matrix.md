@@ -16,10 +16,10 @@
 | `02_eda.ipynb` | ✅ | ✅ | — |
 | `03_event_detection.ipynb` | ✅ | ✅ | — |
 | `04_causal_analysis.ipynb` | ✅ (primary) | ✅ (mean_car feature) | — |
-| `05_feature_engineering.ipynb` | — | ✅ (primary) | ✅ |
-| `06_model_training.ipynb` | — | ✅ (importance/SHAP) | ✅ (primary — incomplete, see below) |
-| `07_model_evaluation.ipynb` | — | ✅ (SHAP deep-dive) | ✅ (primary — incomplete) |
-| `08_results_visualisation.ipynb` | ✅ | ✅ | ✅ |
+| `05_feature_engineering.ipynb` | — | ✅ (legacy pipeline — superseded by `feature_matrix.parquet`/FES v1.0, produced out-of-band; see `10_decision_log.md` 2026-07-06) | ✅ (legacy) |
+| `06_model_training.ipynb` | — | ✅ (legacy — importance/SHAP on legacy feature set) | ✅ (legacy — no baseline split; frozen RQ3 verdict comes from `model_contract.md`/Mission 07, not this notebook) |
+| `07_model_evaluation.ipynb` | — | ✅ (legacy — SHAP deep-dive on legacy model) | ✅ (legacy — extended metrics only, no RQ3 verdict stated) |
+| `08_results_visualisation.ipynb` | ✅ (08a/08b current) | ✅ (08c legacy) | ✅ (08c/08d legacy — pending regeneration, see `08_figures_plan.md`) |
 
 ## Figures (see `08_figures_plan.md` for the full per-figure table)
 
@@ -40,6 +40,8 @@ All 46 figures under `reports/figures/` (40 original + 6 added 2026-07-05 by Mis
 | `reports/baseline/baseline_metrics.json` / `baseline_predictions.parquet` / `models/baseline/baseline_lasso.joblib` | — | — | ✅ (current — `Baseline_LASSO` v1.0, Mission 06) |
 | `reports/model_comparison/model_comparison.parquet` / `statistical_tests.json` / `feature_importance.parquet` / `shap_values_*.parquet` | — | ✅ | ✅ (current — Mission 07, FES v1.0, RQ3 comparison complete) |
 | `shap_values.parquet` (legacy) / `test_predictions.parquet` (legacy) | — | ✅ (superseded) | ✅ (superseded) |
+
+*Row counts for `events_tagged.parquet`/`high_impact_events.parquet` were corrected 2026-07-06 (11,664/4,100) after a live re-execution of `03_event_detection.ipynb` — see `05_data_dictionary.md`, `10_decision_log.md`.*
 
 ## Models
 
