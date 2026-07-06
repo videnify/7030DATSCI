@@ -77,53 +77,65 @@ Event-study CAR establishes *association*, not causation — the market-model re
 
 ## 4. Feature Engineering Methodology (→ RQ2, RQ3)
 
-Six feature groups are built from the outputs of Phases 1–4 (see `06_feature_dictionary.md` for the complete, column-level list):
+**Updated 2026-07-06 — this section previously described the pre-freeze, 91-feature/52-selected pipeline. It now describes the frozen Feature Engineering Specification (FES v1.0), the only feature set any RQ2/RQ3 model may be trained or reported against. See `feature_contract.md` (the binding rulebook this section summarises) and `06_feature_dictionary.md` (per-feature detail) for the authoritative versions of everything below; this correction is logged in `10_decision_log.md`.**
 
-| Group | Count | Examples |
+`feature_matrix.parquet` is built from exactly two upstream artefacts — `data/processed/master_dataset.parquet` (Dataset v1.0) and `data/processed/car_results.parquet` (the Phase-4 event-study output) — and from no other processed file. Six feature categories are engineered (see `06_feature_dictionary.md` for the complete, column-level list):
+
+| Category | Count | Examples |
 |-------|-------|----------|
-| Price & returns | 13 | log returns, lagged returns (1/3/5/10/21d), cumulative returns |
-| Technical indicators | 14 | rolling volatility, momentum, RSI-14, Bollinger Band width/position |
+| Market | 27 | log returns, lagged returns (1/3/5/10/21d), cumulative returns, rolling volatility, momentum, RSI-14, Bollinger Band width/position |
+| Macro & VIX | 16 | VIX level/change, Fed Funds Rate, CPI month-on-month, Treasury yields, yield-curve spread |
 | Sentiment | 25 | daily sentiment by event type, rolling mean/std, sentiment momentum |
-| Event indicators | 14 | event-type dummies, days-since-last-high-impact-event, `mean_car` |
-| Macro & VIX | 16 | VIX level/change, Fed Funds Rate, CPI MoM, yield-curve spread |
-| Interactions | 8 | sentiment × VIX regime, high-impact-event × momentum |
-| **Total engineered** | **91** | — |
-| **Selected (RF importance > 0.001)** | **52** | — |
+| Event | 14 | event-type day counts, `mean_car`, days-since-last-CAR-event, significant-event flags |
+| Temporal | 5 | cyclically encoded day-of-week and month, ordinal quarter |
+| Interaction | 8 | sentiment × VIX regime, monetary × rate-change, event-significance × momentum |
+| **Total engineered** | **95** | — |
 
-**Feature selection:** Random Forest impurity importance, threshold 0.001, computed once on the training period only (no test-period leakage into the selection step itself). As of SAP v1.0, this is preceded by variance (< 1e-8), correlation (|r| > 0.90), and VIF (> 10) threshold checks — see `04_statistics_plan.md` "Feature-engineering thresholds" and `statistical_assumptions.md` (Multicollinearity) — and corroborated, not replaced, by a Mutual Information ranking.
+**Feature selection:** unlike the pre-freeze pipeline, FES v1.0 does not select a subset of a larger candidate pool by an importance threshold — all 95 engineered features are the frozen matrix. Variance (< 1e-8), correlation (|r| > 0.90), and VIF (> 10) checks are still run (`feature_matrix_validation.json`) but serve as **informational flags for the dissertation's multicollinearity discussion**, not an automatic-drop mechanism — a flagged feature is documented in `06_feature_dictionary.md`, not silently removed.
 
-**Target variable:** `fwd_return_1d` (forward 1-day log return) is the primary target (`models/model_metadata.json: primary_target`). Forward 5-day and 10-day returns are also engineered as secondary targets for robustness checks, not used in the primary RQ3 comparison.
+**Target variable:** `fwd_return_1d` (forward 1-day SPY log return) is the sole frozen target. Forward 5-day/10-day return targets are explicitly out of scope for FES v1.0 (`feature_contract.md`) — not engineered, not a secondary robustness check.
 
-**Train/test split:** Strict chronological split — train 2015-01-05 → 2022-12-31 (2,013 rows, 73%), test 2023-01-01 → 2025-12-29 (750 rows, 27%). No shuffling; this is a forecasting task and any random split would leak future information into training via overlapping rolling-window features.
+**Row scope:** after all features are constructed, rows with any undefined value are dropped (the binding constraint is `days_since_car_event`, undefined before the first recorded CAR event on 2016-01-05), yielding 2,511 rows spanning 2016-01-05 to 2025-12-29.
 
-**Scaling:** `StandardScaler` fit on the training set only (`data/processed/scaler.pkl`), applied to both splits — never re-fit on test data.
+**Train/test split:** strict chronological split — train 2016-01-05 → 2022-12-30 (1,761 rows, 70.1%), test 2023-01-03 → 2025-12-29 (750 rows, 29.9%). No shuffling; this is a forecasting task and a random split would leak future information into training via overlapping rolling-window features.
 
-**Inputs:** `data/processed/events_tagged.parquet`, `daily_sentiment.parquet`, `data/raw/prices.parquet`, `vix.parquet`, `macro_indicators.parquet`.
-**Outputs:** `data/processed/model_features.parquet` (2,763 rows × 95 cols), `feature_metadata.parquet`, `scaler.pkl`.
+**Scaling:** per-feature mean and standard deviation computed on the training split only and persisted (`feature_profile.json`), then applied as `(x − mean) / std` uniformly to every engineered feature (including binary flags) in both splits. The scaler is never refit on the full matrix or on test data.
+
+**Baseline eligibility:** the Market category (27 features) is the only category a market-only baseline model may read; the remaining 68 features (Macro & VIX, Sentiment, Event, Temporal, Interaction) are event-enhanced-model-only. This boundary is enforced at the contract level (`feature_contract.md` "Baseline eligibility"), not left to per-notebook discretion, and is the mechanism that prevents event information from leaking into the RQ3 baseline.
+
+**Inputs:** `data/processed/master_dataset.parquet`, `data/processed/car_results.parquet`.
+**Outputs:** `data/processed/feature_matrix.parquet` (2,511 rows × 98 columns, incl. date/split/target), `feature_profile.json`, `feature_matrix_validation.json`.
 **Notebook:** `05_feature_engineering.ipynb`.
 
 ---
 
 ## 5. Machine Learning Methodology (→ RQ3)
 
-**Candidate models:** LASSO (regularised linear regression, interpretable baseline-complexity model), XGBoost, LightGBM.
+**Updated 2026-07-06 — this section previously described a three-model, no-baseline comparison and flagged a missing market-only baseline as blocking RQ3. That gap has since been closed (Model Contract Protocol, MCP v1.0). This section now describes the frozen model roster and comparison procedure; see `model_contract.md` (the binding rulebook this section summarises) and `baseline_model_specification.md`/`07_model_plan.md` for full detail. This correction is logged in `10_decision_log.md`.**
 
-**Validation protocol:** `TimeSeriesSplit` cross-validation, 5 folds (`config.yaml: model.cv_splits`), random seed fixed at 42 throughout for reproducibility. Hyperparameter tuning via `RandomizedSearchCV` constrained to respect time-series ordering (no shuffling across folds).
+**Approved models (MCP v1.0):**
 
-**Hyperparameters actually selected** (`models/model_metadata.json`):
-| Model | Key hyperparameters |
-|-------|---------------------|
-| LASSO | α = 0.000518 |
-| XGBoost | n_estimators 600, learning_rate 0.01, max_depth 6, subsample 0.7, colsample_bytree 0.6, reg_λ 1.5, reg_α 0.1, min_child_weight 5 |
-| LightGBM | n_estimators 200, learning_rate 0.01, num_leaves 127, max_depth 5, subsample 0.9, colsample_bytree 0.6, reg_λ 0.1, reg_α 0.01 |
+| Role | Model | Feature scope |
+|---|---|---|
+| Baseline | `Baseline_LASSO` | Market category only (27 features) |
+| Event-enhanced candidate | Event_LASSO | Full 95-feature set |
+| Event-enhanced candidate | XGBoost | Full 95-feature set |
+| Event-enhanced candidate | LightGBM | Full 95-feature set |
+| Feature-importance tool (RQ2 only, not an RQ3 candidate) | Random Forest | Full 95-feature set |
 
-**⚠️ Missing baseline (RQ3-blocking):** All three models above are trained on the same 52-feature (price + technical + sentiment + event + macro) matrix. No model in the current comparison is trained on price/technical features only. See `07_model_plan.md` for the specification of the missing baseline and `01_research_questions.md` (RQ3 status) for why this blocks a full RQ3 answer.
+`Baseline_LASSO` and Event_LASSO are the same algorithm (regularised linear regression via `LassoCV`) trained as two distinct model objects with different feature scopes and different roles: one establishes the floor RQ3 must clear, the other is a full-feature candidate tested against that floor. They are never conflated or stored as the same artefact.
 
-**Explainability:** SHAP (TreeExplainer for XGBoost/LightGBM; LinearExplainer for LASSO) computed on the test set, producing global summary plots and per-feature dependence plots.
+**Validation protocol:** `TimeSeriesSplit` cross-validation, 5 folds, random seed fixed at 42 throughout, identically for the baseline and every event-enhanced candidate. `Baseline_LASSO` and Event_LASSO are tuned via `LassoCV`'s automatic coordinate-descent alpha-path search; XGBoost and LightGBM are tuned via `RandomizedSearchCV` constrained to respect time-series ordering (no shuffling across folds).
 
-**Inputs:** `data/processed/model_features.parquet`, `feature_metadata.parquet`, `scaler.pkl`.
-**Outputs:** `models/lasso.pkl`, `xgboost.json`, `lightgbm.txt`, `model_metadata.json`; `data/processed/test_predictions.parquet`, `shap_values.parquet`.
-**Notebooks:** `06_model_training.ipynb` (training/tuning), `07_model_evaluation.ipynb` (extended evaluation, residual diagnostics, SHAP deep-dive).
+**Evaluation metrics:** every model is scored on the identical frozen metric set — RMSE, MAE, R², directional accuracy, Information Coefficient (Spearman rank correlation between prediction and actual return) — together with, for the direction-as-binary-class framing, precision/recall/F1/ROC-AUC and a confusion matrix, residual diagnostics (Durbin-Watson, Jarque-Bera, heteroskedasticity correlation), empirical residual-quantile prediction intervals, a block-bootstrap 95% CI on test RMSE, and a Wilson-score 95% CI on directional accuracy.
+
+**Promotion criteria (the test an event-enhanced model must clear to be reported as beating the baseline):** on the test split, (1) its RMSE must be significantly lower than `Baseline_LASSO`'s via a one-sided Diebold-Mariano test, **and** (2) its directional accuracy must be significantly higher via a one-sided two-proportion z-test, both assessed at a Bonferroni-corrected α = 0.05 / 3 = 0.0167 (three event-enhanced candidates compared against one baseline). A model clearing only one leg is a mixed result and is not reported as beating the baseline.
+
+**Explainability:** SHAP (`TreeExplainer` for XGBoost/LightGBM; the exact linear decomposition for Event_LASSO) computed on the test set, producing global importance rankings and per-feature attribution.
+
+**Inputs:** `data/processed/feature_matrix.parquet`, `feature_profile.json` (persisted scaling parameters).
+**Outputs:** `models/baseline/baseline_lasso.joblib`, `models/baseline/baseline_model_metadata.json`, `reports/baseline/baseline_metrics.json`, `reports/baseline/baseline_predictions.parquet`; `models/event/event_model_metadata.json`, `reports/model_comparison/model_comparison.parquet`, `reports/model_comparison/statistical_tests.json`, `reports/model_comparison/feature_importance.parquet`, `reports/model_comparison/shap_values_*.parquet`.
+**Notebooks:** `06_model_training.ipynb` (baseline), `07_model_evaluation.ipynb` (event-enhanced training, statistical comparison, and RQ3 verdict).
 
 ---
 

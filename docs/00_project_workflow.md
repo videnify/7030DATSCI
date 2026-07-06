@@ -46,7 +46,7 @@ Text preprocessing and sentiment/event scoring of presidential communications an
 Rolling returns, lag variables, volatility measures, technical indicators, event features, and macro features combined into the final ML dataset. Feeds **RQ2** and **RQ3**. Notebook: `06_feature_engineering.ipynb`.
 
 ### Phase 8 — Machine Learning
-Market-only baseline model plus Random Forest, XGBoost, and LightGBM trained on the event-augmented feature set, with time-series cross-validation. Directly answers **RQ3**. Notebook: `07_machine_learning.ipynb`.
+A market-only baseline (`Baseline_LASSO`) trained on price/technical features only, plus three event-enhanced candidates (Event_LASSO, XGBoost, LightGBM) trained on the full event-augmented feature set, all under an identical time-series cross-validation protocol. Random Forest is used only as an RQ2 feature-importance tool, not as an RQ3 predictive candidate. Directly answers **RQ3**. Notebooks: `06_model_training.ipynb` (baseline), `07_machine_learning.ipynb` (event-enhanced candidates + comparison).
 
 ### Phase 9 — Evaluation and Explainability
 ROC, precision/recall, confusion matrix, feature importance, and SHAP values — quantifies *which* features matter (RQ2) and *whether* the event-augmented model actually wins (RQ3). Notebook: `08_model_evaluation.ipynb`.
@@ -70,4 +70,4 @@ If a future notebook or figure can't be placed in this table against at least on
 
 ## Notebook naming note
 
-The current repository uses an 8-notebook pipeline (`01_data_collection` … `08_results_visualisation`) rather than the 10-stage numbering shown above. This is tracked as an open decision in `DATSCI7030_Repository_Audit_Report.ipynb` (§7): either document the 8-notebook layout as a deliberate simplification, or renumber to match this file exactly. Until that decision is made, treat the *phase names and RQ traceability* above as authoritative and the notebook filenames in the repo as the current (pre-renumbering) implementation.
+**Resolved 2026-07-06 (Project Governance Freeze).** The repository uses an 8-notebook pipeline (`01_data_collection.ipynb` … `08_results_visualisation.ipynb`), merging Phase 6 (Sentiment Analysis) into Phase 5's notebook (Event Detection) and Phase 9 (Evaluation & Explainability) into Phase 8's notebook (Machine Learning), rather than the 10-stage numbering shown above. This was an open decision as of the original repository audit (`DATSCI7030_Repository_Audit_Report.ipynb` §7); it is now closed — the 8-notebook layout is the official, frozen pipeline (`docs/research_bible/00_project_freeze.md` §5), not a placeholder pending renumbering. Treat the *phase names and RQ traceability* above as the authoritative research-design framing, and the notebook filenames actually in `notebooks/` as the frozen implementation of them — no further renumbering is planned.
