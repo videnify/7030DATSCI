@@ -145,8 +145,8 @@ Reproducibility notes:
 | 2 | `02_eda.ipynb` | ✅ Complete | EDA figures in `reports/figures/` |
 | 3 | `03_event_detection.ipynb` | ✅ Complete | 4 processed parquets, 4 figures |
 | 4 | `04_causal_analysis.ipynb` | ✅ Complete | `car_results.parquet`, `causal_estimates.parquet`, 4 figures |
-| 5 | `05_feature_engineering.ipynb` | ✅ Complete | `model_features.parquet`, `feature_metadata.parquet`, 3 figures |
-| 6 | `06_model_training.ipynb` | ✅ Complete | `lasso.pkl`, `xgboost.json`, `lightgbm.txt`, `test_predictions.parquet`, `shap_values.parquet`, 4 figures |
+| 5 | `05_feature_engineering.ipynb` | ✅ Complete (legacy output); **FES v1.0 frozen 2026-07-05** | `feature_matrix.parquet` (current), `model_features.parquet` / `feature_metadata.parquet` (legacy), 3 figures |
+| 6 | `06_model_training.ipynb` | ✅ Complete (legacy, full-feature models); **market-only baseline (`Baseline_LASSO`) frozen 2026-07-05, MCP v1.0** | `lasso.pkl`, `xgboost.json`, `lightgbm.txt` (legacy, superseded feature set), `test_predictions.parquet`, `shap_values.parquet`, 4 figures; `models/baseline/`, `reports/baseline/` (current) |
 | 7 | `07_model_evaluation.ipynb` | ✅ Complete | `evaluation_summary.parquet`, `residual_diagnostics.json`, 4 figures |
 | 8 | `08_results_visualisation.ipynb` | ✅ Complete | 4 publication figures (300 dpi) |
 
@@ -238,9 +238,11 @@ Event study (AR/CAR, window −5 to +10 trading days) + DoWhy backdoor linear re
 
 ---
 
-## Phase 5 — Feature Engineering (Complete)
+## Phase 5 — Feature Engineering (Complete; superseded 2026-07-05 by Feature Matrix v1.0)
 
-### Feature Matrix
+> **Mission 05B update (2026-07-05):** the feature matrix described below (`model_features.parquet`, 91 engineered / 52 RF-selected) is now a **legacy artefact**. The canonical, frozen feature set is `data/processed/feature_matrix.parquet` (FES v1.0 — 95 features across Market/Macro/Sentiment/Event/Temporal/Interaction categories, built from `master_dataset.parquet` + `car_results.parquet` under `docs/research_bible/feature_contract.md`). See `docs/research_bible/06_feature_dictionary.md` and `docs/research_bible/10_decision_log.md` (2026-07-05 entry) for the full rebuild rationale. The historical narrative below is retained as the record of what Phase 5 originally produced, not as the current ground truth.
+
+### Feature Matrix (legacy — see note above)
 | Group | Features |
 |-------|----------|
 | Price & returns | 13 |

@@ -1,0 +1,177 @@
+{
+  "model_version": "Baseline_LASSO v1.0 (MCP v1.0)",
+  "creation_date": "2026-07-05",
+  "random_seed": 42,
+  "alpha_selected": 0.0018492955165777085,
+  "cv": {
+    "method": "TimeSeriesSplit",
+    "n_splits": 5,
+    "fold_rmse": [
+      0.007392899632211809,
+      0.009205437282558425,
+      0.019458285071485195,
+      0.00887060564556194,
+      0.014638979153362392
+    ],
+    "fold_dir_acc": [
+      0.5631399317406144,
+      0.552901023890785,
+      0.5972696245733788,
+      0.5426621160409556,
+      0.4709897610921502
+    ]
+  },
+  "n_features": 27,
+  "features": [
+    "log_return",
+    "log_return_hi",
+    "log_return_lo",
+    "intraday_range",
+    "volume_ratio",
+    "return_lag1d",
+    "return_lag3d",
+    "return_lag5d",
+    "return_lag10d",
+    "return_lag21d",
+    "cum_return_5d",
+    "cum_return_10d",
+    "cum_return_21d",
+    "volatility_10d",
+    "volatility_21d",
+    "volatility_63d",
+    "momentum_21d",
+    "momentum_63d",
+    "momentum_126d",
+    "rsi_14d",
+    "rsi_oversold",
+    "rsi_overbought",
+    "bb_position",
+    "bb_width",
+    "ma_cross",
+    "price_vs_ma200",
+    "high_vol_regime"
+  ],
+  "train_rows": 1761,
+  "test_rows": 750,
+  "baseline_lasso": {
+    "train": {
+      "RMSE": 0.012034949399336765,
+      "MAE": 0.007615056625375216,
+      "R2": 0.0,
+      "Dir_Acc": 0.5468483816013628,
+      "IC": NaN
+    },
+    "test": {
+      "RMSE": 0.009632374948158705,
+      "MAE": 0.0065506313243330495,
+      "R2": -0.0017798276660192514,
+      "Dir_Acc": 0.5746666666666667,
+      "IC": NaN,
+      "confusion_matrix": {
+        "TP": 431,
+        "TN": 0,
+        "FP": 319,
+        "FN": 0
+      },
+      "precision": 0.5746666666666667,
+      "recall": 1.0,
+      "f1": 0.7298899237933955,
+      "accuracy": 0.5746666666666667,
+      "roc_auc": 0.5
+    },
+    "residual_diagnostics_test": {
+      "residual_mean": 0.00040600951821410697,
+      "residual_std": 0.009630236689266262,
+      "skewness": 0.6014780041476869,
+      "kurtosis": 18.004820790361006,
+      "durbin_watson": 2.1113736709963797,
+      "jarque_bera_stat": 10175.646089090933,
+      "jarque_bera_p": 0.0,
+      "het_corr": 4.244691578777064e-16
+    },
+    "prediction_intervals": {
+      "pi_90": {
+        "lower_offset": -0.019070673280679126,
+        "upper_offset": 0.015582113090212296
+      },
+      "pi_95": {
+        "lower_offset": -0.025884756216836054,
+        "upper_offset": 0.021390851523287017
+      },
+      "method": "Empirical residual-quantile (constant-width band), train-split residuals only"
+    },
+    "rmse_bootstrap_ci_test": {
+      "rmse_95ci_lower": 0.007633815425929058,
+      "rmse_95ci_upper": 0.012449009337792472,
+      "block_length": 21,
+      "n_boot": 2000
+    },
+    "dir_acc_binomial_ci_test": {
+      "dir_acc_95ci_lower": 0.5389917582941637,
+      "dir_acc_95ci_upper": 0.6095805955999989,
+      "method": "Wilson score interval"
+    }
+  },
+  "comparison_baselines": {
+    "random_guess": {
+      "description": "Uniform random direction call, magnitude fixed at mean(|actual|); justifies why beating chance alone is not sufficient evidence",
+      "RMSE": 0.01144339273756707,
+      "MAE": 0.008621265682378934,
+      "R2": -0.4138883942455145,
+      "Dir_Acc": 0.5186666666666667,
+      "IC": 0.05654404069840748,
+      "confusion_matrix": {
+        "TP": 226,
+        "TN": 163,
+        "FP": 156,
+        "FN": 205
+      },
+      "precision": 0.5916230366492147,
+      "recall": 0.5243619489559165,
+      "f1": 0.5559655596555966,
+      "accuracy": 0.5186666666666667,
+      "roc_auc": 0.5176668678948861
+    },
+    "persistence": {
+      "description": "Predicts tomorrow's return = today's realised log_return (naive 'no new information' forecast); the standard weak-form-efficiency null a return-prediction model must clear",
+      "RMSE": 0.014003140661663242,
+      "MAE": 0.009598931374824014,
+      "R2": -1.1171733852924564,
+      "Dir_Acc": 0.508,
+      "IC": -0.01668236921310082,
+      "confusion_matrix": {
+        "TP": 247,
+        "TN": 135,
+        "FP": 184,
+        "FN": 184
+      },
+      "precision": 0.5730858468677494,
+      "recall": 0.5730858468677494,
+      "f1": 0.5730858468677494,
+      "accuracy": 0.5093333333333333,
+      "roc_auc": 0.5052986057066384
+    },
+    "mean_predictor": {
+      "description": "Predicts the train-split mean target for every test row; the minimum bar any model with actual input features must clear on RMSE/R2",
+      "RMSE": 0.009632374948158705,
+      "MAE": 0.0065506313243330495,
+      "R2": -0.0017798276660192514,
+      "Dir_Acc": 0.5746666666666667,
+      "IC": NaN,
+      "confusion_matrix": {
+        "TP": 431,
+        "TN": 0,
+        "FP": 319,
+        "FN": 0
+      },
+      "precision": 0.5746666666666667,
+      "recall": 1.0,
+      "f1": 0.7298899237933955,
+      "accuracy": 0.5746666666666667,
+      "roc_auc": 0.5
+    }
+  },
+  "sklearn_version": "1.7.2",
+  "python_version": "3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]",
+  "platform": "Linux-6.8.0-124-generic-aarch64-with-glibc2.35"
+}

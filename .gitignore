@@ -16,6 +16,9 @@ build/
 
 # --- Virtual environments ---
 
+# --- Local caches (e.g. yfinance sqlite cache) ---
+.cache/
+
 # --- Jupyter ---
 .ipynb_checkpoints/
 *.ipynb_checkpoints

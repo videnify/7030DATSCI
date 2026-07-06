@@ -1,0 +1,108 @@
+# 08 — Figures Plan
+
+**Purpose:** Inventory of every figure produced by the pipeline, which notebook generates it, and which research question it supports — so no figure ends up in the dissertation without a traceable purpose, and no notebook silently produces a figure nobody uses.
+**Owner:** Ibrahim Haroun.
+**Dependencies:** `15_traceability_matrix.md` (this document feeds that matrix's figure column); `03_methodology.md`.
+**Update Frequency:** Update whenever a notebook adds, removes, or renames a figure.
+**Relation to Dissertation:** Direct source for the dissertation's List of Figures and for deciding which figures earn a place in the main text vs. an appendix.
+
+---
+
+## Phase 2 — EDA (`02_eda.ipynb`) — 12 figures
+
+| Figure | Supports | Notes |
+|--------|----------|-------|
+| `01_correlation_analysis.png` | RQ2 (context) | Cross-asset/macro correlation heatmap |
+| `01_gdelt_distributions.png` | RQ1 (context) | GDELT sample distributions — caveat with the 5-day sample limitation when used |
+| `01_price_history.png` | Context | SPY price history 2015–2025 |
+| `01_vix.png` | RQ1/RQ2 (context) | VIX series |
+| `02a_normalised_prices.png` | Context | SPY/QQQ/GLD/TLT normalised — only asset actually discussed downstream is SPY (see `11_limitations.md` re: QQQ/GLD/TLT) |
+| `02b_return_distributions.png` | RQ3 (context) | Return distribution shape — informs model-family choice |
+| `02c_rolling_volatility.png` | RQ2 | Motivates volatility-regime features |
+| `02d_vix_series.png` | RQ1/RQ2 | VIX as confounder/feature |
+| `02e_macro_indicators.png` | RQ2 | Macro feature time series |
+| `02f_return_vix_corr.png` | RQ2 | Return–VIX correlation, motivates `vix_vs_ma` |
+| `02g_app_doc_distribution.png` | RQ1 | Presidential document volume over time |
+| `02h_app_by_president.png` | RQ1 (context) | Document counts by president |
+| `02i_docs_vs_returns.png` | RQ1 | Visual motivation for the event study |
+| `02j_fomc_distribution.png` | RQ1 | FOMC meeting frequency |
+| `02k_fomc_event_window.png` | RQ1 | Example FOMC event window |
+| `02l_combined_timeline.png` | RQ1 | Combined event/price timeline |
+
+## Phase 2 — EDA, SAP v1.0 implementation (`02_eda.ipynb` §9, Mission 05A, added 2026-07-05) — 6 figures
+
+| Figure | Supports | Notes |
+|--------|----------|-------|
+| `02m_descriptive_distributions.png` | Context (RQ1/RQ2) | Histogram+KDE for `log_return`, `vix`, `spy_close`, `overall_mean_sentiment` |
+| `02n_qq_plots.png` | Context | QQ-plots vs. Normal for `log_return`, `vix` — visual normality check |
+| `02o_boxplots.png` | Context | Boxplots for `log_return`, `vix`, `overall_mean_sentiment`, `total_events` — outliers retained per policy |
+| `02p_rolling_stationarity.png` | RQ1/RQ2 | Rolling mean/std (21d/63d) for `log_return`, VIX rolling mean — also serves as the required time-series visualisation |
+| `02q_acf_pacf.png` | RQ2 | ACF/PACF for `log_return`, 30 lags — motivates the existing lag feature set |
+| `02r_correlation_heatmap.png` | RQ2 | Pearson vs. Spearman heatmap, full numeric column set |
+
+## Phase 3 — Event Detection & NLP (`03_event_detection.ipynb`) — 4 figures
+
+| Figure | Supports | Notes |
+|--------|----------|-------|
+| `03a_sentiment_distribution.png` | RQ1/RQ2 | Sentiment breakdown by event type and president |
+| `03b_sentiment_timeline.png` | RQ1 | Sentiment vs. SPY price and event volume |
+| `03c_high_impact_events.png` | RQ1 | High-impact event frequency and sentiment scatter |
+| `03d_sentiment_by_event_type.png` | RQ2 | 90-day rolling sentiment per event type — motivates `sent_mean_*` features |
+
+## Phase 4 — Causal Analysis (`04_causal_analysis.ipynb`) — 4 figures
+
+| Figure | Supports | Notes |
+|--------|----------|-------|
+| `04a_car_by_event_type.png` | **RQ1 (primary evidence)** | CAR distribution/mean by event type |
+| `04b_car_sentiment_scatter.png` | RQ1 | CAR timeline and sentiment-vs-CAR OLS |
+| `04c_causal_estimates.png` | **RQ1 (primary evidence)** | DoWhy estimates with 95% CI |
+| `04d_car_regime_sentiment.png` | RQ1 | CAR by VIX regime and sentiment direction |
+
+## Phase 5 — Feature Engineering (`05_feature_engineering.ipynb`) — 3 figures
+
+| Figure | Supports | Notes |
+|--------|----------|-------|
+| `05a_feature_importance.png` | **RQ2 (primary evidence)** | Top 25 features coloured by group |
+| `05b_feature_correlation.png` | RQ2 | Feature-target correlation and pairwise heatmap |
+| `05c_target_distribution.png` | RQ3 (context) | Target distribution + train/test timeline |
+
+## Phase 6 — Model Training (`06_model_training.ipynb`) — 4 figures
+
+| Figure | Supports | Notes |
+|--------|----------|-------|
+| `06a_model_comparison.png` | **RQ3 (primary evidence — currently incomplete, no baseline)** | Update once `07_model_plan.md` baseline is added |
+| `06b_predicted_vs_actual.png` | RQ3 | Predicted vs. actual scatter, best model |
+| `06c_shap_summary.png` | **RQ2 (primary evidence)** | Global SHAP summary |
+| `06d_residual_analysis.png` | RQ3 | Residual diagnostics, ties to `models/residual_diagnostics.json` |
+
+## Phase 7 — Model Evaluation (`07_model_evaluation.ipynb`) — 4 figures
+
+| Figure | Supports | Notes |
+|--------|----------|-------|
+| `07a_extended_metrics.png` | RQ3 | RMSE/MAE/R²/Dir.Acc/IC/Hit Rate by quintile |
+| `07b_residual_analysis.png` | RQ3 | Deeper residual diagnostics |
+| `07c_shap_deepdive.png` | RQ2 | SHAP force/dependence/interaction plots |
+| `07d_strategy_performance.png` | RQ3 (illustrative only) | **Caveat required:** not a net-of-costs backtest; do not present as a trading-strategy claim (see `11_limitations.md`) |
+
+## Phase 8 — Results Visualisation (`08_results_visualisation.ipynb`) — 4 integrated figures
+
+| Figure | Supports | Notes |
+|--------|----------|-------|
+| `08a_event_landscape.png` | RQ1 | Event volume, type distribution, sentiment over time, president breakdown |
+| `08b_causal_evidence.png` | **RQ1 (summary evidence)** | CAR distributions, DoWhy estimates with CI, sentiment–CAR scatter, regime interaction |
+| `08c_predictive_pipeline.png` | **RQ2 + RQ3 (summary evidence)** | Feature importance by group, model comparison, SHAP top drivers — update once baseline exists |
+| `08d_full_dashboard.png` | All three RQs | Integrated timeline: SPY + VIX + events + model signal + cumulative strategy return (same caveat as `07d`) |
+
+## Architecture diagrams (`docs/architecture/`) — not data-driven, but part of the figure inventory
+
+`arima_pipeline.svg`, `car_formula.svg`, `causal_dag_dowhy*.svg/png`, `data_pipeline_architecture*.svg/png`, `datsci7030_project_structure.svg`, `full_system_architecture.svg`, `hybrid_model.svg`, `intervention_equation.svg`, `ml_project_map.svg`, `phase5_validation_pipeline.svg`, `project_structure.svg` — these support the dissertation Methodology chapter (pipeline/DAG diagrams), not a specific RQ's evidence; see `docs/architecture/README.md`.
+
+---
+
+## Figures requiring an update once the baseline model lands (`07_model_plan.md`)
+
+`06a_model_comparison.png`, `08c_predictive_pipeline.png`, `08d_full_dashboard.png` — all three currently show a 3-model (no-baseline) comparison and must be regenerated once the RQ3 baseline gap is closed, or the dissertation risks presenting an incomplete RQ3 answer as if it were final.
+
+## Figures requiring a caveat in the dissertation text
+
+`07d_strategy_performance.png`, `08d_full_dashboard.png` — any cumulative-return/strategy-style panel must be captioned as illustrative directional-signal visualisation, not a claim of tradeable profit net of transaction costs and slippage (see `00_project_overview.md` "What this project explicitly does NOT attempt" and `11_limitations.md`).
