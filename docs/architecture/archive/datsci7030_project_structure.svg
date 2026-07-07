@@ -1,0 +1,227 @@
+<svg viewBox="0 0 1020 800" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'Segoe UI', Arial, sans-serif">
+  <title>DATSCI7030 Project Directory Structure</title>
+  <desc>Hierarchical tree of the DATSCI7030 project: data/, notebooks/, src/, models/, reports/, tests/, docs/ — each node annotated with contents and purpose.</desc>
+
+  <!-- Background -->
+  <rect width="1020" height="800" fill="#f8f9fb"/>
+
+  <!-- ── TITLE BAND ─────────────────────────────────────────── -->
+  <rect x="0" y="0" width="1020" height="52" fill="#1a1a2e"/>
+  <text x="510" y="22" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">DATSCI7030 — Project Directory Structure</text>
+  <text x="510" y="42" text-anchor="middle" font-size="11" fill="#aab4cc">Causal Event-Driven Market Impact Modelling · LJMU 2025–2026</text>
+
+  <!-- ── LEGEND ─────────────────────────────────────────────── -->
+  <rect x="800" y="62" width="205" height="196" rx="7" fill="#ffffff" stroke="#d0d5e0" stroke-width="1.2"/>
+  <text x="902" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a2e">Legend</text>
+  <rect x="816" y="91"  width="13" height="13" rx="2" fill="#2c7bb6"/>
+  <text x="836" y="102" font-size="10" fill="#333">Root directory</text>
+  <rect x="816" y="110" width="13" height="13" rx="2" fill="#756bb1"/>
+  <text x="836" y="121" font-size="10" fill="#333">Data layer</text>
+  <rect x="816" y="129" width="13" height="13" rx="2" fill="#d7191c"/>
+  <text x="836" y="140" font-size="10" fill="#333">Source code (src/)</text>
+  <rect x="816" y="148" width="13" height="13" rx="2" fill="#1a9641"/>
+  <text x="836" y="159" font-size="10" fill="#333">Notebooks</text>
+  <rect x="816" y="167" width="13" height="13" rx="2" fill="#e07b00"/>
+  <text x="836" y="178" font-size="10" fill="#333">Reports / Models</text>
+  <rect x="816" y="186" width="13" height="13" rx="2" fill="#555"/>
+  <text x="836" y="197" font-size="10" fill="#333">Tests / Docs / Config</text>
+  <line x1="816" y1="208" x2="828" y2="208" stroke="#bbb" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="836" y="212" font-size="10" fill="#555">File leaf</text>
+  <line x1="816" y1="226" x2="828" y2="226" stroke="#bbb" stroke-width="1.5"/>
+  <text x="836" y="230" font-size="10" fill="#555">Directory branch</text>
+  <line x1="816" y1="244" x2="828" y2="244" stroke="#bbb" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <text x="836" y="248" font-size="10" fill="#555">Detail note</text>
+
+  <!-- ══════════════════════════════════════════════════════════
+       LAYOUT — root at (100,88), trunk vertical at x=100
+       Branch y-centres: data=148 nb=262 src=420 models=568 reports=618 tests=688 docs=730 root-files=772
+       ══════════════════════════════════════════════════════════ -->
+
+  <!-- ── ROOT NODE ─────────────────────────────────────────── -->
+  <rect x="20" y="66" width="170" height="40" rx="7" fill="#1a1a2e"/>
+  <text x="105" y="82" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">DATSCI7030/</text>
+  <text x="105" y="97" text-anchor="middle" font-size="9.5" fill="#aab4cc">Project root</text>
+
+  <!-- main vertical trunk -->
+  <line x1="105" y1="106" x2="105" y2="775" stroke="#c0c8d8" stroke-width="1.8"/>
+
+  <!-- ══════════════════════════════════════════════════════════
+       data/
+       ══════════════════════════════════════════════════════════ -->
+  <line x1="105" y1="148" x2="140" y2="148" stroke="#c0c8d8" stroke-width="1.8"/>
+  <rect x="140" y="132" width="96" height="32" rx="6" fill="#756bb1"/>
+  <text x="188" y="148" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">data/</text>
+  <text x="188" y="160" text-anchor="middle" font-size="9" fill="#ddd">All datasets</text>
+
+  <!-- data sub-branch spine -->
+  <line x1="236" y1="148" x2="260" y2="148" stroke="#c0c8d8" stroke-width="1.5"/>
+  <line x1="260" y1="126" x2="260" y2="216" stroke="#c0c8d8" stroke-width="1.5"/>
+
+  <!-- raw/ -->
+  <line x1="260" y1="132" x2="285" y2="132" stroke="#c0c8d8" stroke-width="1.5"/>
+  <rect x="285" y="120" width="70" height="24" rx="4" fill="#9e8fd4"/>
+  <text x="320" y="136" text-anchor="middle" font-size="10" fill="#fff">raw/</text>
+  <line x1="355" y1="132" x2="375" y2="132" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="378" y="128" font-size="9" fill="#555">prices.parquet · spy_ohlcv.parquet · vix.parquet</text>
+  <text x="378" y="139" font-size="9" fill="#555">macro_indicators.parquet · fomc_dates.parquet</text>
+  <text x="378" y="150" font-size="9" fill="#555">news_*.parquet · gdelt_sample.parquet</text>
+
+  <!-- processed/ -->
+  <line x1="260" y1="172" x2="285" y2="172" stroke="#c0c8d8" stroke-width="1.5"/>
+  <rect x="285" y="160" width="70" height="24" rx="4" fill="#9e8fd4"/>
+  <text x="320" y="176" text-anchor="middle" font-size="10" fill="#fff">processed/</text>
+  <line x1="355" y1="172" x2="375" y2="172" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="378" y="168" font-size="9" fill="#555">events_tagged.parquet · daily_sentiment.parquet</text>
+  <text x="378" y="179" font-size="9" fill="#555">features.parquet · target.parquet</text>
+
+  <!-- external/ -->
+  <line x1="260" y1="210" x2="285" y2="210" stroke="#c0c8d8" stroke-width="1.5"/>
+  <rect x="285" y="198" width="70" height="24" rx="4" fill="#9e8fd4"/>
+  <text x="320" y="214" text-anchor="middle" font-size="10" fill="#fff">external/</text>
+  <line x1="355" y1="210" x2="375" y2="210" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="378" y="210" font-size="9" fill="#555">FOMC calendar · macro event reference lists</text>
+
+  <!-- ══════════════════════════════════════════════════════════
+       notebooks/
+       ══════════════════════════════════════════════════════════ -->
+  <line x1="105" y1="270" x2="140" y2="270" stroke="#c0c8d8" stroke-width="1.8"/>
+  <rect x="140" y="254" width="96" height="32" rx="6" fill="#1a9641"/>
+  <text x="188" y="270" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">notebooks/</text>
+  <text x="188" y="282" text-anchor="middle" font-size="9" fill="#ddd">8 numbered phases</text>
+
+  <line x1="236" y1="270" x2="260" y2="270" stroke="#c0c8d8" stroke-width="1.5"/>
+  <line x1="260" y1="242" x2="260" y2="355" stroke="#c0c8d8" stroke-width="1.5"/>
+
+  <!-- notebook files -->
+  <line x1="260" y1="248" x2="285" y2="248" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="252" font-size="9.5" fill="#1a9641" font-weight="bold">01_data_collection.ipynb</text>
+  <text x="530" y="252" font-size="9" fill="#777">yfinance · NewsAPI · GDELT · FRED · VIX</text>
+
+  <line x1="260" y1="264" x2="285" y2="264" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="268" font-size="9.5" fill="#1a9641" font-weight="bold">02_eda.ipynb</text>
+  <text x="530" y="268" font-size="9" fill="#777">Return distributions · volatility regimes · correlations</text>
+
+  <line x1="260" y1="280" x2="285" y2="280" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="284" font-size="9.5" fill="#1a9641" font-weight="bold">03_event_detection.ipynb</text>
+  <text x="530" y="284" font-size="9" fill="#777">FinBERT sentiment · keyword NER · event taxonomy</text>
+
+  <line x1="260" y1="296" x2="285" y2="296" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="300" font-size="9.5" fill="#1a9641" font-weight="bold">04_causal_analysis.ipynb</text>
+  <text x="530" y="300" font-size="9" fill="#777">EventStudy (AR/CAR) · DoWhy ATE · refutation tests</text>
+
+  <line x1="260" y1="312" x2="285" y2="312" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="316" font-size="9.5" fill="#1a9641" font-weight="bold">05_feature_engineering.ipynb</text>
+  <text x="530" y="316" font-size="9" fill="#777">FeatureEngineer → feature matrix X + target y</text>
+
+  <line x1="260" y1="328" x2="285" y2="328" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="332" font-size="9.5" fill="#1a9641" font-weight="bold">06_model_training.ipynb</text>
+  <text x="530" y="332" font-size="9" fill="#777">LASSO · XGBoost · LightGBM · TimeSeriesSplit CV</text>
+
+  <line x1="260" y1="344" x2="285" y2="344" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="348" font-size="9.5" fill="#1a9641" font-weight="bold">07_model_evaluation.ipynb</text>
+  <text x="530" y="348" font-size="9" fill="#777">RMSE · MAE · R² · directional accuracy · SHAP</text>
+
+  <line x1="260" y1="360" x2="285" y2="360" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="364" font-size="9.5" fill="#1a9641" font-weight="bold">08_results_visualisation.ipynb</text>
+  <text x="530" y="364" font-size="9" fill="#777">Publication-quality figures for dissertation</text>
+
+  <!-- ══════════════════════════════════════════════════════════
+       src/
+       ══════════════════════════════════════════════════════════ -->
+  <line x1="105" y1="420" x2="140" y2="420" stroke="#c0c8d8" stroke-width="1.8"/>
+  <rect x="140" y="404" width="96" height="32" rx="6" fill="#d7191c"/>
+  <text x="188" y="420" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">src/</text>
+  <text x="188" y="432" text-anchor="middle" font-size="9" fill="#fdd">Reusable modules</text>
+
+  <line x1="236" y1="420" x2="260" y2="420" stroke="#c0c8d8" stroke-width="1.5"/>
+  <line x1="260" y1="392" x2="260" y2="508" stroke="#c0c8d8" stroke-width="1.5"/>
+
+  <!-- 6 src files -->
+  <line x1="260" y1="398" x2="285" y2="398" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="402" font-size="9.5" fill="#d7191c" font-weight="bold">data_collector.py</text>
+  <text x="440" y="402" font-size="9" fill="#777">MarketDataCollector · NewsCollector · GDELTCollector</text>
+
+  <line x1="260" y1="415" x2="285" y2="415" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="419" font-size="9.5" fill="#d7191c" font-weight="bold">event_detector.py</text>
+  <text x="440" y="419" font-size="9" fill="#777">EventDetector · FinBERT pipeline · from_config()</text>
+
+  <line x1="260" y1="432" x2="285" y2="432" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="436" font-size="9.5" fill="#d7191c" font-weight="bold">causal_engine.py</text>
+  <text x="440" y="436" font-size="9" fill="#777">EventStudy (AR/CAR) · CausalImpactEstimator (DoWhy)</text>
+
+  <line x1="260" y1="449" x2="285" y2="449" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="453" font-size="9.5" fill="#d7191c" font-weight="bold">features.py</text>
+  <text x="440" y="453" font-size="9" fill="#777">FeatureEngineer · 30+ price / event / sentiment features</text>
+
+  <line x1="260" y1="466" x2="285" y2="466" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="470" font-size="9.5" fill="#d7191c" font-weight="bold">models.py</text>
+  <text x="440" y="470" font-size="9" fill="#777">ModelTrainer · LASSO · XGBoost · LightGBM · TimeSeriesSplit</text>
+
+  <line x1="260" y1="483" x2="285" y2="483" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="487" font-size="9.5" fill="#d7191c" font-weight="bold">evaluation.py</text>
+  <text x="440" y="487" font-size="9" fill="#777">ModelEvaluator · SHAP · CAR plots · model comparison</text>
+
+  <line x1="260" y1="500" x2="285" y2="500" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="288" y="504" font-size="9.5" fill="#555" font-style="italic">__init__.py</text>
+  <text x="440" y="504" font-size="9" fill="#777">Package init</text>
+
+  <!-- ══════════════════════════════════════════════════════════
+       models/ · reports/
+       ══════════════════════════════════════════════════════════ -->
+  <line x1="105" y1="540" x2="140" y2="540" stroke="#c0c8d8" stroke-width="1.8"/>
+  <rect x="140" y="524" width="96" height="32" rx="6" fill="#e07b00"/>
+  <text x="188" y="540" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">models/</text>
+  <text x="188" y="552" text-anchor="middle" font-size="9" fill="#ffe">Trained artefacts</text>
+  <line x1="236" y1="540" x2="258" y2="540" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="262" y="537" font-size="9" fill="#777">lasso.joblib · xgboost.joblib · lightgbm.joblib</text>
+  <text x="262" y="548" font-size="9" fill="#777">Saved by ModelTrainer.save_model()</text>
+
+  <line x1="105" y1="590" x2="140" y2="590" stroke="#c0c8d8" stroke-width="1.8"/>
+  <rect x="140" y="574" width="96" height="32" rx="6" fill="#e07b00"/>
+  <text x="188" y="590" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">reports/</text>
+  <text x="188" y="602" text-anchor="middle" font-size="9" fill="#ffe">Final outputs</text>
+  <line x1="236" y1="584" x2="258" y2="584" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="262" y="584" font-size="9" fill="#777">figures/ → PNG charts (CAR · SHAP · price history)</text>
+  <line x1="236" y1="598" x2="258" y2="598" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="262" y="598" font-size="9" fill="#777">dissertation.docx · presentation.pptx</text>
+
+  <!-- ══════════════════════════════════════════════════════════
+       tests/ · docs/ · root files
+       ══════════════════════════════════════════════════════════ -->
+  <line x1="105" y1="636" x2="140" y2="636" stroke="#c0c8d8" stroke-width="1.8"/>
+  <rect x="140" y="620" width="96" height="32" rx="6" fill="#555"/>
+  <text x="188" y="636" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">tests/</text>
+  <text x="188" y="648" text-anchor="middle" font-size="9" fill="#ddd">Unit tests</text>
+  <line x1="236" y1="636" x2="258" y2="636" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="262" y="632" font-size="9" fill="#777">test_event_study.py · test_features.py</text>
+  <text x="262" y="643" font-size="9" fill="#777">Run with pytest (in requirements.txt)</text>
+
+  <line x1="105" y1="682" x2="140" y2="682" stroke="#c0c8d8" stroke-width="1.8"/>
+  <rect x="140" y="666" width="96" height="32" rx="6" fill="#555"/>
+  <text x="188" y="682" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">docs/</text>
+  <text x="188" y="694" text-anchor="middle" font-size="9" fill="#ddd">Documentation</text>
+  <line x1="236" y1="682" x2="258" y2="682" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="262" y="682" font-size="9" fill="#777">architecture/ → 11 SVG diagrams + README.md</text>
+
+  <!-- Root config files -->
+  <line x1="105" y1="750" x2="140" y2="750" stroke="#c0c8d8" stroke-width="1.8"/>
+  <rect x="140" y="734" width="96" height="32" rx="6" fill="#2c7bb6"/>
+  <text x="188" y="749" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">root files</text>
+  <text x="188" y="761" text-anchor="middle" font-size="9" fill="#cde">Config + VCS</text>
+
+  <line x1="236" y1="742" x2="258" y2="742" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="262" y="742" font-size="9" fill="#555" font-weight="bold">config.yaml</text>
+  <text x="340" y="742" font-size="9" fill="#777">tickers · dates · API keys · model hyperparameters</text>
+
+  <line x1="236" y1="756" x2="258" y2="756" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="262" y="756" font-size="9" fill="#555" font-weight="bold">requirements.txt</text>
+  <text x="360" y="756" font-size="9" fill="#777">yfinance · dowhy · transformers · xgboost · lightgbm · shap</text>
+
+  <line x1="236" y1="770" x2="258" y2="770" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="262" y="770" font-size="9" fill="#555" font-weight="bold">README.md · .gitignore</text>
+  <text x="400" y="770" font-size="9" fill="#777">Project overview · VCS exclusions (data/, models/, secrets)</text>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <rect x="0" y="786" width="1020" height="14" fill="#1a1a2e"/>
+  <text x="510" y="797" text-anchor="middle" font-size="9" fill="#8899bb">DATSCI7030 Project Structure — Version 1.1</text>
+</svg>

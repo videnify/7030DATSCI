@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="660" viewBox="0 0 800 660" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="660" fill="#FFFFFF"/>
+  <text x="400" y="32" text-anchor="middle" font-size="15" font-weight="700" fill="#111111">Phase 5 — Validation and Reporting Pipeline</text>
+  <text x="400" y="50" text-anchor="middle" font-size="11" fill="#666666">Out-of-Sample Testing, Benchmarking, and Output Compilation</text>
+  <line x1="60" y1="60" x2="740" y2="60" stroke="#AAAAAA" stroke-width="0.8"/>
+
+  <!-- Step 1: Data split -->
+  <rect x="60" y="76" width="680" height="72" rx="6" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
+  <text x="400" y="101" text-anchor="middle" font-size="13" font-weight="700" fill="#111111">Step 1 — Temporal Data Split</text>
+  <text x="400" y="121" text-anchor="middle" font-size="11" fill="#444444">Training set: 2018–2022 (TimeSeriesSplit CV) — Test set: 2023–2024 (held-out, no leakage)</text>
+  <text x="400" y="137" text-anchor="middle" font-size="10" fill="#666666">5-fold TimeSeriesSplit CV on train set; hard holdout for final test</text>
+  <line x1="400" y1="150" x2="400" y2="176" stroke="#888888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: Model application -->
+  <rect x="60" y="178" width="680" height="72" rx="6" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
+  <text x="400" y="203" text-anchor="middle" font-size="13" font-weight="700" fill="#111111">Step 2 — Out-of-Sample Model Application</text>
+  <text x="400" y="223" text-anchor="middle" font-size="11" fill="#444444">Apply ARIMA, XGBoost, LightGBM, and LASSO to 2023–2024 held-out events</text>
+  <text x="400" y="239" text-anchor="middle" font-size="10" fill="#666666">Generate predicted returns; compare directional accuracy per model</text>
+  <line x1="400" y1="252" x2="400" y2="278" stroke="#888888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: Benchmark comparison — split into two -->
+  <text x="400" y="296" text-anchor="middle" font-size="11" font-weight="700" fill="#333333">Step 3 — Performance Evaluation</text>
+
+  <rect x="60" y="306" width="310" height="80" rx="6" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
+  <text x="215" y="330" text-anchor="middle" font-size="12" font-weight="700" fill="#111111">3a — Benchmark Comparison</text>
+  <text x="215" y="350" text-anchor="middle" font-size="10" fill="#444444">Compare model against naive forecast</text>
+  <text x="215" y="368" text-anchor="middle" font-size="10" fill="#444444">Metrics: RMSE, MAE, R², directional accuracy</text>
+
+  <rect x="430" y="306" width="310" height="80" rx="6" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
+  <text x="585" y="330" text-anchor="middle" font-size="12" font-weight="700" fill="#111111">3b — Statistical Significance</text>
+  <text x="585" y="350" text-anchor="middle" font-size="10" fill="#444444">t-test and Wilcoxon signed-rank test</text>
+  <text x="585" y="368" text-anchor="middle" font-size="10" fill="#444444">applied to out-of-sample CAR distribution</text>
+
+  <line x1="215" y1="388" x2="215" y2="420" stroke="#888888" stroke-width="1.2"/>
+  <line x1="585" y1="388" x2="585" y2="420" stroke="#888888" stroke-width="1.2"/>
+  <line x1="215" y1="420" x2="585" y2="420" stroke="#888888" stroke-width="1.2"/>
+  <line x1="400" y1="420" x2="400" y2="444" stroke="#888888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Interpretability -->
+  <rect x="60" y="446" width="680" height="72" rx="6" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
+  <text x="400" y="471" text-anchor="middle" font-size="13" font-weight="700" fill="#111111">Step 4 — SHAP Interpretability Analysis</text>
+  <text x="400" y="491" text-anchor="middle" font-size="11" fill="#444444">Apply SHAP values to XGBoost and LightGBM; compare feature attribution per model</text>
+  <text x="400" y="507" text-anchor="middle" font-size="10" fill="#666666">Sentiment score, event type, and macroeconomic features ranked by contribution</text>
+  <line x1="400" y1="520" x2="400" y2="546" stroke="#888888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: Reporting outputs -->
+  <rect x="60" y="548" width="680" height="72" rx="6" fill="#FFFFFF" stroke="#111111" stroke-width="1"/>
+  <text x="400" y="573" text-anchor="middle" font-size="13" font-weight="700" fill="#111111">Step 5 — Research Report and Dashboard</text>
+  <text x="400" y="593" text-anchor="middle" font-size="11" fill="#444444">Compile academic report: empirical findings, model diagnostics, and policy implications</text>
+  <text x="400" y="609" text-anchor="middle" font-size="10" fill="#666666">Interactive Plotly / Streamlit dashboard: abnormal returns by event type, decision-maker, and asset</text>
+
+  <line x1="60" y1="636" x2="740" y2="636" stroke="#CCCCCC" stroke-width="0.6"/>
+  <text x="400" y="650" text-anchor="middle" font-size="9" fill="#AAAAAA">DATSCI7030 — Validation and Reporting Pipeline — Version 1.1</text>
+</svg>
