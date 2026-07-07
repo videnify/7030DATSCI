@@ -44,9 +44,12 @@ data/external/*
 !data/external/.gitkeep
 
 
-data/docs/*
+docs/*
 !docs/README.md
 !docs/.gitkeep
+
+docs/research_bible/*
+!docs/research_bible/.gitkeep
 
 # Belt-and-braces: never allow these extensions anywhere in the repo
 *.csv
