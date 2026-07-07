@@ -27,17 +27,26 @@ build/
 # Pattern ignores directory CONTENTS (folder/*) rather than the folder itself,
 # so README.md / .gitkeep can be negated back in to preserve structure on a fresh clone.
 data/raw/*
-data/processed/*
-data/interim/*
-data/external/*
 !data/raw/README.md
 !data/raw/.gitkeep
+
+data/processed/*
 !data/processed/README.md
 !data/processed/.gitkeep
+
+data/interim/*
+
 !data/interim/README.md
 !data/interim/.gitkeep
+
+data/external/*
 !data/external/README.md
 !data/external/.gitkeep
+
+
+data/docs/*
+!docs/README.md
+!docs/.gitkeep
 
 # Belt-and-braces: never allow these extensions anywhere in the repo
 *.csv
@@ -49,6 +58,8 @@ data/external/*
 *.pickle
 *.xlsx
 *.xls
+*.docx
+*.doc
 
 # --- Models (trained binaries — never committed, only the code that produces them) ---
 models/*
