@@ -43,11 +43,6 @@ data/external/*
 !data/external/README.md
 !data/external/.gitkeep
 
-
-docs/*
-!docs/README.md
-!docs/.gitkeep
-
 docs/research_bible/*
 !docs/research_bible/.gitkeep
 
