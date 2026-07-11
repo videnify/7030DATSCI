@@ -41,12 +41,12 @@
   <text x="670.0" y="344.0" text-anchor="middle" font-size="12" font-weight="700" fill="#111111">Statistical Comparison</text>
   <text x="670.0" y="364.0" text-anchor="middle" font-size="10.5" fill="#444444">DM test · z-test · Bonferroni</text>
   <line x1="545.0" y1="350.0" x2="575.0" y2="350.0" stroke="#3A6EA5" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <polyline points="670.0,146 670.0,292.0 450.0,292.0 450.0,438" fill="none" stroke="#3A6EA5" stroke-width="1.6" marker-end="url(#arrow)"/>
-  <polyline points="670.0,262 670.0,350.0 450.0,350.0 450.0,438" fill="none" stroke="#3A6EA5" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <polyline points="765.0,118 800.0,118 800.0,460.0 630.0,460.0" fill="none" stroke="#3A6EA5" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <polyline points="765.0,234 820.0,234 820.0,480.0 630.0,480.0" fill="none" stroke="#3A6EA5" stroke-width="1.6" marker-end="url(#arrow)"/>
   <polyline points="670.0,378 670.0,408.0 450.0,408.0 450.0,438" fill="none" stroke="#3A6EA5" stroke-width="1.6" marker-end="url(#arrow)"/>
   <rect x="270.0" y="438" width="360" height="56" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
   <text x="450.0" y="460.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#111111">Results / Dissertation</text>
   <text x="450.0" y="480.0" text-anchor="middle" font-size="11.5" fill="#444444">Chapter 4 (Results) · Chapter 6 (Conclusion)</text>
   <text x="450.0" y="524" text-anchor="middle" font-size="10" fill="#888888" font-style="italic">Note: RQ1 evidence combines Event Study AND Causal Analysis (both answer RQ1, per 01_research_questions.md) — shown as one lane above for accuracy.</text>
-  <text x="450.0" y="544" text-anchor="middle" font-size="9.5" fill="#888888" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — RQ Traceability — Architecture v2.0 (2026-07-06)</text>
+  <text x="450.0" y="544" text-anchor="middle" font-size="9.5" fill="#888888" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — RQ Traceability — Architecture v2.1 (2026-07-08, rerouted connectors to avoid crossing box text)</text>
 </svg>

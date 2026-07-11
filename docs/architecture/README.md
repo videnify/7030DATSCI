@@ -1,9 +1,9 @@
 # Architecture Diagrams
 
-**DATSCI7030 — Causal Event-Driven Market Impact Modelling** · Version 2.0 (2026-07-06)
+**DATSCI7030 — Causal Event-Driven Market Impact Modelling** · Version 2.1 (2026-07-08)
 
 **Purpose:** Minimal, accurate SVG diagrams of the current, frozen project architecture — pipeline order, data lineage, governance structure, RQ traceability, and the RQ3 modelling flow. These diagrams support the dissertation's Methodology chapter; they are reference material, not RQ1–RQ3 evidence figures (which live in `reports/figures/`, tracked in `docs/research_bible/08_figures_plan.md`).
-**Last updated:** 2026-07-06 (Architecture SVG Cleanup & Rebuild mission) — the full diagram set was audited; 11 diagrams describing an earlier, superseded ARIMA/intervention-analysis methodology were archived, 2 broken/misattributed files were deleted, and the 5 canonical diagrams below were rebuilt from scratch against the current frozen pipeline.
+**Last updated:** 2026-07-08 (Final Appendix Cleanup & Architecture SVG Enhancement mission) — `car_formula.svg` was factually corrected and restyled to match the other five diagrams (it was previously the visual outlier: black borders, gray arrows, no italic subtitle, and content that contradicted frozen Section 3.3); `data_lineage.svg` gained a `causal_estimates.parquet` branch and two minor label/spacing fixes; `rq_traceability.svg` had its RQ1/RQ2 connector lines rerouted around box edges instead of through box text. See "2026-07-08" entry in the mission history below for full detail. Earlier: 2026-07-06 (Architecture SVG Cleanup & Rebuild mission) — the full diagram set was audited; 11 diagrams describing an earlier, superseded ARIMA/intervention-analysis methodology were archived, 2 broken/misattributed files were deleted, and the 5 canonical diagrams (now 6, including `car_formula.svg`) were rebuilt from scratch against the current frozen pipeline.
 
 ---
 
@@ -11,14 +11,18 @@
 
 | File | What it shows | Use in dissertation |
 |------|----------------|----------------------|
-| `project_pipeline.svg` | Notebook execution order, 01 Data Collection → 08 Results Visualisation → Dissertation | Chapter 3 (Methodology) — pipeline overview figure |
-| `data_lineage.svg` | Raw files → `events_tagged.parquet`/`daily_sentiment.parquet` → `master_dataset.parquet` → `car_results.parquet` → `feature_matrix.parquet` → models/reports | Chapter 3 §3.1 (Data Sources) / reproducibility appendix |
-| `research_governance.svg` | Research Questions → Hypotheses → SAP v1.0 → Dataset Contract → FES v1.0 → MCP v1.0 → Results | Chapter 3 (Methodology) — governance/versioning figure |
-| `rq_traceability.svg` | RQ1/RQ2/RQ3 → method chain → Results, for each research question | Chapter 1 (Introduction) or Chapter 4 (Results) opening figure |
-| `modelling_flow.svg` | `feature_matrix.parquet` → Baseline → Event-enhanced models → Metrics → Statistical comparison → Explainability → RQ3 conclusion | Chapter 3 §3.5 (Model Specification) / Chapter 4 §4.4 (Model Comparison) |
-| `car_formula.svg` | Annotated CAR formula reference (updated 2026-07-06 — ARIMA reference removed, event window corrected to config.yaml's −5/+10 days) | Chapter 3 (Methodology) — event study equation reference |
+| `project_pipeline.svg` | Notebook execution order, 01 Data Collection → 08 Results Visualisation → Dissertation | **Not currently used.** Removed from Chapter 3 §3.1 (2026-07-08 Appendix Cleanup mission) — it documents repository/notebook structure rather than methodology, and its page cost was not justified by the one sentence of prose it replaced. Repository documentation only unless separately approved. |
+| `data_lineage.svg` | Raw files → `events_tagged.parquet`/`daily_sentiment.parquet` → `master_dataset.parquet` → `car_results.parquet` → `feature_matrix.parquet` → models/reports, plus a `causal_estimates.parquet` branch (added 2026-07-08) showing the causal-analysis output separately, since it is *not* consumed by feature engineering | Chapter 3 §3.5 (Feature Engineering) — kept in the dissertation |
+| `research_governance.svg` | Research Questions → Hypotheses → SAP v1.0 → Dataset Contract → FES v1.0 → MCP v1.0 → Results | Chapter 3 (Methodology) — governance/versioning figure (not currently embedded) |
+| `rq_traceability.svg` | RQ1/RQ2/RQ3 → method chain → Results, for each research question | Chapter 1 (Introduction) or Chapter 4 (Results) opening figure (not currently embedded) |
+| `modelling_flow.svg` | `feature_matrix.parquet` → Baseline → Event-enhanced models → Metrics → Statistical comparison (incl. Bonferroni correction) → SHAP explainability → RQ3 conclusion | Chapter 3 §3.6 (Predictive Modelling) — kept in the dissertation |
+| `car_formula.svg` | Annotated CAR/AR formula reference, now written in the dissertation's own notation (`AR_τ = R_τ − μ̂`, `CAR(t₁,t₂) = Σ AR_τ`); constant-mean-return (mean-adjusted) design, 252–21 trading day estimation window, simple-return type, −5/+10 event window — corrected 2026-07-08 to match frozen Section 3.3 exactly (previously said "market-model expected return" and "120-day pre-window", both wrong) | **Not currently embedded.** See recommendation below. |
 
 All six are plain SVG (no raster embeds), white background, dark grey/black text, a single muted steel-blue accent colour, Arial/Helvetica, and no local file paths — safe to open directly in a browser or embed in Word/LaTeX.
+
+## Recommendation: `car_formula.svg` dissertation placement (2026-07-08)
+
+Now that `car_formula.svg` has been corrected to match frozen Section 3.3 exactly, it is factually safe to use. It has **not** been inserted into the dissertation automatically, per the mission brief for the 2026-07-08 Appendix Cleanup & Architecture SVG Enhancement mission. Recommendation: this diagram is a useful visual restatement of an equation the dissertation already states in full in prose and display-equation form (`AR_τ = R_τ − μ̂`; `CAR(t₁,t₂) = Σ AR_τ`) — it does not carry new information the reader doesn't already have. If added at all, it belongs in the **Appendix** as a supplementary reference figure, not in Chapter 3 body text where it would duplicate the existing display equations. Whether to add it is a judgement call for the dissertation author; no action has been taken either way.
 
 ## A note on `rq_traceability.svg`
 
