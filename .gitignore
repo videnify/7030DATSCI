@@ -99,7 +99,6 @@ desktop.ini
 *.sublime-workspace
 
 # --- Reports (generated/duplicate exports — the dissertation itself is tracked separately) ---
-reports/figures/*.png
 reports/figures/*.pdf
 reports/figures/*.html
 reports/figures/*.svg
