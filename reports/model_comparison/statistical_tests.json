@@ -2,89 +2,44 @@
   "alpha_bonferroni": 0.016666666666666666,
   "family_size": 3,
   "correction": "Bonferroni (statistical_decision_matrix.md Part K)",
-  "bh_fdr_note": "Not applicable to RQ3 -- BH-FDR governs RQ1's event-type family only per statistical_analysis_plan.md Part A.",
   "results_by_model": {
     "Event_LASSO": {
-      "train": {
-        "RMSE": 0.011459316909889309,
-        "MAE": 0.007447596529708427,
-        "R2": 0.09337242713028326,
-        "Dir_Acc": 0.5565019875070982,
-        "IC": 0.16338935899742152
-      },
       "test": {
-        "RMSE": 0.009464552960643443,
-        "MAE": 0.0065020659710833375,
-        "R2": 0.03282350213655105,
-        "Dir_Acc": 0.564,
-        "IC": 0.16629577652582492,
+        "RMSE": 0.009631061816812675,
+        "MAE": 0.006547931743181517,
+        "R2": -0.0015064059786111805,
+        "Dir_Acc": 0.5746666666666667,
+        "IC": NaN,
         "confusion_matrix": {
-          "TP": 299,
-          "TN": 124,
-          "FP": 195,
-          "FN": 132
+          "TP": 431,
+          "TN": 0,
+          "FP": 319,
+          "FN": 0
         },
-        "precision": 0.6052631578947368,
-        "recall": 0.6937354988399071,
-        "f1": 0.6464864864864864,
-        "accuracy": 0.564,
-        "roc_auc": 0.5745768752409284
-      },
-      "residual_diagnostics_test": {
-        "residual_mean": 0.00035588191836286026,
-        "residual_std": 0.009464171289091258,
-        "skewness": 0.6365719446645071,
-        "kurtosis": 18.005578787855004,
-        "durbin_watson": 1.9826280664590799,
-        "jarque_bera_stat": 10181.930089018435,
-        "jarque_bera_p": 0.0,
-        "het_corr": 0.19801630246313376
-      },
-      "prediction_intervals": {
-        "pi_90": {
-          "lower_offset": -0.01948443379989416,
-          "upper_offset": 0.015528976423509148
-        },
-        "pi_95": {
-          "lower_offset": -0.025091148705726454,
-          "upper_offset": 0.020059969433743663
-        },
-        "method": "Empirical residual-quantile (constant-width band), train-split residuals only"
-      },
-      "rmse_bootstrap_ci_test": {
-        "rmse_95ci_lower": 0.007501964781865149,
-        "rmse_95ci_upper": 0.012171524997798134,
-        "block_length": 21,
-        "n_boot": 2000
-      },
-      "dir_acc_binomial_ci_test": {
-        "dir_acc_95ci_lower": 0.5282733730315806,
-        "dir_acc_95ci_upper": 0.5990743588777016,
-        "method": "Wilson score interval"
+        "precision": 0.5746666666666667,
+        "recall": 1.0,
+        "f1": 0.7298899237933955,
+        "accuracy": 0.5746666666666667,
+        "roc_auc": 0.5
       },
       "comparison_vs_baseline": {
         "diebold_mariano": {
-          "dm_stat": 1.589467479576651,
-          "p_value_one_sided": 0.05597744522414744,
-          "mean_loss_diff": 3.2048843970908723e-06,
-          "loss_diff_series_std": 5.525620784735972e-05
+          "dm_stat": NaN,
+          "p_value_one_sided": NaN,
+          "mean_loss_diff": 0.0,
+          "loss_diff_series_std": 0.0
         },
         "two_proportion_z_test": {
-          "z_stat": -0.41714824633572944,
-          "p_value_one_sided": 0.6617150113460311,
-          "p1": 0.564,
+          "z_stat": 0.0,
+          "p_value_one_sided": 0.5,
+          "p1": 0.5746666666666667,
           "p2": 0.5746666666666667,
-          "diff_pp": -1.0666666666666713
+          "diff_pp": 0.0
         },
-        "pct_rmse_improvement_over_baseline": 1.7422700883061335,
-        "pp_dir_acc_improvement_over_baseline": -1.0666666666666713,
-        "rmse_diff_bootstrap_ci": {
-          "mean_sq_err_diff_95ci_lower": -1.7022410221542542e-07,
-          "mean_sq_err_diff_95ci_upper": 7.308406350276149e-06
-        },
+        "pct_rmse_improvement_over_baseline": 0.0,
         "bonferroni_verdict": {
-          "dm_p": 0.05597744522414744,
-          "z_p": 0.6617150113460311,
+          "dm_p": NaN,
+          "z_p": 0.5,
           "alpha_corrected": 0.016666666666666666,
           "rmse_leg_significant": false,
           "dir_acc_leg_significant": false,
@@ -93,86 +48,42 @@
       }
     },
     "XGBoost": {
-      "train": {
-        "RMSE": 0.010302817855153685,
-        "MAE": 0.006691115174160639,
-        "R2": 0.2671358009269462,
-        "Dir_Acc": 0.6695059625212947,
-        "IC": 0.5175680018400626
-      },
       "test": {
-        "RMSE": 0.009533211109330846,
-        "MAE": 0.006581132834392131,
-        "R2": 0.018740342504404928,
-        "Dir_Acc": 0.556,
-        "IC": 0.15956204237962437,
+        "RMSE": 0.009652522892459863,
+        "MAE": 0.006652863098380804,
+        "R2": -0.005974729872182394,
+        "Dir_Acc": 0.5373333333333333,
+        "IC": 0.01970316106173207,
         "confusion_matrix": {
-          "TP": 280,
-          "TN": 138,
-          "FP": 181,
-          "FN": 151
+          "TP": 247,
+          "TN": 157,
+          "FP": 162,
+          "FN": 184
         },
-        "precision": 0.6073752711496746,
-        "recall": 0.6496519721577726,
-        "f1": 0.6278026905829596,
-        "accuracy": 0.5573333333333333,
-        "roc_auc": 0.5607466779160515
-      },
-      "residual_diagnostics_test": {
-        "residual_mean": 0.0007956769320405333,
-        "residual_std": 0.009506287653345644,
-        "skewness": 0.7675397249533428,
-        "kurtosis": 17.55762960751822,
-        "durbin_watson": 2.023962502390932,
-        "jarque_bera_stat": 9707.088323510194,
-        "jarque_bera_p": 0.0,
-        "het_corr": 0.23389570553624497
-      },
-      "prediction_intervals": {
-        "pi_90": {
-          "lower_offset": -0.016703674177261263,
-          "upper_offset": 0.013794737362980314
-        },
-        "pi_95": {
-          "lower_offset": -0.022435231110476295,
-          "upper_offset": 0.01799738873299983
-        },
-        "method": "Empirical residual-quantile (constant-width band), train-split residuals only"
-      },
-      "rmse_bootstrap_ci_test": {
-        "rmse_95ci_lower": 0.007593383704231594,
-        "rmse_95ci_upper": 0.012232366152459585,
-        "block_length": 21,
-        "n_boot": 2000
-      },
-      "dir_acc_binomial_ci_test": {
-        "dir_acc_95ci_lower": 0.5202454632676737,
-        "dir_acc_95ci_upper": 0.5911838021529484,
-        "method": "Wilson score interval"
+        "precision": 0.6039119804400978,
+        "recall": 0.5730858468677494,
+        "f1": 0.5880952380952381,
+        "accuracy": 0.5386666666666666,
+        "roc_auc": 0.507007833353941
       },
       "comparison_vs_baseline": {
         "diebold_mariano": {
-          "dm_stat": 0.9803732075464928,
-          "p_value_one_sided": 0.16345096500787593,
-          "mean_loss_diff": 1.9005330868463697e-06,
-          "loss_diff_series_std": 5.3125662056191855e-05
+          "dm_stat": -0.255639680334111,
+          "p_value_one_sided": 0.6008854621362945,
+          "mean_loss_diff": -4.138464701946952e-07,
+          "loss_diff_series_std": 4.436406613817803e-05
         },
         "two_proportion_z_test": {
-          "z_stat": -0.7292088674750261,
-          "p_value_one_sided": 0.7670630461056837,
-          "p1": 0.556,
+          "z_stat": -1.4550687745972257,
+          "p_value_one_sided": 0.9271748886656802,
+          "p1": 0.5373333333333333,
           "p2": 0.5746666666666667,
-          "diff_pp": -1.866666666666661
+          "diff_pp": -3.733333333333333
         },
-        "pct_rmse_improvement_over_baseline": 1.0294848296661747,
-        "pp_dir_acc_improvement_over_baseline": -1.866666666666661,
-        "rmse_diff_bootstrap_ci": {
-          "mean_sq_err_diff_95ci_lower": -1.3681500476743228e-06,
-          "mean_sq_err_diff_95ci_upper": 5.747366018838744e-06
-        },
+        "pct_rmse_improvement_over_baseline": -0.2228318751907974,
         "bonferroni_verdict": {
-          "dm_p": 0.16345096500787593,
-          "z_p": 0.7670630461056837,
+          "dm_p": 0.6008854621362945,
+          "z_p": 0.9271748886656802,
           "alpha_corrected": 0.016666666666666666,
           "rmse_leg_significant": false,
           "dir_acc_leg_significant": false,
@@ -181,86 +92,42 @@
       }
     },
     "LightGBM": {
-      "train": {
-        "RMSE": 0.010906827842514058,
-        "MAE": 0.007180780812232059,
-        "R2": 0.1786876014883627,
-        "Dir_Acc": 0.5934128336172629,
-        "IC": 0.3165306638136551
-      },
       "test": {
-        "RMSE": 0.009529160549971119,
-        "MAE": 0.006576307133430938,
-        "R2": 0.019574018807424487,
-        "Dir_Acc": 0.5493333333333333,
-        "IC": 0.10819339347625063,
+        "RMSE": 0.009704315175904322,
+        "MAE": 0.006780232097702833,
+        "R2": -0.016799155642190255,
+        "Dir_Acc": 0.43333333333333335,
+        "IC": -0.03425863302731015,
         "confusion_matrix": {
-          "TP": 324,
-          "TN": 88,
-          "FP": 231,
-          "FN": 107
+          "TP": 43,
+          "TN": 283,
+          "FP": 36,
+          "FN": 388
         },
-        "precision": 0.5837837837837838,
-        "recall": 0.7517401392111369,
-        "f1": 0.6572008113590264,
-        "accuracy": 0.5493333333333333,
-        "roc_auc": 0.5341590963640728
-      },
-      "residual_diagnostics_test": {
-        "residual_mean": 0.0006531136194253191,
-        "residual_std": 0.009513096695199903,
-        "skewness": 0.6979331446261929,
-        "kurtosis": 16.60019976733635,
-        "durbin_watson": 2.079469960911641,
-        "jarque_bera_stat": 8672.346094154533,
-        "jarque_bera_p": 0.0,
-        "het_corr": 0.27341591721235653
-      },
-      "prediction_intervals": {
-        "pi_90": {
-          "lower_offset": -0.018196069159806684,
-          "upper_offset": 0.0148243581826547
-        },
-        "pi_95": {
-          "lower_offset": -0.024588511609644263,
-          "upper_offset": 0.01921631343486449
-        },
-        "method": "Empirical residual-quantile (constant-width band), train-split residuals only"
-      },
-      "rmse_bootstrap_ci_test": {
-        "rmse_95ci_lower": 0.00760081301128655,
-        "rmse_95ci_upper": 0.012178872627600512,
-        "block_length": 21,
-        "n_boot": 2000
-      },
-      "dir_acc_binomial_ci_test": {
-        "dir_acc_95ci_lower": 0.5135626173847718,
-        "dir_acc_95ci_upper": 0.5846012592953,
-        "method": "Wilson score interval"
+        "precision": 0.5443037974683544,
+        "recall": 0.09976798143851508,
+        "f1": 0.16862745098039214,
+        "accuracy": 0.43466666666666665,
+        "roc_auc": 0.48947552167809794
       },
       "comparison_vs_baseline": {
         "diebold_mariano": {
-          "dm_stat": 0.9896780198365575,
-          "p_value_one_sided": 0.1611657608973749,
-          "mean_loss_diff": 1.9777463547895583e-06,
-          "loss_diff_series_std": 5.476423461218786e-05
+          "dm_stat": -0.4751579735493467,
+          "p_value_one_sided": 0.6826628102352372,
+          "mean_loss_diff": -1.4163813140198816e-06,
+          "loss_diff_series_std": 8.168880099115193e-05
         },
         "two_proportion_z_test": {
-          "z_stat": -0.9887870238126464,
-          "p_value_one_sided": 0.8386163228253279,
-          "p1": 0.5493333333333333,
+          "z_stat": -5.47399163317485,
+          "p_value_one_sided": 0.9999999779995076,
+          "p1": 0.43333333333333335,
           "p2": 0.5746666666666667,
-          "diff_pp": -2.533333333333332
+          "diff_pp": -14.133333333333331
         },
-        "pct_rmse_improvement_over_baseline": 1.0715363422113904,
-        "pp_dir_acc_improvement_over_baseline": -2.533333333333332,
-        "rmse_diff_bootstrap_ci": {
-          "mean_sq_err_diff_95ci_lower": -2.1424751057946796e-06,
-          "mean_sq_err_diff_95ci_upper": 7.2276406875390636e-06
-        },
+        "pct_rmse_improvement_over_baseline": -0.7605948387100087,
         "bonferroni_verdict": {
-          "dm_p": 0.1611657608973749,
-          "z_p": 0.8386163228253279,
+          "dm_p": 0.6826628102352372,
+          "z_p": 0.9999999779995076,
           "alpha_corrected": 0.016666666666666666,
           "rmse_leg_significant": false,
           "dir_acc_leg_significant": false,

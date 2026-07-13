@@ -6,20 +6,40 @@ Handles all data ingestion:
   - Presidential communications via The American Presidency Project (APP)
   - News headlines via NewsAPI (legacy — superseded by APP for 2015–2025)
   - Macro indicators via FRED
+  - Global geopolitical risk event data via GDELT Project (Chunked Bulk Ingestion)
 
 Usage:
-    from src.data_collector import MarketDataCollector, APPCollector, NewsCollector
+    from src.data_collector import (
+        MarketDataCollector, 
+        APPCollector, 
+        NewsCollector, 
+        GDELTCollector,
+        load_config
+    )
 """
 
+# ==============================================================================
+# BLOCK 1: IMPORTS & SYSTEM DEPENDENCIES
+# ==============================================================================
+import csv
+import io
 import yaml
 import logging
+import zipfile
+import requests
 import pandas as pd
 import yfinance as yf
 from pathlib import Path
+from datetime import datetime, timedelta
+from calendar import monthrange
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 logger = logging.getLogger(__name__)
 
 
+# ==============================================================================
+# BLOCK 2: CONFIGURATION & PERSISTENCE HELPERS
+# ==============================================================================
 def _save_parquet(df: pd.DataFrame, path: Path) -> None:
     """
     Save DataFrame to parquet safely with consistent datetime handling.
@@ -78,6 +98,7 @@ def _save_parquet(df: pd.DataFrame, path: Path) -> None:
         "Fix: pip install 'pyarrow>=15,<18' or pip install fastparquet"
     )
 
+
 def load_config(config_path: str = "config.yaml") -> dict:
     """
     Load project configuration from YAML file.
@@ -100,6 +121,9 @@ def load_config(config_path: str = "config.yaml") -> dict:
     return config
 
 
+# ==============================================================================
+# BLOCK 3: MARKET DATA COLLECTION (YAHOO FINANCE)
+# ==============================================================================
 class MarketDataCollector:
     """
     Pulls OHLCV price data from Yahoo Finance.
@@ -159,6 +183,9 @@ class MarketDataCollector:
         return data
 
 
+# ==============================================================================
+# BLOCK 4: NEWS HEADLINES COLLECTION (NEWSAPI LEGACY)
+# ==============================================================================
 class NewsCollector:
     """
     Pulls financial news headlines via NewsAPI.
@@ -250,6 +277,9 @@ class NewsCollector:
         return df
 
 
+# ==============================================================================
+# BLOCK 5: AMERICAN PRESIDENCY PROJECT SCRAPER (APP)
+# ==============================================================================
 class APPCollector:
     """
     Scrapes presidential communications from The American Presidency Project.
@@ -319,8 +349,6 @@ class APPCollector:
             )
 
         # Build a persistent session with browser-like headers.
-        # A session reuses the underlying TCP connection (keep-alive) which
-        # reduces per-request overhead and looks more like a real browser.
         self._session = requests.Session()
         self._session.headers.update({
             "User-Agent":      self._USER_AGENTS[0],
@@ -336,10 +364,6 @@ class APPCollector:
         self._BeautifulSoup = BeautifulSoup
         self._ua_index = 0   # for rotating User-Agent on retries
 
-    # ------------------------------------------------------------------
-    # Public API
-    # ------------------------------------------------------------------
-
     def load_from_csv(
         self,
         csv_dir: str | Path | None = None,
@@ -347,37 +371,6 @@ class APPCollector:
     ) -> pd.DataFrame:
         """
         Load APP data from manually-downloaded CSV files.
-
-        This is the PREFERRED method. The APP website allows you to export
-        search results as CSV directly from your browser — no scraping needed,
-        no rate limits, full 2015–2025 coverage in minutes.
-
-        How to get the CSV files
-        ------------------------
-        1. Go to: https://www.presidency.ucsb.edu/advanced-search
-        2. Set From: 01/01/2015  To: 12/31/2025
-        3. Leave Person as default (The President)
-        4. Select one Category at a time (Executive Orders, Press Conferences, etc.)
-        5. Click Search → scroll to bottom → click the CSV export button
-        6. Save each file to:  DATSCI7030/data/raw/app_csv/
-        7. Name them anything — the loader detects type from column content
-
-        Expected CSV columns (APP export format)
-        -----------------------------------------
-        Title | Date | President | Summary | Category | Tags
-
-        Parameters
-        ----------
-        csv_dir : path, optional
-            Directory containing APP CSV exports.
-            Default: {data_raw}/app_csv/
-        save : bool
-            Save merged result to app_presidential_documents.parquet.
-
-        Returns
-        -------
-        pd.DataFrame
-            Columns: date, title, doc_type, president, url, text_snippet
         """
         if csv_dir is None:
             csv_dir = self.raw_path / "app_csv"
@@ -400,7 +393,6 @@ class APPCollector:
             )
             return pd.DataFrame(columns=["date", "title", "doc_type", "president", "url", "text_snippet"])
 
-        # APP CSV column name mapping (APP export uses these exact headers)
         APP_COL_MAP = {
             "Title":     "title",
             "title":     "title",
@@ -418,7 +410,6 @@ class APPCollector:
             "url":       "url",
         }
 
-        # Map raw APP category names → our doc_type keys
         CATEGORY_TO_TYPE = {
             "spoken addresses": "spoken_addresses",
             "addresses":        "spoken_addresses",
@@ -447,10 +438,8 @@ class APPCollector:
                     logger.warning(f"Could not read {fpath.name}: {e}")
                     continue
 
-            # Normalise column names
             df = df.rename(columns={c: APP_COL_MAP[c] for c in df.columns if c in APP_COL_MAP})
 
-            # Infer doc_type from filename or category column
             doc_type = "unknown"
             fname_lower = fpath.stem.lower()
             for key in self.DOCUMENT_TYPES:
@@ -467,7 +456,6 @@ class APPCollector:
 
             df["doc_type"] = doc_type
 
-            # Ensure required columns exist
             for col in ["title", "date", "president", "url", "text_snippet"]:
                 if col not in df.columns:
                     df[col] = ""
@@ -483,7 +471,6 @@ class APPCollector:
         combined["date"] = pd.to_datetime(combined["date"], errors="coerce")
         combined.dropna(subset=["date"], inplace=True)
 
-        # Filter to configured date range
         start = pd.to_datetime(self.start_date)
         end   = pd.to_datetime(self.end_date)
         combined = combined[(combined["date"] >= start) & (combined["date"] <= end)]
@@ -512,51 +499,21 @@ class APPCollector:
     ) -> pd.DataFrame:
         """
         Fetch presidential documents using monthly windows with checkpoint/resume.
-
-        Strategy
-        --------
-        - Iterates month-by-month (Jan 2015 → Dec 2025) for each doc type.
-        - Monthly windows almost never exceed 100 results, so page 0 is always
-          sufficient — no pagination needed, no page-2 blocks.
-        - After every month, completed records are checkpointed to a CSV in
-          data/raw/. On re-run with resume=True, already-fetched months are
-          skipped so progress is never lost after a crash or rate-limit.
-        - One retry on failure (60s wait) then skips the month gracefully.
-
-        Parameters
-        ----------
-        doc_types : list of str, optional
-            Subset of DOCUMENT_TYPES keys. Default: all types.
-        delay : float
-            Seconds between requests (default 5s — respectful of APP servers).
-        save : bool
-            Save final merged parquet to data/raw/.
-        resume : bool
-            Skip months already checkpointed (default True).
-
-        Returns
-        -------
-        pd.DataFrame  —  date, title, doc_type, president, url, text_snippet
         """
         import time
-        import csv
-        from calendar import monthrange
 
         if doc_types is None:
             doc_types = list(self.DOCUMENT_TYPES.keys())
 
-        # ── Checkpoint file: one CSV row per successfully fetched month ───────
         ckpt_path = self.raw_path / "app_checkpoint.csv"
         ckpt_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Load already-completed (doc_type, year, month) combos
         done: set[tuple] = set()
         if resume and ckpt_path.exists():
             with open(ckpt_path, newline="") as fh:
                 for row in csv.DictReader(fh):
                     done.add((row["doc_type"], int(row["year"]), int(row["month"])))
 
-        # Load already-collected records (avoid losing data between runs)
         all_records: list[dict] = []
         seen_urls:   set[str]   = set()
         tmp_path = self.raw_path / "app_partial.parquet"
@@ -589,7 +546,6 @@ class APPCollector:
                     from_str = f"{month:02d}-01-{year}"
                     to_str   = f"{month:02d}-{last_day:02d}-{year}"
 
-                    # ── Single request with one retry ─────────────────────────
                     resp = None
                     for attempt in range(2):
                         self._ua_index = (self._ua_index + attempt) % len(self._USER_AGENTS)
@@ -645,7 +601,6 @@ class APPCollector:
                     all_records.extend(new_recs)
                     type_new += len(new_recs)
 
-                    # Mark month as done
                     done.add((dtype, year, month))
                     with open(ckpt_path, "a", newline="") as fh:
                         w = csv.writer(fh)
@@ -653,7 +608,6 @@ class APPCollector:
                             w.writerow(["doc_type", "year", "month", "count"])
                         w.writerow([dtype, year, month, len(new_recs)])
 
-                    # Save partial parquet after every month so progress survives crashes
                     if all_records:
                         _save_parquet(
                             pd.DataFrame(all_records),
@@ -691,7 +645,6 @@ class APPCollector:
             out = self.raw_path / "app_presidential_documents.parquet"
             _save_parquet(df, out)
             logger.info(f"Saved → {out}")
-            # Clean up partial file now that full parquet is saved
             if tmp_path.exists():
                 tmp_path.unlink()
 
@@ -700,20 +653,6 @@ class APPCollector:
     def fetch_document_text(self, url: str) -> str:
         """
         Fetch the full text of a single APP document by URL.
-
-        Use this to retrieve full speech text for FinBERT scoring.
-        The fetch() method only retrieves titles/metadata from the index.
-
-        Parameters
-        ----------
-        url : str
-            Full APP document URL, e.g.
-            'https://www.presidency.ucsb.edu/documents/address-joint-session-congress'
-
-        Returns
-        -------
-        str
-            Plain text of the document body (cleaned of HTML).
         """
         try:
             resp = self._requests.get(
@@ -728,51 +667,31 @@ class APPCollector:
 
         soup = self._BeautifulSoup(resp.text, "lxml")
 
-        # APP document body is in <div class="field-docs-content">
         body_div = soup.find("div", class_="field-docs-content")
         if body_div is None:
-            # Fallback: <div class="field-items">
             body_div = soup.find("div", class_="field-items")
         if body_div is None:
             logger.warning(f"Could not find document body at {url}")
             return ""
 
-        # Strip footnote / metadata spans
         for tag in body_div.find_all(["sup", "span"], class_=["footnote", "citation"]):
             tag.decompose()
 
         return body_div.get_text(separator=" ", strip=True)
 
-    # ------------------------------------------------------------------
-    # Private helpers
-    # ------------------------------------------------------------------
 
+# ==============================================================================
+# BLOCK 6: PRIVATE SCRAPING HELPERS (APP ENGINE)
+# ==============================================================================
     def _parse_results_page(self, html: str, doc_type: str) -> tuple[list, bool]:
         """
         Parse one page of APP advanced-search results.
-
-        APP renders results in two possible layouts:
-          1. <table class="views-table"> with <td class="views-field-*"> cells
-          2. <div class="views-row"> blocks (fallback for some category pages)
-
-        We use CSS class selectors on individual <td> elements rather than
-        positional indexing because the column order is not guaranteed to be
-        consistent across document categories.
-
-        Known APP td class names:
-          views-field-field-docs-start-date-value  → date
-          views-field-title                         → document title + /documents/ link
-          views-field-title-1                       → president name + /people/ link (ignore this link)
-
-        Returns (records_list, has_next_page).
         """
         soup = self._BeautifulSoup(html, "lxml")
         records = []
 
-        # ── Strategy 1: table layout (most category pages) ───────────────────
         rows = soup.select("table.views-table tbody tr")
 
-        # Helper: check if a tag has a given class among its (possibly multiple) classes
         def has_cls(tag, cls_name):
             classes = tag.get("class") or []
             return cls_name in classes
@@ -780,26 +699,21 @@ class APPCollector:
         for row in rows:
             tds = row.find_all("td")
 
-            # ── Date cell ────────────────────────────────────────────────────
-            # APP class: "views-field views-field-field-docs-start-date-value"
             date_cell = next(
                 (td for td in tds if
-                 has_cls(td, "views-field-field-docs-start-date-time-value")   # actual APP class
-                 or has_cls(td, "views-field-field-docs-start-date-value")),   # fallback variant
+                 has_cls(td, "views-field-field-docs-start-date-time-value")
+                 or has_cls(td, "views-field-field-docs-start-date-value")),
                 None
             )
             if date_cell is None and tds:
                 date_cell = tds[0]
             date_str = date_cell.get_text(strip=True) if date_cell else ""
 
-            # ── Title cell ───────────────────────────────────────────────────
-            # APP class: "views-field views-field-title"  (NOT views-field-title-1)
             title_cell = next(
                 (td for td in tds
                  if has_cls(td, "views-field-title") and not has_cls(td, "views-field-title-1")),
                 None
             )
-            # Fallback: any td containing a /documents/ link
             if title_cell is None:
                 for td in tds:
                     if td.find("a", href=lambda h: h and "/documents/" in h):
@@ -809,10 +723,8 @@ class APPCollector:
             if title_cell is None:
                 continue
 
-            # Extract the document link — /documents/ href only, never /people/
             doc_link = title_cell.find("a", href=lambda h: h and "/documents/" in h)
             if doc_link is None:
-                # Broader fallback: any <a> in the title cell that is NOT a /people/ link
                 for a in title_cell.find_all("a"):
                     if "/people/" not in a.get("href", ""):
                         doc_link = a
@@ -826,13 +738,10 @@ class APPCollector:
             url   = href if href.startswith("http") else f"https://www.presidency.ucsb.edu{href}"
             title = doc_link.get_text(strip=True)
 
-            # ── President cell ───────────────────────────────────────────────
-            # APP class: "views-field views-field-title-1"
             pres_cell = next(
                 (td for td in tds if has_cls(td, "views-field-title-1")),
                 None
             )
-            # President name is plain text — do NOT use the <a> href (that's the /people/ link)
             president = pres_cell.get_text(strip=True) if pres_cell else ""
 
             if not title or not date_str:
@@ -847,13 +756,11 @@ class APPCollector:
                 "text_snippet": "",
             })
 
-        # ── Strategy 2: div layout fallback ──────────────────────────────────
         if not records:
             for div in soup.select("div.views-row"):
                 date_el  = div.select_one(".views-field-field-docs-start-date-value")
                 pres_el  = div.select_one(".views-field-title-1")
 
-                # title div: has views-field-title but not views-field-title-1
                 title_el = None
                 for el in div.select(".views-field-title"):
                     if "views-field-title-1" not in " ".join(el.get("class", [])):
@@ -884,8 +791,6 @@ class APPCollector:
                     "text_snippet": "",
                 })
 
-        # ── Next-page detection ───────────────────────────────────────────────
-        # APP uses <li class="pager-next"> or <a rel="next">
         pager_next = (
             soup.select_one("li.pager-next a")
             or soup.select_one("a[rel='next']")
@@ -898,29 +803,144 @@ class APPCollector:
     @staticmethod
     def _fmt_date(date_str: str) -> str:
         """Convert 'YYYY-MM-DD' → 'MM-DD-YYYY' for APP search form."""
-        from datetime import datetime
         dt = datetime.strptime(date_str, "%Y-%m-%d")
         return dt.strftime("%m-%d-%Y")
 
 
+# ==============================================================================
+# BLOCK 7: GEOPOLITICAL EVENT DATA COLLECTION (GDELT BULK INGESTION)
+# ==============================================================================
 class GDELTCollector:
     """
     Pulls event data from the GDELT Project (free, no API key required).
-    Uses GDELT 2.0 GKG (Global Knowledge Graph) for event mentions.
+    Downloads daily historical export ZIPs directly from the official GDELT archives.
     """
 
-    GDELT_BASE = "http://data.gdeltproject.org/gdeltv2/"
+    # Primary archive root for daily historical exports (1979-present)
+    GDELT_DAILY_BASE = "http://data.gdeltproject.org/events/"
 
     def __init__(self, config: dict):
         self.raw_path = Path(config["paths"]["data_raw"])
+        self.start_date = config["data"]["start_date"]
+        self.end_date = config["data"]["end_date"]
+
+    def _download_single_day(self, date_dt: datetime) -> pd.DataFrame:
+        """
+        Download and parse a single day's GDELT export zip file.
+        Tries daily archive endpoint (.export.CSV.zip) first, then lower-case fallback.
+        """
+        date_str = date_dt.strftime("%Y%m%d")
+        
+        # Candidate daily URLs (GDELT uses uppercase .export.CSV.zip for daily archives)
+        urls = [
+            f"{self.GDELT_DAILY_BASE}{date_str}.export.CSV.zip",
+            f"{self.GDELT_DAILY_BASE}{date_str}.export.csv.zip",
+        ]
+
+        resp = None
+        for url in urls:
+            try:
+                r = requests.get(url, timeout=20)
+                if r.status_code == 200 and len(r.content) > 0:
+                    resp = r
+                    break
+            except Exception as e:
+                logger.debug(f"GDELT fetch error for {url}: {e}")
+
+        if resp is None:
+            logger.warning(f"GDELT file not found for date: {date_str}")
+            return pd.DataFrame()
+
+        try:
+            with zipfile.ZipFile(io.BytesIO(resp.content)) as z:
+                # Find the internal CSV file name
+                csv_files = [f for f in z.namelist() if f.endswith(".csv") or f.endswith(".CSV")]
+                if not csv_files:
+                    return pd.DataFrame()
+
+                with z.open(csv_files[0]) as f:
+                    # GDELT Event Codebook layout:
+                    # Col 0: GLOBALEVENTID, Col 1: SQLDATE, Col 26: EventCode, 
+                    # Col 30: GoldsteinScale, Col 34: AvgTone
+                    df = pd.read_csv(
+                        f,
+                        sep="\t",
+                        header=None,
+                        usecols=[0, 1, 26, 30, 34],
+                        names=["event_id", "date_raw", "event_code", "goldstein_scale", "avg_tone"],
+                        on_bad_lines="skip",
+                        dtype={"date_raw": str},
+                        low_memory=False,
+                    )
+
+                    if df.empty:
+                        return pd.DataFrame()
+
+                    df["date"] = pd.to_datetime(df["date_raw"], format="%Y%m%d", errors="coerce")
+                    df = df.dropna(subset=["date"])
+                    
+                    logger.info(f"✓ GDELT downloaded for {date_str}: {len(df):,} events")
+                    return df[["date", "event_code", "goldstein_scale", "avg_tone"]]
+
+        except Exception as exc:
+            logger.error(f"Failed to extract GDELT zip for {date_str}: {exc}")
+            return pd.DataFrame()
 
     def fetch_recent_events(self, days_back: int = 7) -> pd.DataFrame:
+        """Fetches GDELT event data for the specified recent days window."""
+        end_dt = datetime.now()
+        start_dt = end_dt - timedelta(days=days_back)
+        date_list = [start_dt + timedelta(days=x) for x in range((end_dt - start_dt).days + 1)]
+
+        frames = []
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            futures = [executor.submit(self._download_single_day, d) for d in date_list]
+            for future in as_completed(futures):
+                res = future.result()
+                if not res.empty:
+                    frames.append(res)
+
+        if not frames:
+            return pd.DataFrame(columns=["date", "event_code", "goldstein_scale", "avg_tone"])
+
+        df = pd.concat(frames, ignore_index=True)
+        df.sort_values("date", inplace=True)
+        df.reset_index(drop=True, inplace=True)
+        return df
+
+    def fetch_historical_range(self, save: bool = True, max_workers: int = 4) -> pd.DataFrame:
         """
-        Placeholder — implement GDELT bulk download.
-        See: https://www.gdeltproject.org/data.html
+        Executes a chunked bulk ingestion of daily GDELT archives spanning 
+        the target timeline (start_date to end_date from config.yaml).
         """
-        # TODO: implement GDELT CSV download and parsing
-        raise NotImplementedError(
-            "GDELT bulk download not yet implemented. "
-            "See notebooks/01_data_collection.ipynb for manual steps."
-        )
+        logger.info(f"Initiating GDELT historical ingestion: {self.start_date} to {self.end_date}")
+        start_dt = datetime.strptime(self.start_date, "%Y-%m-%d")
+        end_dt = datetime.strptime(self.end_date, "%Y-%m-%d")
+
+        date_list = [start_dt + timedelta(days=x) for x in range((end_dt - start_dt).days + 1)]
+        frames = []
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_date = {executor.submit(self._download_single_day, d): d for d in date_list}
+            for future in as_completed(future_to_date):
+                try:
+                    res = future.result()
+                    if not res.empty:
+                        frames.append(res)
+                except Exception as exc:
+                    logger.debug(f"Failed parsing day: {exc}")
+
+        if not frames:
+            logger.warning("No historical GDELT data retrieved.")
+            return pd.DataFrame(columns=["date", "event_code", "goldstein_scale", "avg_tone"])
+
+        combined = pd.concat(frames, ignore_index=True)
+        combined.sort_values("date", inplace=True)
+        combined.reset_index(drop=True, inplace=True)
+
+        if save:
+            out = self.raw_path / "gdelt_events.parquet"
+            _save_parquet(combined, out)
+            logger.info(f"Saved GDELT historical dataset → {out} ({len(combined):,} total rows)")
+
+        return combined
