@@ -1,39 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="656" viewBox="0 0 600 656" font-family="Arial, Helvetica, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M1 1L9 5L1 9Z" fill="#3A6EA5"/>
+      <path d="M1 1L9 5L1 9Z" fill="#5B8FC7"/>
     </marker>
   </defs>
   <rect width="600" height="656" fill="#FFFFFF"/>
-  <text x="300.0" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#111111" font-family="Arial, Helvetica, sans-serif">Research Governance</text>
-  <text x="300.0" y="54" text-anchor="middle" font-size="12" fill="#888888" font-style="italic" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — how a research question becomes a frozen, testable pipeline</text>
-  <line x1="30" y1="66" x2="570" y2="66" stroke="#CCCCCC" stroke-width="0.8"/>
-  <rect x="80.0" y="84" width="440" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="300.0" y="104.0" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">Research Questions</text>
-  <text x="300.0" y="124.0" text-anchor="middle" font-size="11.5" fill="#444444">RQ1 · RQ2 · RQ3 (01_research_questions.md)</text>
-  <rect x="80.0" y="164" width="440" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="300.0" y="184.0" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">Hypotheses</text>
-  <text x="300.0" y="204.0" text-anchor="middle" font-size="11.5" fill="#444444">H1 · H2 · H3, frozen (02_hypotheses.md)</text>
-  <line x1="300.0" y1="136" x2="300.0" y2="164" stroke="#3A6EA5" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <rect x="80.0" y="244" width="440" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="300.0" y="264.0" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">SAP v1.0</text>
-  <text x="300.0" y="284.0" text-anchor="middle" font-size="11.5" fill="#444444">Statistical Analysis Plan — tests, α, corrections</text>
-  <line x1="300.0" y1="216" x2="300.0" y2="244" stroke="#3A6EA5" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <rect x="80.0" y="324" width="440" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="300.0" y="344.0" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">Dataset Contract</text>
-  <text x="300.0" y="364.0" text-anchor="middle" font-size="11.5" fill="#444444">master_dataset.parquet consumption rules</text>
-  <line x1="300.0" y1="296" x2="300.0" y2="324" stroke="#3A6EA5" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <rect x="80.0" y="404" width="440" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="300.0" y="424.0" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">FES v1.0</text>
-  <text x="300.0" y="444.0" text-anchor="middle" font-size="11.5" fill="#444444">Feature Engineering Spec — feature_matrix.parquet</text>
-  <line x1="300.0" y1="376" x2="300.0" y2="404" stroke="#3A6EA5" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <rect x="80.0" y="484" width="440" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="300.0" y="504.0" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">MCP v1.0</text>
-  <text x="300.0" y="524.0" text-anchor="middle" font-size="11.5" fill="#444444">Model Contract Protocol — approved models, baseline spec</text>
-  <line x1="300.0" y1="456" x2="300.0" y2="484" stroke="#3A6EA5" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <rect x="80.0" y="564" width="440" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="300.0" y="584.0" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">Results / Dissertation</text>
-  <text x="300.0" y="604.0" text-anchor="middle" font-size="11.5" fill="#444444">09_results_log.md · 12_dissertation_outline.md</text>
-  <line x1="300.0" y1="536" x2="300.0" y2="564" stroke="#3A6EA5" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <text x="300.0" y="642" text-anchor="middle" font-size="9.5" fill="#888888" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — Research Governance — Architecture v2.0 (2026-07-06)</text>
+  <text x="300.0" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#1E1E1E" font-family="Arial, Helvetica, sans-serif">Research Governance</text>
+  <text x="300.0" y="54" text-anchor="middle" font-size="12" fill="#969696" font-style="italic" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — how a research question becomes a frozen, testable pipeline</text>
+  <line x1="30" y1="66" x2="570" y2="66" stroke="#DCDCDC" stroke-width="0.8"/>
+  <rect x="80.0" y="84" width="440" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="300.0" y="104.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">Research Questions</text>
+  <text x="300.0" y="124.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">RQ1 · RQ2 · RQ3 (01_research_questions.md)</text>
+  <rect x="80.0" y="164" width="440" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="300.0" y="184.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">Hypotheses</text>
+  <text x="300.0" y="204.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">H1 · H2 · H3, frozen (02_hypotheses.md)</text>
+  <line x1="300.0" y1="136" x2="300.0" y2="164" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="80.0" y="244" width="440" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="300.0" y="264.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">SAP v1.0</text>
+  <text x="300.0" y="284.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Statistical Analysis Plan — tests, α, corrections</text>
+  <line x1="300.0" y1="216" x2="300.0" y2="244" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="80.0" y="324" width="440" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="300.0" y="344.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">Dataset Contract</text>
+  <text x="300.0" y="364.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">master_dataset.parquet consumption rules</text>
+  <line x1="300.0" y1="296" x2="300.0" y2="324" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="80.0" y="404" width="440" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="300.0" y="424.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">FES v1.0</text>
+  <text x="300.0" y="444.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Feature Engineering Spec — feature_matrix.parquet</text>
+  <line x1="300.0" y1="376" x2="300.0" y2="404" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="80.0" y="484" width="440" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="300.0" y="504.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">MCP v1.0</text>
+  <text x="300.0" y="524.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Model Contract Protocol — approved models, baseline spec</text>
+  <line x1="300.0" y1="456" x2="300.0" y2="484" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="80.0" y="564" width="440" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="300.0" y="584.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">Results / Dissertation</text>
+  <text x="300.0" y="604.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">09_results_log.md · 12_dissertation_outline.md</text>
+  <line x1="300.0" y1="536" x2="300.0" y2="564" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="300.0" y="642" text-anchor="middle" font-size="9.5" fill="#969696" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — Research Governance — Architecture v2.3 (2026-07-13, lighter palette)</text>
 </svg>

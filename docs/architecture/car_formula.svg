@@ -1,81 +1,81 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560" font-family="Arial, Helvetica, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M1 1L9 5L1 9Z" fill="#3A6EA5"/>
+      <path d="M1 1L9 5L1 9Z" fill="#5B8FC7"/>
     </marker>
   </defs>
 
   <rect width="800" height="560" fill="#FFFFFF"/>
 
   <!-- Title -->
-  <text x="400" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#111111">Cumulative Abnormal Return — Formula Breakdown</text>
-  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#888888" font-style="italic">DATSCI7030 — constant-mean-return (mean-adjusted) event study, Section 3.3</text>
-  <line x1="30" y1="66" x2="770" y2="66" stroke="#CCCCCC" stroke-width="0.8"/>
+  <text x="400" y="34" text-anchor="middle" font-size="19" font-weight="700" fill="#1E1E1E">Cumulative Abnormal Return — Formula Breakdown</text>
+  <text x="400" y="54" text-anchor="middle" font-size="12" fill="#969696" font-style="italic">DATSCI7030 — constant-mean-return (mean-adjusted) event study, Section 3.3</text>
+  <line x1="30" y1="66" x2="770" y2="66" stroke="#DCDCDC" stroke-width="0.8"/>
 
   <!-- Equation 1: daily abnormal return -->
-  <rect x="60" y="80" width="330" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="225" y="112" text-anchor="middle" font-size="17" font-weight="700" font-style="italic" fill="#111111">AR_τ  =  R_τ  −  μ̂</text>
+  <rect x="60" y="80" width="330" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="225" y="112" text-anchor="middle" font-size="17" font-weight="700" font-style="italic" fill="#1E1E1E">AR_τ  =  R_τ  −  μ̂</text>
 
   <!-- Equation 2: cumulative abnormal return -->
-  <rect x="410" y="80" width="330" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="575" y="112" text-anchor="middle" font-size="15" font-weight="700" font-style="italic" fill="#111111">CAR(t₁,t₂) = Σ AR_τ , τ = t₁..t₂</text>
+  <rect x="410" y="80" width="330" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="575" y="112" text-anchor="middle" font-size="15" font-weight="700" font-style="italic" fill="#1E1E1E">CAR(t₁,t₂) = Σ AR_τ , τ = t₁..t₂</text>
 
   <!-- Annotation lines -->
-  <line x1="140" y1="132" x2="140" y2="150" stroke="#7FA6C9" stroke-width="1" marker-end="url(#arrow)"/>
-  <line x1="245" y1="132" x2="245" y2="150" stroke="#7FA6C9" stroke-width="1" marker-end="url(#arrow)"/>
-  <line x1="345" y1="132" x2="345" y2="150" stroke="#7FA6C9" stroke-width="1" marker-end="url(#arrow)"/>
-  <line x1="575" y1="132" x2="575" y2="150" stroke="#7FA6C9" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="140" y1="132" x2="140" y2="150" stroke="#A9C6E3" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="245" y1="132" x2="245" y2="150" stroke="#A9C6E3" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="345" y1="132" x2="345" y2="150" stroke="#A9C6E3" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="575" y1="132" x2="575" y2="150" stroke="#A9C6E3" stroke-width="1" marker-end="url(#arrow)"/>
 
   <!-- Term cards -->
-  <rect x="60" y="152" width="160" height="78" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="140" y="176" text-anchor="middle" font-size="13" font-weight="700" font-style="italic" fill="#111111">AR_τ</text>
-  <text x="140" y="196" text-anchor="middle" font-size="10" fill="#444444">Abnormal return</text>
-  <text x="140" y="212" text-anchor="middle" font-size="10" fill="#444444">on day τ</text>
+  <rect x="60" y="152" width="160" height="78" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="140" y="176" text-anchor="middle" font-size="13" font-weight="700" font-style="italic" fill="#1E1E1E">AR_τ</text>
+  <text x="140" y="196" text-anchor="middle" font-size="10" fill="#4F4F4F">Abnormal return</text>
+  <text x="140" y="212" text-anchor="middle" font-size="10" fill="#4F4F4F">on day τ</text>
 
-  <rect x="230" y="152" width="160" height="78" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="310" y="176" text-anchor="middle" font-size="13" font-weight="700" font-style="italic" fill="#111111">R_τ</text>
-  <text x="310" y="196" text-anchor="middle" font-size="10" fill="#444444">Realised simple</text>
-  <text x="310" y="212" text-anchor="middle" font-size="10" fill="#444444">return on day τ</text>
+  <rect x="230" y="152" width="160" height="78" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="310" y="176" text-anchor="middle" font-size="13" font-weight="700" font-style="italic" fill="#1E1E1E">R_τ</text>
+  <text x="310" y="196" text-anchor="middle" font-size="10" fill="#4F4F4F">Realised simple</text>
+  <text x="310" y="212" text-anchor="middle" font-size="10" fill="#4F4F4F">return on day τ</text>
 
-  <rect x="400" y="152" width="150" height="78" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="475" y="176" text-anchor="middle" font-size="13" font-weight="700" font-style="italic" fill="#111111">μ̂</text>
-  <text x="475" y="196" text-anchor="middle" font-size="10" fill="#444444">Historical mean</text>
-  <text x="475" y="212" text-anchor="middle" font-size="10" fill="#444444">return (see below)</text>
+  <rect x="400" y="152" width="150" height="78" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="475" y="176" text-anchor="middle" font-size="13" font-weight="700" font-style="italic" fill="#1E1E1E">μ̂</text>
+  <text x="475" y="196" text-anchor="middle" font-size="10" fill="#4F4F4F">Historical mean</text>
+  <text x="475" y="212" text-anchor="middle" font-size="10" fill="#4F4F4F">return (see below)</text>
 
-  <rect x="560" y="152" width="180" height="78" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="650" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#111111">CAR(t₁, t₂)</text>
-  <text x="650" y="196" text-anchor="middle" font-size="10" fill="#444444">Sum of AR_τ over the</text>
-  <text x="650" y="212" text-anchor="middle" font-size="10" fill="#444444">event window t₁ to t₂</text>
-
-  <!-- Divider -->
-  <line x1="60" y1="250" x2="740" y2="250" stroke="#CCCCCC" stroke-width="0.8"/>
-  <text x="400" y="268" text-anchor="middle" font-size="10" fill="#888888" font-style="italic">Estimation of μ̂ — the constant-mean-return (mean-adjusted) design</text>
-
-  <rect x="60" y="278" width="680" height="66" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="400" y="301" text-anchor="middle" font-size="12" font-weight="700" fill="#111111">μ̂ = SPY's own historical mean simple return, not a market-proxy regression</text>
-  <text x="400" y="321" text-anchor="middle" font-size="10" fill="#444444">Estimation window: 252 to 21 trading days before the event date</text>
-  <text x="400" y="336" text-anchor="middle" font-size="10" fill="#444444">(no regression against a separate market-proxy series)</text>
+  <rect x="560" y="152" width="180" height="78" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="650" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#1E1E1E">CAR(t₁, t₂)</text>
+  <text x="650" y="196" text-anchor="middle" font-size="10" fill="#4F4F4F">Sum of AR_τ over the</text>
+  <text x="650" y="212" text-anchor="middle" font-size="10" fill="#4F4F4F">event window t₁ to t₂</text>
 
   <!-- Divider -->
-  <line x1="60" y1="364" x2="740" y2="364" stroke="#CCCCCC" stroke-width="0.8"/>
-  <text x="400" y="382" text-anchor="middle" font-size="10" fill="#888888" font-style="italic">The event window — what t₁ and t₂ define</text>
+  <line x1="60" y1="250" x2="740" y2="250" stroke="#DCDCDC" stroke-width="0.8"/>
+  <text x="400" y="268" text-anchor="middle" font-size="10" fill="#969696" font-style="italic">Estimation of μ̂ — the constant-mean-return (mean-adjusted) design</text>
 
-  <rect x="60" y="392" width="680" height="52" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="400" y="423" text-anchor="middle" font-size="12" font-weight="700" fill="#111111">t₁ = −5, t₂ = +10 trading days relative to the event date (config.yaml: event_window_pre/post)</text>
+  <rect x="60" y="278" width="680" height="66" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="400" y="301" text-anchor="middle" font-size="12" font-weight="700" fill="#1E1E1E">μ̂ = SPY's own historical mean simple return, not a market-proxy regression</text>
+  <text x="400" y="321" text-anchor="middle" font-size="10" fill="#4F4F4F">Estimation window: 252 to 21 trading days before the event date</text>
+  <text x="400" y="336" text-anchor="middle" font-size="10" fill="#4F4F4F">(no regression against a separate market-proxy series)</text>
 
   <!-- Divider -->
-  <line x1="60" y1="462" x2="740" y2="462" stroke="#CCCCCC" stroke-width="0.8"/>
-  <text x="400" y="480" text-anchor="middle" font-size="10" fill="#888888" font-style="italic">What the sample and CAR sign represent</text>
+  <line x1="60" y1="364" x2="740" y2="364" stroke="#DCDCDC" stroke-width="0.8"/>
+  <text x="400" y="382" text-anchor="middle" font-size="10" fill="#969696" font-style="italic">The event window — what t₁ and t₂ define</text>
 
-  <rect x="60" y="488" width="310" height="42" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="215" y="507" text-anchor="middle" font-size="10.5" font-weight="700" fill="#111111">Asset: SPY</text>
-  <text x="215" y="521" text-anchor="middle" font-size="9.5" fill="#444444">RQ1 evidence base — see 11_limitations.md</text>
+  <rect x="60" y="392" width="680" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="400" y="423" text-anchor="middle" font-size="12" font-weight="700" fill="#1E1E1E">t₁ = −5, t₂ = +10 trading days relative to the event date (config.yaml: event_window_pre/post)</text>
 
-  <rect x="430" y="488" width="310" height="42" rx="9" fill="#EEF3F8" stroke="#3A6EA5" stroke-width="1.4"/>
-  <text x="585" y="507" text-anchor="middle" font-size="10.5" font-weight="700" fill="#111111">CAR sign</text>
-  <text x="585" y="521" text-anchor="middle" font-size="9.5" fill="#444444">positive = boosted · negative = depressed</text>
+  <!-- Divider -->
+  <line x1="60" y1="462" x2="740" y2="462" stroke="#DCDCDC" stroke-width="0.8"/>
+  <text x="400" y="480" text-anchor="middle" font-size="10" fill="#969696" font-style="italic">What the sample and CAR sign represent</text>
+
+  <rect x="60" y="488" width="310" height="42" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="215" y="507" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1E1E1E">Asset: SPY</text>
+  <text x="215" y="521" text-anchor="middle" font-size="9.5" fill="#4F4F4F">RQ1 evidence base — see 11_limitations.md</text>
+
+  <rect x="430" y="488" width="310" height="42" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
+  <text x="585" y="507" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1E1E1E">CAR sign</text>
+  <text x="585" y="521" text-anchor="middle" font-size="9.5" fill="#4F4F4F">positive = boosted · negative = depressed</text>
 
   <!-- Footer -->
-  <text x="400" y="546" text-anchor="middle" font-size="9.5" fill="#888888">DATSCI7030 — CAR Formula Reference — Architecture v2.0 (2026-07-08)</text>
-  <text x="400" y="558" text-anchor="middle" font-size="8" fill="#AAAAAA">Corrected to match frozen Section 3.3 notation exactly: AR_τ = R_τ − μ̂; constant-mean-return design; 252–21 day estimation window; simple returns</text>
+  <text x="400" y="546" text-anchor="middle" font-size="9.5" fill="#969696">DATSCI7030 — CAR Formula Reference — Architecture v2.3 (2026-07-13, lighter palette)</text>
+  <text x="400" y="558" text-anchor="middle" font-size="8" fill="#B8B8B8">Corrected to match frozen Section 3.3 notation exactly: AR_τ = R_τ − μ̂; constant-mean-return design; 252–21 day estimation window; simple returns</text>
 </svg>
