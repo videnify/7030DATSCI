@@ -1,11 +1,7 @@
 # data/interim/
 
-Intermediate artefacts produced between raw collection and final processed datasets — e.g. partially cleaned frames, merge checkpoints, or cached scrape results that are not yet the final modelling table.
+**Updated 2026-07-13** — this folder is currently **empty** (only `.gitkeep`) in the implemented pipeline. The previous version of this README described a `02_data_cleaning.ipynb` staging step — no such notebook exists; the actual `02_eda.ipynb` performs exploratory analysis only, and Notebooks 01/03/04/05 each write directly from raw inputs to their `data/processed/` outputs with no intermediate staging file. This mirrors `data/external/README.md`'s "reserved but unused" framing for the same reason: an early scaffolding placeholder from before the pipeline's actual notebook structure was settled.
 
-Nothing in this directory is committed to git (see root `.gitignore`); everything here must be regenerable by re-running the notebooks in `notebooks/` in order.
+Nothing in this directory is committed to git (see root `.gitignore`); if a genuine multi-step transformation ever needs an inspectable intermediate checkpoint, it belongs here — until then, this folder is reserved but unused.
 
-**Purpose:** staging area for multi-step transformations in `02_data_cleaning` so intermediate state can be inspected without re-running the full pipeline.
-**Contents:** none tracked — populated at runtime.
-**Input:** `data/raw/`
-**Output:** consumed by `data/processed/` build steps.
-**Dependencies:** `notebooks/02_data_cleaning.ipynb` (or equivalent cleaning stage), `src/`.
+**Input:** n/a (unused). **Output:** n/a (unused). **Dependencies:** none currently.
