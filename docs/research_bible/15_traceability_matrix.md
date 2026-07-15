@@ -9,6 +9,8 @@
 
 **2026-07-14 FES v1.1 gate:** Notebooks 05–08 freeze and validate the 92-feature matrix, `Baseline_LASSO`, event-model suite, Random Forest/SHAP outputs, corrected model comparisons, and all four synthesis figures. `results_visualisation_validation.json` binds the figures to the same current matrix and model-evaluation validations.
 
+**2026-07-15 addition:** `data/processed/causal_overall_estimate.json` (the pooled/overall DoWhy backdoor estimate) is added below as a Notebook 04 output, read directly by Notebook 08. This closes a traceability gap: the pooled estimate previously existed only as printed notebook output and a hand-copied literal in `08_results_visualisation.ipynb`. No RQ1–RQ3 value changed as a result — see `10_decision_log.md`, 2026-07-15 entries.
+
 ---
 
 ## Notebooks
@@ -34,6 +36,7 @@ All 26 PNG figures currently under `reports/figures/` trace to at least one RQ p
 |------|:---:|:---:|:---:|
 | `car_results.parquet` | ✅ | — | — |
 | `causal_estimates.parquet` | ✅ | — | — |
+| `causal_overall_estimate.json` | ✅ (pooled DoWhy estimate; added 2026-07-15) | — | — |
 | `events_tagged.parquet` / `high_impact_events.parquet` | ✅ | ✅ (source) | — |
 | `daily_sentiment.parquet` | ✅ | ✅ | — |
 | `gdelt_daily_risk.parquet` | 🟡 (full 2015–2025 history since 2026-07-13, but not yet feature-engineered — see `11_limitations.md` L7) | 🟡 | — |

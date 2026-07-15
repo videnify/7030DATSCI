@@ -1,7 +1,9 @@
 # 1. Data Collection — What Went Into This Project
 
-**Status:** ✅ Verified 2026-07-13 — every number below was checked directly against the current data files, not copied from an earlier report or the notebook's own narrative text.
-**Technical detail:** `notebooks/01_data_collection.ipynb` · [`dataset_contract.md`](../research_bible/dataset_contract.md) · [`05_data_dictionary.md`](../research_bible/05_data_dictionary.md) · [`10_decision_log.md`](../research_bible/10_decision_log.md) (2026-07-13 entry, GDELT backfill)
+**Status:** ✅ Verified — every number below was checked directly against the current data files, not copied from an earlier report or the notebook's own narrative text.
+**Originally verified:** 2026-07-13.
+**Last reviewed against current pipeline:** 2026-07-15 (as part of a full eight-notebook traceability audit — every figure in the table below was re-checked directly against the current parquet files on disk; all matched; no number changed as a result of this review).
+**Technical detail:** `notebooks/01_data_collection.ipynb` · [`dataset_contract.md`](../research_bible/dataset_contract.md) · [`05_data_dictionary.md`](../research_bible/05_data_dictionary.md) · [`10_decision_log.md`](../research_bible/10_decision_log.md) (2026-07-13 entry, GDELT backfill; 2026-07-15 entry, GDELT reproducibility correction)
 
 ---
 
@@ -35,6 +37,8 @@ That said, bringing in this much bigger signal correctly is itself a piece of ca
 ## What's still being checked
 
 The presidential-communications figure above shows a narrowing from 10,892 collected documents down to 916 judged "economically relevant." That narrowing step (which keywords or rules decide what counts as economically relevant) has not yet been independently reviewed in this pass of the project — it's flagged as an open item, not a confirmed result. It does not affect the market price, volatility, economic-indicator, Fed-decision, or news-risk data described above, all of which are independently verified and stable.
+
+**Re-checked 2026-07-15:** this item remains open. The 2026-07-15 traceability audit searched the full decision log for any later review of this specific filtering rule and found none — only the downstream consequences of the current 916-document count (e.g. event totals in Notebook 3/4) have been discussed since. This is preserved as an open limitation, not marked resolved, even though Notebook 3 itself is now complete and re-verified — completion of the notebook is not the same as independent review of this one filtering rule.
 
 ## Where to go for more detail
 

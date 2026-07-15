@@ -19,7 +19,7 @@
   "diagnostic_model": "XGBoost",
   "diagnostic_model_selection": "Highest defined test IC among non-constant event candidates; not a winner",
   "input_sha256": {
-    "notebook_04_causal_analysis": "654d7a5ef34b7e8ba2f938dab42fe6e75f11f0cccd089a2092f627100d683984",
+    "notebook_04_causal_analysis": "745312ec82278d86df37ed7b56bc5d924f71fc78a9368405debc1583c0799010",
     "rq1_reporting_validation": "6bc60b2c7ab823ceb99acb9e1e45ce2164946e4935cb486ee36899db789418b4",
     "event_type_statistics": "7507588fe140466c5999df9ca902ea93264d46fa3f7c211607c104e6795a25e6",
     "feature_matrix_validation": "6305c7f72040b8d317123e4bf8efad22fe22220f69438cb53ce2e5e341698298",
@@ -27,7 +27,8 @@
     "model_evaluation_validation": "4312f305f86c7bfc3614e7ba74aaa725f4a58a89975557aacc2ffc4c11ac0ef2",
     "statistical_tests": "0bdb68cce38cd961d672a141b4f9dc63d62a806338e185721306633cf57b3afd",
     "feature_importance": "ecd2edda99c9675447bec37c7291c1e9323c1d9a4f835fbbca64f38bcbf7de2e",
-    "event_model_predictions": "6e6130c79248e3cdc552d8b053b0cc380b503445d061ec97d3c4442e348541d1"
+    "event_model_predictions": "6e6130c79248e3cdc552d8b053b0cc380b503445d061ec97d3c4442e348541d1",
+    "causal_overall_estimate": "9633bc1474cc95617414e941ca7478744d139b4de89cef8499074133a390361d"
   },
   "figure_dimensions_px": {
     "08a_event_landscape.png": [

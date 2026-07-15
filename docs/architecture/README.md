@@ -1,6 +1,6 @@
 # Architecture Diagrams
 
-**DATSCI7030 — Causal Event-Driven Market Impact Modelling** · Version 2.9 (2026-07-14)
+**DATSCI7030 — Causal Event-Driven Market Impact Modelling** · Version 3.0 (2026-07-15)
 
 **Purpose:** Minimal, accurate SVG diagrams of the current, frozen project architecture — pipeline order, data lineage, governance structure, RQ traceability, and the RQ3 modelling flow. These diagrams support the dissertation's Methodology chapter; they are reference material, not RQ1–RQ3 evidence figures (which live in `reports/figures/`, tracked in `docs/research_bible/08_figures_plan.md`).
 **Last updated:** 2026-07-15 (RQ1 reporting freeze) — the canonical diagrams now include the RQ1-v1.0 BH-FDR/95% CI/effect-size boundary and mark the RQ1–RQ3 evidence chain complete. `data_lineage.svg` names the new event-type statistics artefact alongside the causal estimates. Remaining work is final submission QA. Version bumped to v3.0.

@@ -4,8 +4,8 @@
 > **Author:** Ibrahim Haroun  
 > **Institution:** Liverpool John Moores University  
 > **Year:** 2025–2026  
-> **Version:** 2.1 — Pipeline Rebuilt, GDELT Integrated as Continuous Confounder (2026-07-13)  
-> **Last updated:** 2026-07-13
+> **Version:** 2.2 — Full Eight-Notebook Traceability Audit, Pooled Causal Estimate Persisted (2026-07-15)  
+> **Last updated:** 2026-07-15
 
 ---
 
@@ -242,7 +242,8 @@ Event study (AR/CAR, window −5 to +10 trading days) + DoWhy backdoor linear re
 - `car_results.parquet` — 264 current event-study CAR records
 - `event_type_statistics.parquet` — five event-type mean-CAR rows with 95% CI, raw p, BH q and Cohen's d
 - `rq1_reporting_validation.json` — hash-bound RQ1 statistical-reporting validation (`PASS`)
-- `causal_estimates.parquet` — pooled and category backdoor estimates under the combined APP + FOMC treatment
+- `causal_estimates.parquet` — five per-event-type backdoor estimates under the combined APP + FOMC treatment
+- `causal_overall_estimate.json` — the pooled/overall DoWhy backdoor estimate (added 2026-07-15), persisted as a dedicated artefact rather than a hand-copied literal; `08_results_visualisation.ipynb` reads this file directly
 
 **Figures** (`reports/figures/`):
 - `04a_car_by_event_type.png` — CAR distribution and mean by event type

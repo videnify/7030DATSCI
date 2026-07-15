@@ -170,4 +170,38 @@ Future improvements, ideas, and technical debt belong exclusively in `future_imp
 
 ---
 
+## Section 10 — Documentation Impact and Date Maintenance
+
+**Added 2026-07-15**, following the full eight-notebook traceability audit that found — and closed — a case where a change (the 2026-07-13 GDELT full-history backfill) was made correctly in code but left a stale claim uncorrected in `09_results_log.md` for two days. This section makes the underlying discipline a permanent rule rather than a one-off fix.
+
+1. **A technical change is not complete until related documentation has been checked.** "Related" means: any research_bible document that cites the changed notebook's numbers, row counts, or claims; the stakeholder report page for that stage, if one exists; the dissertation, if the change affects a reported number; and any validation/traceability record that binds to the changed artefact's hash.
+
+2. **Historical dates must never be mass-replaced.** A file being edited today does not mean every date in it becomes today's date. Distinguish:
+   - **Created date** — when the file/artefact first existed.
+   - **Historical decision date** — when a specific past decision was made (append-only; never edited once written).
+   - **Last modified date** — when the file's content last changed, for any reason.
+   - **Last verified date** — when someone last checked the file's claims against current code/artefacts and confirmed they still hold.
+   - **Generated date** — when a machine-generated artefact (a validation JSON, a figure, a model file) was produced.
+   - **Status date** — when a status label (e.g. "✅ Verified," "🟡 Pending") was last assigned based on actual evidence.
+
+3. **"Last verified" may only be updated after comparison with current code and artefacts.** Opening a file, or updating an unrelated section of it, is not verification. A "Last verified" date must correspond to an actual check of that file's specific claims against the current notebook/artefact state.
+
+4. **Historical decisions must be amended with new dated entries, not rewritten.** `10_decision_log.md` and `09_results_log.md` are append-only. A superseded or incorrect past entry is struck through or annotated in place, with a new dated entry explaining the correction — never silently edited or deleted. (See the 2026-07-15 GDELT traceability correction and Mission 05A scope clarification in `09_results_log.md` for the pattern to follow.)
+
+5. **Every completion report for a technical change must list:**
+   - technical files changed;
+   - data or artefacts changed (or explicitly: none);
+   - documentation changed;
+   - dates updated and why (tied to rule 2's categories);
+   - historical dates preserved (named explicitly, not just "none touched");
+   - related documents checked but found to need no change;
+   - known stale documents remaining, if any;
+   - RQ1–RQ3 impact (explicitly: none, or named and explained).
+
+6. **If related documentation remains stale after a technical change, the task must be reported as "Technically complete, documentation incomplete"** — not as fully complete. A correct code change with a stale doc trail is exactly the failure mode this section exists to prevent.
+
+7. **Every changed notebook must trigger a check of:** the stakeholder report, the research bible (results log, decision log, contracts, dictionaries), validation reports, README/status files, traceability records, and dissertation impact — even when the answer for most of them is "checked, no change needed."
+
+---
+
 *This document is the first document any future contributor, examiner, or collaborator should read. `00_project_overview.md` remains the narrative "what is this project" companion; this document is the binding governance record.*
