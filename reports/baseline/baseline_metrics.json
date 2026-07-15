@@ -1,7 +1,28 @@
 {
-  "model_version": "Baseline_LASSO v1.0 (MCP v1.0)",
+  "model_version": "Baseline_LASSO v1.1 (MCP v1.0)",
+  "feature_matrix_version": "FES v1.1",
+  "feature_matrix_sha256": "127a6dbe4b83e59c873dfdf7502060aab115037732bbb723f9d489c6b85dc383",
+  "creation_date": "2026-07-14",
   "random_seed": 42,
   "alpha_selected": 0.0018533887501907256,
+  "cv": {
+    "method": "TimeSeriesSplit",
+    "n_splits": 5,
+    "fold_rmse": [
+      0.007521585189357928,
+      0.009257781929119125,
+      0.019805598722689596,
+      0.008553986023668102,
+      0.014777474145188119
+    ],
+    "fold_dir_acc": [
+      0.5853658536585366,
+      0.5435540069686411,
+      0.5958188153310104,
+      0.5470383275261324,
+      0.4564459930313589
+    ]
+  },
   "n_features": 27,
   "features": [
     "log_return",
@@ -39,13 +60,120 @@
       "RMSE": 0.011995288892314613,
       "MAE": 0.007536431418438753,
       "R2": 0.0,
-      "Dir_Acc": 0.5477707006369427
+      "Dir_Acc": 0.5477707006369427,
+      "IC": null
     },
     "test": {
       "RMSE": 0.009631061816812675,
       "MAE": 0.006547931743181517,
       "R2": -0.0015064059786111805,
-      "Dir_Acc": 0.5746666666666667
+      "Dir_Acc": 0.5746666666666667,
+      "IC": null,
+      "confusion_matrix": {
+        "TP": 431,
+        "TN": 0,
+        "FP": 319,
+        "FN": 0
+      },
+      "precision": 0.5746666666666667,
+      "recall": 1.0,
+      "f1": 0.7298899237933955,
+      "accuracy": 0.5746666666666667,
+      "roc_auc": 0.5
+    },
+    "residual_diagnostics_test": {
+      "residual_mean": 0.0003735238350420448,
+      "residual_std": 0.00963023815800501,
+      "skewness": 0.6026896176099742,
+      "excess_kurtosis": 18.061011784579428,
+      "durbin_watson": 2.1119526156743804,
+      "jarque_bera_stat": 10239.158930731763,
+      "jarque_bera_p": 0.0,
+      "het_corr": null
+    },
+    "prediction_intervals": {
+      "pi_90": {
+        "lower_offset": -0.018611563092504276,
+        "upper_offset": 0.015520198434649865
+      },
+      "pi_95": {
+        "lower_offset": -0.026247453221149426,
+        "upper_offset": 0.021357262745977542
+      },
+      "method": "Empirical residual-quantile (constant-width band), train-split residuals only"
+    },
+    "rmse_bootstrap_ci_test": {
+      "rmse_95ci_lower": 0.007637144981427517,
+      "rmse_95ci_upper": 0.012423277064660048,
+      "block_length": 21,
+      "n_boot": 2000
+    },
+    "dir_acc_binomial_ci_test": {
+      "dir_acc_95ci_lower": 0.5389917582941637,
+      "dir_acc_95ci_upper": 0.6095805955999989,
+      "method": "Wilson score interval"
     }
-  }
+  },
+  "comparison_baselines": {
+    "random_guess": {
+      "description": "Seeded random direction; magnitude fixed at mean absolute test return",
+      "RMSE": 0.011443404108211912,
+      "MAE": 0.008621279964845392,
+      "R2": -0.413890772772765,
+      "Dir_Acc": 0.5186666666666667,
+      "IC": 0.056519402772177235,
+      "confusion_matrix": {
+        "TP": 226,
+        "TN": 163,
+        "FP": 156,
+        "FN": 205
+      },
+      "precision": 0.5916230366492147,
+      "recall": 0.5243619489559165,
+      "f1": 0.5559655596555966,
+      "accuracy": 0.5186666666666667,
+      "roc_auc": 0.5176668678948861
+    },
+    "persistence": {
+      "description": "Tomorrow equals today: test return_lag1d",
+      "RMSE": 0.013308403842968504,
+      "MAE": 0.009508753240864618,
+      "R2": -0.9123057586817807,
+      "Dir_Acc": 0.5173333333333333,
+      "IC": -0.011820124124665108,
+      "confusion_matrix": {
+        "TP": 250,
+        "TN": 138,
+        "FP": 181,
+        "FN": 181
+      },
+      "precision": 0.580046403712297,
+      "recall": 0.580046403712297,
+      "f1": 0.580046403712297,
+      "accuracy": 0.5173333333333333,
+      "roc_auc": 0.5219617569405552
+    },
+    "mean_predictor": {
+      "description": "Constant training-target mean",
+      "RMSE": 0.009631061816812675,
+      "MAE": 0.006547931743181517,
+      "R2": -0.0015064059786111805,
+      "Dir_Acc": 0.5746666666666667,
+      "IC": null,
+      "confusion_matrix": {
+        "TP": 431,
+        "TN": 0,
+        "FP": 319,
+        "FN": 0
+      },
+      "precision": 0.5746666666666667,
+      "recall": 1.0,
+      "f1": 0.7298899237933955,
+      "accuracy": 0.5746666666666667,
+      "roc_auc": 0.5
+    }
+  },
+  "python_version": "3.14.6 (v3.14.6:c63aec69bd5, Jun 10 2026, 08:07:54) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "sklearn_version": "1.9.0",
+  "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O"
 }

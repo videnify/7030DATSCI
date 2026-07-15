@@ -43,8 +43,8 @@ data/external/*
 !data/external/README.md
 !data/external/.gitkeep
 
-docs/research_bible/*
-!docs/research_bible/.gitkeep
+# Research Bible governance, contracts, decisions, and traceability are source
+# documentation and must remain version-controlled with the pipeline.
 
 # Belt-and-braces: never allow these extensions anywhere in the repo
 *.csv
@@ -99,6 +99,7 @@ desktop.ini
 *.sublime-workspace
 
 # --- Reports (generated/duplicate exports — the dissertation itself is tracked separately) ---
+reports/**/archive/
 reports/figures/*.pdf
 reports/figures/*.html
 reports/figures/*.svg

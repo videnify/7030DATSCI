@@ -10,7 +10,7 @@
 | `test_event_study.py` | `EventStudy` class in `src/causal_engine.py` |
 | `test_features.py` | `FeatureEngineer` class in `src/features.py` |
 
-**Note (2026-07-06):** these tests cover the `src/` module-level implementations, which predate the frozen FES v1.0/MCP v1.0 contracts (see `src/README.md`). They verify the reusable helper logic, not the current notebook-level feature/model construction in `05_feature_engineering.ipynb`–`07_model_evaluation.ipynb`, which is validated instead by each notebook's own in-notebook reproduction-check cells (see `docs/research_bible/10_decision_log.md`, Mission 05-07 Reproducibility Rebuild).
+**Note (updated 2026-07-14):** these tests cover the reusable `src/` implementations, which predate the current FES v1.1/MCP v1.0 notebook contracts (see `src/README.md`). They do not validate the current notebook-level feature/model/figure construction in `05_feature_engineering.ipynb`–`08_results_visualisation.ipynb`; that boundary is instead checked by the notebooks' blocking validation cells and the three downstream validation JSON files under `reports/`.
 
 ## Running
 

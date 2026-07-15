@@ -10,19 +10,22 @@
   <line x1="30" y1="66" x2="1000" y2="66" stroke="#DCDCDC" stroke-width="0.8"/>
   <text x="513.5" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#1E1E1E">Raw Data (data/raw/)</text>
   <rect x="30" y="90" width="163.0" height="56" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
-  <text x="111.5" y="123.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1E1E1E">prices.parquet</text>
+  <text x="111.5" y="115.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1E1E1E">spy_ohlcv.parquet</text>
+  <text x="111.5" y="132.0" text-anchor="middle" font-size="9.5" fill="#4F4F4F">+ vix.parquet</text>
   <rect x="209.0" y="90" width="163.0" height="56" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="290.5" y="123.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1E1E1E">macro_indicators.parquet</text>
   <rect x="388.0" y="90" width="163.0" height="56" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="469.5" y="123.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1E1E1E">fomc_dates.parquet</text>
   <rect x="567.0" y="90" width="225.0" height="56" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
-  <text x="679.5" y="123.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1E1E1E">app_presidential_documents.parquet</text>
+  <text x="679.5" y="115.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1E1E1E">app_presidential_documents_</text>
+  <text x="679.5" y="132.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1E1E1E">economic.parquet</text>
   <rect x="812.0" y="90" width="185.0" height="56" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="904.5" y="123.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1E1E1E">gdelt_daily_summary.parquet</text>
   <rect x="90.0" y="216" width="260" height="56" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="220.0" y="249.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E1E1E">events_tagged.parquet</text>
   <rect x="410.0" y="216" width="260" height="56" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
-  <text x="540.0" y="249.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E1E1E">daily_sentiment.parquet</text>
+  <text x="540.0" y="239.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E1E1E">daily_sentiment.parquet</text>
+  <text x="540.0" y="258.0" text-anchor="middle" font-size="10.5" fill="#4F4F4F">sentiment + explicit occurrence counts</text>
   <rect x="760.0" y="216" width="210" height="56" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="865.0" y="249.0" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E1E1E">gdelt_daily_risk.parquet</text>
   <line x1="904.5" y1="146" x2="904.5" y2="180" stroke="#5B8FC7" stroke-width="1.3"/>
@@ -43,7 +46,7 @@
   <line x1="380.0" y1="294" x2="380.0" y2="326" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="170.0" y="328" width="420" height="54" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="380.0" y="349.0" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1E1E1E">master_dataset.parquet</text>
-  <text x="380.0" y="369.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Frozen v1.0 — dataset_contract.md</text>
+  <text x="380.0" y="369.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Frozen Dataset v1.2 — 34 columns · validation PASS</text>
   <line x1="380.0" y1="382" x2="380.0" y2="428" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="170.0" y="428" width="420" height="50" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="380.0" y="447.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1E1E1E">car_results.parquet</text>
@@ -51,22 +54,22 @@
   <line x1="380.0" y1="478" x2="380.0" y2="524" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="170.0" y="524" width="420" height="54" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="380.0" y="545.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1E1E1E">feature_matrix.parquet</text>
-  <text x="380.0" y="565.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Frozen v1.0 — FES v1.0 / feature_contract.md</text>
+  <text x="380.0" y="565.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Frozen FES v1.1 — 92 features · validation PASS</text>
   <line x1="380.0" y1="578" x2="380.0" y2="624" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="170.0" y="624" width="420" height="54" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="380.0" y="645.0" text-anchor="middle" font-size="13" font-weight="700" fill="#1E1E1E">Models + Reports</text>
-  <text x="380.0" y="665.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Baseline &amp; event models · reports/model_comparison/</text>
+  <text x="380.0" y="665.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Baseline + event/RQ2 outputs + figures · v1.1 PASS</text>
 
   <!-- Branch: causal analysis output (Section 3.4), not consumed by feature engineering -->
   <line x1="590.0" y1="453" x2="740.0" y2="453" stroke="#A9C6E3" stroke-width="1.3" marker-end="url(#arrow)"/>
   <rect x="740.0" y="428" width="210" height="50" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
-  <text x="845.0" y="447.0" text-anchor="middle" font-size="12" font-weight="700" fill="#1E1E1E">causal_estimates.parquet</text>
-  <text x="845.0" y="465.0" text-anchor="middle" font-size="10" fill="#4F4F4F">Per-event-type DoWhy effects (3.4)</text>
+  <text x="845.0" y="447.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1E1E1E">event_type_statistics.parquet</text>
+  <text x="845.0" y="465.0" text-anchor="middle" font-size="10" fill="#4F4F4F">+ causal_estimates.parquet</text>
   <line x1="845.0" y1="478" x2="845.0" y2="524" stroke="#A9C6E3" stroke-width="1.3" marker-end="url(#arrow)"/>
   <rect x="740.0" y="524" width="210" height="54" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="845.0" y="545.0" text-anchor="middle" font-size="12" font-weight="700" fill="#1E1E1E">Chapter 4 — RQ1 Evidence</text>
-  <text x="845.0" y="563.0" text-anchor="middle" font-size="10" fill="#4F4F4F">Abnormal-returns findings</text>
+  <text x="845.0" y="563.0" text-anchor="middle" font-size="10" fill="#4F4F4F">BH-FDR/effect sizes + DoWhy</text>
   <text x="845.0" y="600" text-anchor="middle" font-size="9" fill="#969696" font-style="italic">Not consumed by feature engineering (3.5)</text>
 
-  <text x="515.0" y="704" text-anchor="middle" font-size="9.5" fill="#969696" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — Data Lineage — Architecture v2.3 (2026-07-13, added gdelt_daily_summary.parquet / gdelt_daily_risk.parquet path into master_dataset.parquet)</text>
+  <text x="515.0" y="704" text-anchor="middle" font-size="9.5" fill="#969696" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — Data Lineage — Architecture v3.0 (2026-07-15, RQ1 reporting PASS)</text>
 </svg>

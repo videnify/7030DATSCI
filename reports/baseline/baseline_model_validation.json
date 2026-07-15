@@ -1,0 +1,30 @@
+{
+  "validation_status": "PASS",
+  "model_version": "Baseline_LASSO v1.1",
+  "model_contract_version": "MCP v1.0",
+  "feature_matrix_version": "FES v1.1",
+  "feature_matrix_sha256": "127a6dbe4b83e59c873dfdf7502060aab115037732bbb723f9d489c6b85dc383",
+  "feature_matrix_validation_status": "PASS",
+  "market_only_feature_count": 27,
+  "market_only_contract_passed": true,
+  "finite_scaled_inputs": true,
+  "train_rows": 1727,
+  "test_rows": 750,
+  "historical_comparison": {
+    "previous_model_version": "Baseline_LASSO v1.0",
+    "row_index_unchanged": true,
+    "market_values_unchanged": true,
+    "target_unchanged": true,
+    "alpha_match": true,
+    "intercept_match": true,
+    "all_zero_match": true,
+    "metric_mismatches_gt_1e_6": {},
+    "reproduction_exact": true
+  },
+  "artifact_sha256": {
+    "model": "a6a87c1cf8fb2db2f9bfbf92855a929768558d73708702c9d628520f51bffcea",
+    "metadata": "4f92a59e0488c809eb5e41ef6b7aa22331c442d1128be9344727716074c3d8fe",
+    "predictions": "ff15d6f9cd2e042b4c5a219f466cecb2e18ec92bc8a058d842c5f7f8287a4135",
+    "metrics": "db3dca7f0708f3e561856b4fbca84a699c5cc96456b0184c4df720824a7fb8de"
+  }
+}

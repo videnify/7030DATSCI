@@ -76,6 +76,6 @@
   <text x="585" y="521" text-anchor="middle" font-size="9.5" fill="#4F4F4F">positive = boosted · negative = depressed</text>
 
   <!-- Footer -->
-  <text x="400" y="546" text-anchor="middle" font-size="9.5" fill="#969696">DATSCI7030 — CAR Formula Reference — Architecture v2.3 (2026-07-13, lighter palette)</text>
+  <text x="400" y="546" text-anchor="middle" font-size="9.5" fill="#969696">DATSCI7030 — CAR Formula Reference — Architecture v3.0 (2026-07-15, RQ1-v1.0)</text>
   <text x="400" y="558" text-anchor="middle" font-size="8" fill="#B8B8B8">Corrected to match frozen Section 3.3 notation exactly: AR_τ = R_τ − μ̂; constant-mean-return design; 252–21 day estimation window; simple returns</text>
 </svg>

@@ -10,7 +10,7 @@
   <line x1="30" y1="66" x2="590" y2="66" stroke="#DCDCDC" stroke-width="0.8"/>
   <rect x="80.0" y="84" width="460" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="310.0" y="104.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">01 — Data Collection</text>
-  <text x="310.0" y="124.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">yfinance · APP · FOMC · FRED</text>
+  <text x="310.0" y="124.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">yfinance · APP · FOMC · FRED · GDELT</text>
   <rect x="80.0" y="166" width="460" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="310.0" y="186.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">02 — Exploratory Data Analysis</text>
   <text x="310.0" y="206.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Descriptive stats · stationarity (SAP v1.0)</text>
@@ -25,23 +25,23 @@
   <line x1="310.0" y1="300" x2="310.0" y2="330" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="80.0" y="412" width="460" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="310.0" y="432.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">05 — Feature Engineering</text>
-  <text x="310.0" y="452.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">feature_matrix.parquet (FES v1.0)</text>
+  <text x="310.0" y="452.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">feature_matrix.parquet (FES v1.1 · PASS)</text>
   <line x1="310.0" y1="382" x2="310.0" y2="412" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="80.0" y="494" width="460" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="310.0" y="514.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">06 — Baseline</text>
-  <text x="310.0" y="534.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Baseline_LASSO — market-only (MCP v1.0)</text>
+  <text x="310.0" y="534.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Baseline_LASSO v1.1 — complete · PASS</text>
   <line x1="310.0" y1="464" x2="310.0" y2="494" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="80.0" y="576" width="460" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="310.0" y="596.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">07 — Model Evaluation</text>
-  <text x="310.0" y="616.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Event-enhanced models vs. baseline</text>
+  <text x="310.0" y="616.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Event models vs. baseline — FES v1.1 complete</text>
   <line x1="310.0" y1="546" x2="310.0" y2="576" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="80.0" y="658" width="460" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="310.0" y="678.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">08 — Results Visualisation</text>
-  <text x="310.0" y="698.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Integrated dissertation figures</text>
+  <text x="310.0" y="698.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Visualisation v1.1 · figures 08a–08d · PASS</text>
   <line x1="310.0" y1="628" x2="310.0" y2="658" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
   <rect x="80.0" y="740" width="460" height="52" rx="9" fill="#F3F7FC" stroke="#5B8FC7" stroke-width="1.1"/>
   <text x="310.0" y="760.0" text-anchor="middle" font-size="14" font-weight="700" fill="#1E1E1E">Dissertation</text>
-  <text x="310.0" y="780.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Chapters 1–6</text>
+  <text x="310.0" y="780.0" text-anchor="middle" font-size="11.5" fill="#4F4F4F">Chapters 1–6 synchronized · final QA</text>
   <line x1="310.0" y1="710" x2="310.0" y2="740" stroke="#5B8FC7" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <text x="310.0" y="818" text-anchor="middle" font-size="9.5" fill="#969696" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — Causal Event-Driven Market Impact Modelling — Architecture v2.3 (2026-07-13, lighter palette)</text>
+  <text x="310.0" y="818" text-anchor="middle" font-size="9.5" fill="#969696" font-family="Arial, Helvetica, sans-serif">DATSCI7030 — Notebook Pipeline — Architecture v3.0 (2026-07-15, RQ1–RQ3 complete)</text>
 </svg>

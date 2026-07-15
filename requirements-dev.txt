@@ -1,0 +1,9 @@
+-r requirements.txt
+
+pytest
+newsapi-python
+
+# Optional legacy src/evaluation.py explainability path. The canonical Notebook 07
+# uses native XGBoost/LightGBM contribution APIs and does not require SHAP. SHAP's
+# numba dependency currently supports Python <3.14 only.
+shap; python_version < "3.14"

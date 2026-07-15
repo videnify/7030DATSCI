@@ -1,11 +1,11 @@
 # reports/figures/
 
 **Purpose:** All charts and plots (300 dpi PNGs), one set per notebook. Gitignored — regenerate by re-running the corresponding numbered notebook, never hand-edited.
-**Added:** 2026-07-13 (this folder previously had no README).
+**Added:** 2026-07-13 (this folder previously had no README). **Updated 2026-07-14** after the validated FES v1.1 Notebook 08 rerun.
 
 ## Contents
 
-26 figures on disk (2026-07-13), prefixed `01`–`08` matching the notebook that produces them (e.g. `02b_return_distribution.png` from `02_eda.ipynb`). Includes each notebook's "learning outcome" visualisation added this session (`05_learning_outcome.png`, `06_learning_outcome.png`, `07_learning_outcome.png`) alongside the analytical figures. `docs/research_bible/08_figures_plan.md` is the authoritative plan for what each figure supports (RQ mapping) and any caveats (e.g. GDELT-related figures).
+Figures are prefixed `01`–`08` to match the notebook that produces them (for example, `02b_return_distribution.png` from `02_eda.ipynb`). The dissertation synthesis figures `08a`–`08d` are current visualisation v1.2 outputs. Their dimensions, SHA-256 hashes and upstream bindings are recorded in `results_visualisation_validation.json`, which reports `PASS`. Figure 08b now reports the completed RQ1 family result (0/5 BH-FDR rejections, minimum q=0.581, maximum |d|=0.239) and describes the separate DoWhy treatment as the combined APP + FOMC signal; the old “lexicon treatment” wording is historical. `docs/research_bible/08_figures_plan.md` remains the authoritative RQ mapping and caveat register.
 
 ## Dependencies
 

@@ -1,15 +1,27 @@
 {
+  "model_suite_version": "1.1",
+  "feature_matrix_version": "FES v1.1",
+  "feature_matrix_sha256": "127a6dbe4b83e59c873dfdf7502060aab115037732bbb723f9d489c6b85dc383",
+  "baseline_model_version": "Baseline_LASSO v1.1",
   "alpha_bonferroni": 0.016666666666666666,
   "family_size": 3,
   "correction": "Bonferroni (statistical_decision_matrix.md Part K)",
+  "rq3_verdict": "H0(3) NOT REJECTED",
   "results_by_model": {
     "Event_LASSO": {
+      "train": {
+        "RMSE": 0.011995288892314613,
+        "MAE": 0.007536431418438753,
+        "R2": 0.0,
+        "Dir_Acc": 0.5477707006369427,
+        "IC": null
+      },
       "test": {
         "RMSE": 0.009631061816812675,
         "MAE": 0.006547931743181517,
         "R2": -0.0015064059786111805,
         "Dir_Acc": 0.5746666666666667,
-        "IC": NaN,
+        "IC": null,
         "confusion_matrix": {
           "TP": 431,
           "TN": 0,
@@ -22,10 +34,42 @@
         "accuracy": 0.5746666666666667,
         "roc_auc": 0.5
       },
+      "residual_diagnostics_test": {
+        "residual_mean": 0.0003735238350420448,
+        "residual_std": 0.00963023815800501,
+        "skewness": 0.6026896176099742,
+        "excess_kurtosis": 18.061011784579428,
+        "durbin_watson": 2.1119526156743804,
+        "jarque_bera_stat": 10239.158930731763,
+        "jarque_bera_p": 0.0,
+        "het_corr": null
+      },
+      "prediction_intervals": {
+        "pi_90": {
+          "lower_offset": -0.018611563092504276,
+          "upper_offset": 0.015520198434649865
+        },
+        "pi_95": {
+          "lower_offset": -0.026247453221149426,
+          "upper_offset": 0.021357262745977542
+        },
+        "method": "Empirical residual-quantile, train split only"
+      },
+      "rmse_bootstrap_ci_test": {
+        "rmse_95ci_lower": 0.007637144981427517,
+        "rmse_95ci_upper": 0.012423277064660048,
+        "block_length": 21,
+        "n_boot": 2000
+      },
+      "dir_acc_binomial_ci_test": {
+        "dir_acc_95ci_lower": 0.5389917582941637,
+        "dir_acc_95ci_upper": 0.6095805955999989,
+        "method": "Wilson score interval"
+      },
       "comparison_vs_baseline": {
         "diebold_mariano": {
-          "dm_stat": NaN,
-          "p_value_one_sided": NaN,
+          "dm_stat": null,
+          "p_value_one_sided": null,
           "mean_loss_diff": 0.0,
           "loss_diff_series_std": 0.0
         },
@@ -38,7 +82,7 @@
         },
         "pct_rmse_improvement_over_baseline": 0.0,
         "bonferroni_verdict": {
-          "dm_p": NaN,
+          "dm_p": null,
           "z_p": 0.5,
           "alpha_corrected": 0.016666666666666666,
           "rmse_leg_significant": false,
@@ -48,42 +92,81 @@
       }
     },
     "XGBoost": {
+      "train": {
+        "RMSE": 0.010577103385616989,
+        "MAE": 0.006794695267709947,
+        "R2": 0.22247909439965918,
+        "Dir_Acc": 0.6554719166184134,
+        "IC": 0.4992350842448194
+      },
       "test": {
-        "RMSE": 0.009652522892459863,
-        "MAE": 0.006652863098380804,
-        "R2": -0.005974729872182394,
-        "Dir_Acc": 0.5373333333333333,
-        "IC": 0.01970316106173207,
+        "RMSE": 0.00965606312396423,
+        "MAE": 0.006631869201756855,
+        "R2": -0.006712782829070507,
+        "Dir_Acc": 0.48933333333333334,
+        "IC": 0.024945595102119546,
         "confusion_matrix": {
-          "TP": 247,
-          "TN": 157,
-          "FP": 162,
-          "FN": 184
+          "TP": 189,
+          "TN": 179,
+          "FP": 140,
+          "FN": 242
         },
-        "precision": 0.6039119804400978,
-        "recall": 0.5730858468677494,
-        "f1": 0.5880952380952381,
-        "accuracy": 0.5386666666666666,
-        "roc_auc": 0.507007833353941
+        "precision": 0.574468085106383,
+        "recall": 0.4385150812064965,
+        "f1": 0.49736842105263157,
+        "accuracy": 0.49066666666666664,
+        "roc_auc": 0.5138629272159955
+      },
+      "residual_diagnostics_test": {
+        "residual_mean": 0.001049684245343476,
+        "residual_std": 0.009605245043665363,
+        "skewness": 0.39910412817049384,
+        "excess_kurtosis": 16.279929797127533,
+        "durbin_watson": 1.9888632087078495,
+        "jarque_bera_stat": 8302.28908187162,
+        "jarque_bera_p": 0.0,
+        "het_corr": 0.021260209348297844
+      },
+      "prediction_intervals": {
+        "pi_90": {
+          "lower_offset": -0.01744444158766315,
+          "upper_offset": 0.013607419970241032
+        },
+        "pi_95": {
+          "lower_offset": -0.02256235610943994,
+          "upper_offset": 0.01815784182402665
+        },
+        "method": "Empirical residual-quantile, train split only"
+      },
+      "rmse_bootstrap_ci_test": {
+        "rmse_95ci_lower": 0.007732350671418827,
+        "rmse_95ci_upper": 0.012389645155199245,
+        "block_length": 21,
+        "n_boot": 2000
+      },
+      "dir_acc_binomial_ci_test": {
+        "dir_acc_95ci_lower": 0.45370317870737514,
+        "dir_acc_95ci_upper": 0.5250721993077445,
+        "method": "Wilson score interval"
       },
       "comparison_vs_baseline": {
         "diebold_mariano": {
-          "dm_stat": -0.255639680334111,
-          "p_value_one_sided": 0.6008854621362945,
-          "mean_loss_diff": -4.138464701946952e-07,
-          "loss_diff_series_std": 4.436406613817803e-05
+          "dm_stat": -0.27844894921444213,
+          "p_value_one_sided": 0.6096661257339718,
+          "mean_loss_diff": -4.822033347147969e-07,
+          "loss_diff_series_std": 4.74575135778455e-05
         },
         "two_proportion_z_test": {
-          "z_stat": -1.4550687745972257,
-          "p_value_one_sided": 0.9271748886656802,
-          "p1": 0.5373333333333333,
+          "z_stat": -3.3117351818885417,
+          "p_value_one_sided": 0.9995364036534133,
+          "p1": 0.48933333333333334,
           "p2": 0.5746666666666667,
-          "diff_pp": -3.733333333333333
+          "diff_pp": -8.533333333333331
         },
-        "pct_rmse_improvement_over_baseline": -0.2228318751907974,
+        "pct_rmse_improvement_over_baseline": -0.259590350753559,
         "bonferroni_verdict": {
-          "dm_p": 0.6008854621362945,
-          "z_p": 0.9271748886656802,
+          "dm_p": 0.6096661257339718,
+          "z_p": 0.9995364036534133,
           "alpha_corrected": 0.016666666666666666,
           "rmse_leg_significant": false,
           "dir_acc_leg_significant": false,
@@ -92,42 +175,81 @@
       }
     },
     "LightGBM": {
+      "train": {
+        "RMSE": 0.011036535681906162,
+        "MAE": 0.0071742186961234805,
+        "R2": 0.15346655753796845,
+        "Dir_Acc": 0.5946728430804864,
+        "IC": 0.3090460781352018
+      },
       "test": {
-        "RMSE": 0.009704315175904322,
-        "MAE": 0.006780232097702833,
-        "R2": -0.016799155642190255,
-        "Dir_Acc": 0.43333333333333335,
-        "IC": -0.03425863302731015,
+        "RMSE": 0.009699663070002773,
+        "MAE": 0.006769780479736723,
+        "R2": -0.015824512205936392,
+        "Dir_Acc": 0.44266666666666665,
+        "IC": -0.05058046657622094,
         "confusion_matrix": {
-          "TP": 43,
-          "TN": 283,
-          "FP": 36,
-          "FN": 388
+          "TP": 55,
+          "TN": 278,
+          "FP": 41,
+          "FN": 376
         },
-        "precision": 0.5443037974683544,
-        "recall": 0.09976798143851508,
-        "f1": 0.16862745098039214,
-        "accuracy": 0.43466666666666665,
-        "roc_auc": 0.48947552167809794
+        "precision": 0.5729166666666666,
+        "recall": 0.12761020881670534,
+        "f1": 0.20872865275142316,
+        "accuracy": 0.444,
+        "roc_auc": 0.4809148368233095
+      },
+      "residual_diagnostics_test": {
+        "residual_mean": 0.0014219500559567205,
+        "residual_std": 0.009601272534877463,
+        "skewness": 0.532971397991849,
+        "excess_kurtosis": 14.05093426680429,
+        "durbin_watson": 2.0323805173399347,
+        "jarque_bera_stat": 6205.155869198892,
+        "jarque_bera_p": 0.0,
+        "het_corr": -0.13093161827561772
+      },
+      "prediction_intervals": {
+        "pi_90": {
+          "lower_offset": -0.01809433104139995,
+          "upper_offset": 0.015243204064813224
+        },
+        "pi_95": {
+          "lower_offset": -0.024705031023038455,
+          "upper_offset": 0.018813887212148085
+        },
+        "method": "Empirical residual-quantile, train split only"
+      },
+      "rmse_bootstrap_ci_test": {
+        "rmse_95ci_lower": 0.0077837272634332785,
+        "rmse_95ci_upper": 0.012364851665742027,
+        "block_length": 21,
+        "n_boot": 2000
+      },
+      "dir_acc_binomial_ci_test": {
+        "dir_acc_95ci_lower": 0.4075004603450381,
+        "dir_acc_95ci_upper": 0.47841719648622977,
+        "method": "Wilson score interval"
       },
       "comparison_vs_baseline": {
         "diebold_mariano": {
-          "dm_stat": -0.4751579735493467,
-          "p_value_one_sided": 0.6826628102352372,
-          "mean_loss_diff": -1.4163813140198816e-06,
-          "loss_diff_series_std": 8.168880099115193e-05
+          "dm_stat": -0.44668505267697506,
+          "p_value_one_sided": 0.672448762169031,
+          "mean_loss_diff": -1.3261119523085682e-06,
+          "loss_diff_series_std": 8.135778644114903e-05
         },
         "two_proportion_z_test": {
-          "z_stat": -5.47399163317485,
-          "p_value_one_sided": 0.9999999779995076,
-          "p1": 0.43333333333333335,
+          "z_stat": -5.113106176867814,
+          "p_value_one_sided": 0.9999998415479743,
+          "p1": 0.44266666666666665,
           "p2": 0.5746666666666667,
-          "diff_pp": -14.133333333333331
+          "diff_pp": -13.200000000000001
         },
-        "pct_rmse_improvement_over_baseline": -0.7605948387100087,
+        "pct_rmse_improvement_over_baseline": -0.7122916921823047,
         "bonferroni_verdict": {
-          "dm_p": 0.6826628102352372,
-          "z_p": 0.9999999779995076,
+          "dm_p": 0.672448762169031,
+          "z_p": 0.9999998415479743,
           "alpha_corrected": 0.016666666666666666,
           "rmse_leg_significant": false,
           "dir_acc_leg_significant": false,
