@@ -1,0 +1,157 @@
+{
+  "manifest_version": "1.0",
+  "freeze_date": "2026-07-16",
+  "git": {
+    "branch": "main",
+    "commit": "ddc86cdca7bb349bce50c773ad17c304336103be",
+    "status_at_freeze": "clean (no tracked-file modifications; only untracked/gitignored additions)"
+  },
+  "dissertation": {
+    "reports/dissertation/2026-07-16-7030DATSCI.docx": "a46c411da588a77a8293e4bacb2d16dc988c6d7ec8882e22eaf35a7e3b630747",
+    "reports/dissertation/2026-07-16-7030DATSCI.pdf": "4a8ce3cfc9eb49c400bc2ea8d08bb856d28bd36f33abd2c63214a86d231df1bf",
+    "reports/dissertation/2026-07-16-7030DATSCI_Generative_AI_Statement.docx": "c5ca44f8a2762ef0ce28c955f7e8cf5625589ad7219abcd4b4148d6c4fe7fbdf"
+  },
+  "notebooks": {
+    "notebooks/01_data_collection.ipynb": "6bb1ec28c88590b1750cd74a30f5077a0624a8d6e077672e7cd911790f1d8e73",
+    "notebooks/02_eda.ipynb": "d2ad46c76d109ac78f8f7b867b7771df1609f69fc300e63e90f54ed3b583ffbb",
+    "notebooks/03_event_detection.ipynb": "49821fc8067e695ecc137a78cdbd7cb2e897f777fcc27c3a659f38a863636ae8",
+    "notebooks/04_causal_analysis.ipynb": "745312ec82278d86df37ed7b56bc5d924f71fc78a9368405debc1583c0799010",
+    "notebooks/05_feature_engineering.ipynb": "9fd2ab02ea8396ec9d4ad4b21bdea28607356efa15cfc5d6a2200c4110ff1b9b",
+    "notebooks/06_model_training.ipynb": "40cc01d3c188d790692c3ee693b9808202c363ab5d87a8ae82307f832f804a45",
+    "notebooks/07_model_evaluation.ipynb": "4326bf7bb4d138dc19460ffe7fb8f51b79f68c26f843781f7a0490fe0321ccd3",
+    "notebooks/08_results_visualisation.ipynb": "8c36ca59a31b5743edf301bb67d2982620079a95d3d9829ef95e1b01f969ce61"
+  },
+  "protected_processed_artefacts": {
+    "data/processed/master_dataset.parquet": "142145722faff37156c6606801ae82d56843118b486942b050629b0472647819",
+    "data/processed/feature_matrix.parquet": "127a6dbe4b83e59c873dfdf7502060aab115037732bbb723f9d489c6b85dc383",
+    "data/processed/feature_profile.json": "17bcd14a888aaaecb456873efa259d28178412878ceffce0ceb8b03498bf91ce",
+    "data/processed/car_results.parquet": "b9cbfa318404f38a84fe4c189984f7a707339fd861dbef73527c83551d5d1932",
+    "data/processed/causal_estimates.parquet": "1e828f191236a7558832b0a1466a6d326785247cf76f527778948289bc8ed137",
+    "data/processed/causal_overall_estimate.json": "9633bc1474cc95617414e941ca7478744d139b4de89cef8499074133a390361d"
+  },
+  "model_artefacts": {
+    "models/baseline/baseline_lasso.joblib": "a6a87c1cf8fb2db2f9bfbf92855a929768558d73708702c9d628520f51bffcea",
+    "models/baseline/baseline_model_metadata.json": "4f92a59e0488c809eb5e41ef6b7aa22331c442d1128be9344727716074c3d8fe",
+    "models/event/event_lasso.joblib": "750dbd5e4fedfcd9d95ba71cd3d32ab4404d631e9c0a1f164b7c1c085cade207",
+    "models/event/event_model_metadata.json": "11b55297bc87ed80ae83994f26fb340c259ed7deaabcd967c73e1b586e2e4e23",
+    "models/event/lightgbm.joblib": "7ced6ffa417e4250062d984d7eba8fcd712d3a7b6c811034c4ec5b2e3ad46d23",
+    "models/event/random_forest_importance_tool.joblib": "eac8a8ef3bf1611000d06d717dac9da659449e3e25100033fdd381586154d16b",
+    "models/event/xgboost.joblib": "f1e62268e10b33f8374f7a7536c836a82b2904fccfb41360f012cbd420159c7c"
+  },
+  "prediction_files": {
+    "reports/baseline/baseline_predictions.parquet": "ff15d6f9cd2e042b4c5a219f466cecb2e18ec92bc8a058d842c5f7f8287a4135",
+    "reports/model_comparison/event_model_predictions.parquet": "6e6130c79248e3cdc552d8b053b0cc380b503445d061ec97d3c4442e348541d1"
+  },
+  "shap_files": {
+    "reports/model_comparison/shap_importance_summary.parquet": "7e14e387988b1e2b1d1e47ec88879bf9054c0e92db13474df2616d6a0ef40e3c",
+    "reports/model_comparison/shap_values_event_lasso.parquet": "db01bb65112d91304997f251278aca89f2bdcf3f269266eb9af83ee8f1aaba01",
+    "reports/model_comparison/shap_values_lightgbm.parquet": "f50360ad01085f6e725858c2d12f43bc89156df10685a9af3ec534dd9bc0aca7",
+    "reports/model_comparison/shap_values_xgboost.parquet": "f945b39c7adb1ae13c879ed902e7b61db2c75ab8eee127b905af8679bacc4bda"
+  },
+  "model_comparison_and_stats": {
+    "reports/model_comparison/model_comparison.parquet": "a63e57209a5215432d5d623b4ea573d72826cb7ec8e46604150b958b92ab7cb6",
+    "reports/model_comparison/statistical_tests.json": "0bdb68cce38cd961d672a141b4f9dc63d62a806338e185721306633cf57b3afd"
+  },
+  "validation_json_files": {
+    "data/processed/feature_matrix_validation.json": "6305c7f72040b8d317123e4bf8efad22fe22220f69438cb53ce2e5e341698298",
+    "data/processed/master_dataset_validation.json": "a1a57a1d43d7d815e30bb265997ec1ad7033295f10c0b64222abc8081389a5d9",
+    "data/processed/rq1_reporting_validation.json": "6bc60b2c7ab823ceb99acb9e1e45ce2164946e4935cb486ee36899db789418b4",
+    "reports/baseline/baseline_model_validation.json": "e4ed99c2f7aa3b817adc6c6049ec411470f9d1f16081eefb99fdfb9545551f9f",
+    "reports/figures/results_visualisation_validation.json": "71dd88a827ef66eab54551287339fbb17812a63ca02823727a40d9d043dca8db",
+    "reports/model_comparison/model_evaluation_validation.json": "4312f305f86c7bfc3614e7ba74aaa725f4a58a89975557aacc2ffc4c11ac0ef2"
+  },
+  "dissertation_figures": {
+    "reports/figures/01_spy_rebased_price.png": "e800b299de1355f46100b2216eff973b623140f60547baf2246db530c7631455",
+    "reports/figures/02b_return_distribution.png": "c7e29adfa5ea94f073a20df68b52ff2267303941992db0b26edd153af6c3e89a",
+    "reports/figures/02c_vix_and_macro.png": "4d453b1199a75c40a6dfd654954d2ce182953a254a9499dbf7aef4f7c4a78d0b",
+    "reports/figures/02g_app_doc_distribution.png": "897a6516d5e1335d2b2a5d2eab0ec64d48b10dfa206417a531e8d9d9fccd239f",
+    "reports/figures/02i_docs_vs_returns.png": "49e7260e5f9a60cf7e50f440095337973fc349562d008ed7961a8d3b6825e38e",
+    "reports/figures/02j_fomc_distribution.png": "90713e7658e771df09a84add28a18db695c70a035a1c0bd27c7155a25b835822",
+    "reports/figures/02m_descriptive_distributions.png": "64e1ea3a7f0c90cb37ca6e1049452a41e49cf4e39f064efde792f2b1b8699858",
+    "reports/figures/02n_qq_plots.png": "172597f105ea861bcb0e8ea307e0ab488ac0c114432e47ea18651e4ada3feda6",
+    "reports/figures/02p_rolling_stationarity.png": "54e0e80beb506d1e94b94972fba08115046fbf400d514f9bfdeb24ecd42595b1",
+    "reports/figures/02q_acf_pacf.png": "2ca557a8378fcdc3bfd37472e56e25b612a1441481eed61b826a09f4893f6093",
+    "reports/figures/02r_correlation_heatmap.png": "6996ccf7959e87423e5381f9b7f7f69f4932dc6947e243795bb85ec9bdb7b9ec",
+    "reports/figures/03a_sentiment_distribution.png": "935d18a1599738acb67612f2995f269a4fb164944105ee86bcc246ed56b611aa",
+    "reports/figures/03b_sentiment_timeline.png": "8be603915c50ebc67255ad6ccf9bea1480669030e328f7ffea9ea8b1f298cae5",
+    "reports/figures/03c_high_impact_events.png": "d3c9f2d7b40bb6b7b5e40825c38ee6917a67d701c8a8578417834a8b7538317b",
+    "reports/figures/03d_sentiment_by_event_type.png": "686bebe5796ee25944a42cb2bdda226c93e41db3421ce7c89b93b44254d5fddf",
+    "reports/figures/04a_car_by_event_type.png": "1a17366d059b474e905db535515dfa75a5dd0bfc6a942b132429563e6f09d2cf",
+    "reports/figures/04b_car_sentiment_scatter.png": "ee988458c7b558c3afe356cd873b6fc41056eaa093b6b52b861d4a9070f48716",
+    "reports/figures/04c_causal_estimates.png": "090c7e7c058399e77d56b085b38b0f1067079923075f4970d50cb5ae9813ca9d",
+    "reports/figures/04d_car_regime_sentiment.png": "f79295b1e48e0b949037ec25f3fc48e0c6b24b80b2da1eeb04f3e4d99476f71a",
+    "reports/figures/05_learning_outcome.png": "ab75d442cdcf89cd89088b06e1f24a2e98ddf77202767f04cac9379520fed538",
+    "reports/figures/06_learning_outcome.png": "368553f48bfe3e6ec565dfcdc339faa7e7252599603338db1928dbded9efe146",
+    "reports/figures/07_learning_outcome.png": "e48990536539f4b0ce5e127231eebab47447e980c14b06382bf298282617ec5e",
+    "reports/figures/08a_event_landscape.png": "f3dbb8b7319bbb8c90cb0ee61b4960b866068cb3fbc7a10de6b8182735f7da65",
+    "reports/figures/08b_causal_evidence.png": "d853b30c06671ad882f4675baa8ba91eff2945a3efdfa4fc75efc46ff92bc261",
+    "reports/figures/08c_predictive_pipeline.png": "6ef823818b5d93a083fc7c81856dfdafa46660675a44b5ef0733e4652a1a7a13",
+    "reports/figures/08d_full_dashboard.png": "af9355ad3d6e2cdf7f746d7a1be17faa3abb91b2350f56fa0e36d1f1ad2fa03b"
+  },
+  "research_bible_contracts": {
+    "docs/research_bible/dataset_contract.md": "42c8561c2fd3f901a3a7d56247b10ea1bc3de56248046965ae18255c070dcfb7",
+    "docs/research_bible/feature_contract.md": "43b0d4d607fe13dd64247620a2879d7ae3353bf57493013a3d62003f9ca29529",
+    "docs/research_bible/model_contract.md": "bac36a5090e7480188c1586b43188fc4c16e52883bd9ce8f31abe55899646a57",
+    "docs/research_bible/00_project_freeze.md": "eb5708e4ea2bfded89585b37200c170f8a6bcfc72c8e751b13e12e8c2c472eb3"
+  },
+  "architecture_svgs": {
+    "docs/architecture/project_pipeline.svg": "a2a754acfec9b9eae1421de9353985a96fe8770c18e4a35b596380d1b4d277a7",
+    "docs/architecture/data_lineage.svg": "e4c895cbe6659c1eaac665c67992e33786c01c1657da41609832863c6b2163cf",
+    "docs/architecture/research_governance.svg": "0f7f6d9d05bd29dc883fcabca517203bc28ee9316c5fcc134068f20a81d360a9",
+    "docs/architecture/rq_traceability.svg": "a2dc9b701b0a217cc34a187e0c4850be15835590252c7218b1a3e4a58c2d375e",
+    "docs/architecture/modelling_flow.svg": "397b946fb14c97a2bae222fdfd0f0c979bc813597da9a3e7b31686edea9d8a8d",
+    "docs/architecture/car_formula.svg": "c6bd670e241972924e277035ab36a9149128adeec9e97694ac32cbd69ab7c5e2"
+  },
+  "tests": {
+    "tests/test_event_study.py": "d05d4a6defcfab307867992953c1cafec4bb93301346b536d8f724fc21bad751",
+    "tests/test_features.py": "10c8c74f1259e24e9c86e93ef6285c303914a2f27716c8a244329d865e112e0f",
+    "tests/test_legacy_causal_engine.py": "6886f83ffac5a74d308523aa0257566790414e2e743d1fbcae3b033f24efac6f"
+  },
+  "test_summary": {
+    "command": "/usr/local/bin/python3 -m pytest tests/ -v",
+    "result": "18 passed, 0 failed",
+    "date": "2026-07-16"
+  },
+  "environment_summary": {
+    "python_version": "3.14.6",
+    "validated_executable": "/usr/local/bin/python3",
+    "key_packages": {
+      "numpy": "2.4.6",
+      "pandas": "3.0.3",
+      "scipy": "1.18.0",
+      "scikit-learn": "1.9.0",
+      "xgboost": "3.3.0",
+      "lightgbm": "4.6.0",
+      "dowhy": "0.8",
+      "statsmodels": "0.14.6",
+      "pyarrow": "25.0.0",
+      "matplotlib": "3.11.0",
+      "pytest": "9.1.1"
+    },
+    "detail": "docs/research_bible/ENVIRONMENT_2026-07-16.md"
+  },
+  "excluded_large_files": {
+    "policy": ".gitignore",
+    "categories": [
+      "data/raw/*, data/interim/*, data/processed/*, data/external/* (contents; README/.gitkeep negated back in)",
+      "models/* (contents; README/.gitkeep negated back in), *.joblib",
+      "reports/*.docx, reports/*.pdf, reports/**/archive/",
+      "notebooks/archive/ (superseded/duplicate notebooks, local reference only)",
+      "reports/figures/*.svg, *.pdf, *.html (generated/duplicate exports)",
+      "*.csv, *.parquet, *.feather, *.h5, *.hdf5, *.pkl, *.pickle, *.xlsx, *.xls, *.docx, *.doc (belt-and-braces)"
+    ]
+  },
+  "rq_conclusions": {
+    "RQ1": "Qualified: 0/5 event-type mean-CAR nulls rejected after BH-FDR (min q=0.5810, max |d|=0.239); pooled DoWhy estimate +0.005601 (95% CI [+0.002295,+0.008907], p=0.0009, n=2762), conditional on frozen DAG.",
+    "RQ2": "Null: Random Forest importance dominated by market/macro features; no event feature in top ten.",
+    "RQ3": "Null: market-only LASSO baseline and event-enhanced LASSO identical constant predictors; XGBoost/LightGBM worse; no candidate clears Bonferroni two-leg promotion rule."
+  },
+  "repository_status_at_freeze": "Frozen pending assessment feedback. See docs/research_bible/FINAL_PROJECT_FREEZE_2026-07-16.md",
+  "flagged_unresolved_items": [
+    "Five tracked notebooks (02,03,04,05,06) contain a printed local machine path in a protected cell output; not fixed (would require re-running a frozen notebook)."
+  ],
+  "resolved_2026-07-16_by_owner_instruction": [
+    "Generative AI Statement revised and re-dated (2026-07-16-7030DATSCI_Generative_AI_Statement.docx) to disclose the dissertation finalisation and repository-freeze passes; superseded copy archived.",
+    "data/Equation.png retained and tracked as a supplementary equation-reference image linked into reporting material, per explicit owner instruction; documented in data/README.md."
+  ]
+}

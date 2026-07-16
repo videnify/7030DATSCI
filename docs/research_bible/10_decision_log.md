@@ -1005,3 +1005,27 @@
 **RQ1–RQ3 impact:** None. Confirmed by direct re-execution, not merely by inspection this time.
 
 **Reversible:** Yes. `causal_overall_estimate.json` can be regenerated deterministically by re-running Notebook 04; no frozen dataset, model, or figure was touched.
+
+---
+
+### 2026-07-16 — Dissertation accepted; repository cleanup and freeze pending assessment feedback
+
+**Decision:** With the dissertation content now accepted (`reports/dissertation/2026-07-16-7030DATSCI.docx`/`.pdf`), clean and organise the repository, archive superseded material safely, align documentation, and formally freeze the repository until assessment feedback is received — without changing any research question, method, dataset, model, numerical result, or RQ1–RQ3 conclusion.
+
+**Process:** Inspection-first, per explicit instruction. A full pre-cleanup baseline (`reports/finalisation/REPOSITORY_PRE_FREEZE_BASELINE_2026-07-16.md`) and SHA-256 hashes for every protected artefact (`reports/finalisation/PROTECTED_FILE_HASHES_2026-07-16.txt`) were recorded before any file was touched, and re-verified identical after cleanup.
+
+**What was removed (all untracked/gitignored, zero Git-history impact, fully reproducible/regenerable):** 11 `.ipynb_checkpoints/` directories, 8 `.DS_Store` files, 2 `__pycache__/` directories, 1 `.pytest_cache/` directory, 2 stray Word lock files inside an already-archived folder, and one disposable LibreOffice preview PDF created solely for the prior session's own equation-rendering QA check (never a dissertation version).
+
+**What was archived (existing convention reused, no new archive system introduced):** four superseded 2026-07-15 dissertation versions (`7030DATSCI-15_07_2026.docx`, `7030DATSCI_FINAL_2026-07-15.docx`, `7030DATSCI_SUBMISSION_FINAL_2026-07-15.docx/.pdf`) moved into a new `reports/dissertation/archive/superseded_2026-07-16/` subfolder, following the same dated-subfolder pattern already used by `pre_2026-07-14_cleanup/` and `pre_fes_v1_1_doc_sync_2026-07-14/`.
+
+**What was flagged, not resolved (owner decision required):** the Generative AI Statement (dated 2026-07-15, predates this pass's AI-assisted dissertation edits), a misplaced equation-verification screenshot (`data/Equation.png`), and a printed local machine path inside five already-executed, protected notebook cell outputs. None were altered. Full detail in the 2026-07-16 `14_project_dashboard.md` entry above this one.
+
+**Documentation updated:** `docs/research_bible/00_project_overview.md` (phase-status table: Dissertation Writing → Accepted), `14_project_dashboard.md` (new dated entry), `reports/dissertation/README.md` (rewritten for current state), `notebooks/README.md`, `scripts/README.md`, `reports/figures/README.md` (extended for new appendix figures/scripts), plus new `docs/research_bible/FINAL_PROJECT_FREEZE_2026-07-16.md`, `docs/research_bible/ENVIRONMENT_2026-07-16.md`, `reports/finalisation/project_freeze_manifest_2026-07-16.json`, and a refreshed root `README.md`. No historical document (`09_results_log.md`, earlier `10_decision_log.md` entries, earlier dashboard entries, `00_project_freeze.md`'s existing content) was rewritten.
+
+**Validation performed:** all eight notebooks re-confirmed valid JSON; all Python files in `src/`, `scripts/`, `tests/` compile cleanly; `/usr/local/bin/python3 -m pytest tests/` passes 18/18 (unchanged from 2026-07-15); all architecture SVGs and processed/report JSON files confirmed well-formed; every protected-artefact SHA-256 re-verified identical to the pre-cleanup baseline.
+
+**RQ1–RQ3 impact:** None. No dataset, feature matrix, model artefact, reported statistic, or dissertation conclusion was changed by this pass.
+
+**Reversible:** Yes. All archived files remain on disk (moved, not deleted); all deleted items are regenerable cache/checkpoint/lock-file debris or a disposable QA-only render with no unique content; nothing under Git tracking was touched (working tree had zero tracked modifications throughout, confirmed before and after).
+
+**Addendum (same day, 2026-07-16):** the two items flagged above as needing owner decision were resolved by explicit owner instruction. (1) The Generative AI Statement was revised — a new dated section discloses this session's two AI-assisted passes (dissertation finalisation, repository cleanup/freeze) — and re-filed as `2026-07-16-7030DATSCI_Generative_AI_Statement.docx` to match the accepted dissertation's naming; the superseded 2026-07-15 copy was archived alongside the other superseded dissertation versions. (2) `data/Equation.png` is retained and tracked in Git at the owner's explicit instruction, as a supplementary equation-reference image linked into reporting material rather than pipeline data; documented as a named exception in `data/README.md`. `reports/dissertation/README.md`, `FINAL_PROJECT_FREEZE_2026-07-16.md`, and `reports/finalisation/project_freeze_manifest_2026-07-16.json` were all updated to match. No protected artefact hash from the original 2026-07-16 baseline changed as a result.

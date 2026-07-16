@@ -103,8 +103,11 @@ reports/**/archive/
 reports/figures/*.pdf
 reports/figures/*.html
 reports/figures/*.svg
-reports/*.docx
-reports/*.pdf
+# Recursive (not just top-level reports/*) so reports/dissertation/*.pdf and
+# reports/stakeholder/*.pdf are also excluded — .docx is additionally covered
+# globally by the belt-and-braces *.docx rule above.
+reports/**/*.docx
+reports/**/*.pdf
 
 # --- Logs ---
 logs/*

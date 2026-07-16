@@ -12,6 +12,7 @@
 | `processed/` | Cleaned, merged, feature-engineered datasets — see `processed/README.md` |
 | `external/` | Reference data (event calendars, macro indicators) — see `external/README.md` |
 | `fred_client.py` | Standalone FRED API client helper, sits at this level rather than in `src/` |
+| `Equation.png` | **Exception to the rule above** — a manually captured equation-reference image (Section 3.3's AR/CAR formulas), not pipeline data and not reproducible by re-running a notebook. Retained and tracked in Git at the owner's explicit instruction (2026-07-16) as a supplementary illustration linked into reporting material. |
 
 ## Dependencies
 

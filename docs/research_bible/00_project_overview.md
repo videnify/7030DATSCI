@@ -54,7 +54,7 @@ This project deliberately narrows a much broader possible design (originally con
 
 The governing brief specifies a 10-phase pipeline; the implemented repository currently runs an 8-notebook version that merges sentiment analysis into event detection and explainability into evaluation. This divergence is tracked as an open decision in `docs/00_project_workflow.md` and `10_decision_log.md` — treat the phase *names and RQ traceability* below as authoritative, and the notebook filenames as the current implementation.
 
-| Phase | Notebook | Status (as of 2026-07-14) |
+| Phase | Notebook | Status (as of 2026-07-16) |
 |-------|----------|------|
 | 1 — Data Collection | `01_data_collection.ipynb` | ✅ Complete |
 | 2 — EDA | `02_eda.ipynb` | ✅ Complete |
@@ -64,7 +64,7 @@ The governing brief specifies a 10-phase pipeline; the implemented repository cu
 | 6 — Model Training | `06_model_training.ipynb` | ✅ `Baseline_LASSO` v1.1 complete; validation PASS |
 | 7 — Model Evaluation | `07_model_evaluation.ipynb` | ✅ FES v1.1 event suite, RF/SHAP and corrected tests complete; validation PASS |
 | 8 — Results Visualisation | `08_results_visualisation.ipynb` | ✅ Visualisation v1.2 complete; figures 08a–08d include the completed RQ1 BH-FDR/effect-size reporting and validation is `PASS` |
-| — Dissertation Writing | `reports/dissertation/` | 🟡 In Progress |
+| — Dissertation Writing | `reports/dissertation/` | ✅ **Accepted 2026-07-16** — `2026-07-16-7030DATSCI.docx`/`.pdf`. Repository frozen pending assessment feedback; see `FINAL_PROJECT_FREEZE_2026-07-16.md`. |
 
 See `14_project_dashboard.md` for the live, more granular status view (including open repository-hygiene risks).
 
